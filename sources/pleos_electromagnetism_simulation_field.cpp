@@ -31,9 +31,23 @@
 
 // The namespace "pleos" is used to simplify the all.
 namespace pleos {
+    // Quadratic gradient color for the Image class circle, made for electromagnetic fields
+    scls::Color fill_circle_gradient_electromagnetic(double distance, int radius, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha) {
+        double needed_multiplication = std::pow(std::abs(1.0 - distance / static_cast<double>(radius)), 2);
+        return scls::Color(static_cast<double>(red) * needed_multiplication, static_cast<double>(green) * needed_multiplication, static_cast<double>(blue) * needed_multiplication, static_cast<double>(alpha) * needed_multiplication);
+    }
+
     // Electromagnetism_Field constructor
     Electromagnetism_Field::Electromagnetism_Field(scls::_Window_Advanced_Struct& window, std::string name, scls::GUI_Object* parent) : scls::GUI_Object(window, name, parent) {
         set_texture_alignment(scls::Alignment_Texture::T_Fit);
+    }
+
+    // Adds an electrical charge in the field
+    void Electromagnetism_Field::add_electrical_charge(double charge, scls::Fraction x, scls::Fraction y) {
+        // Create the object
+        std::shared_ptr<Electrical_Charge> current_charge = std::make_shared<Electrical_Charge>(charge);
+        current_charge.get()->set_x(x.to_double()); current_charge.get()->set_y(y.to_double());
+        a_objects.push_back(current_charge);
     }
 
     // Function called after that the window is resized
@@ -45,6 +59,25 @@ namespace pleos {
         int height = height_in_pixel() / 2;
         int width = width_in_pixel() / 2;
         std::shared_ptr<scls::Image> new_texture = std::make_shared<scls::Image>(width, height, scls::Color(0, 0, 0));
+
+        // Create the fields
+        for(int i = 0;i<static_cast<int>(a_objects.size());i++) {
+            scls::Transform_Object_3D position = field_position_to_gui_position(*(a_objects[i].get()));
+            if(a_objects[i].get()->charge() > 0) {
+                new_texture.get()->fill_circle_gradient(position.x(), position.y(), a_objects[i].get()->force_field_produced(1) * 50000, scls::Color(255, 0, 0), fill_circle_gradient_electromagnetic);
+            } else {
+                new_texture.get()->fill_circle_gradient(position.x(), position.y(), a_objects[i].get()->force_field_produced(1) * 50000, scls::Color(0, 0, 255), fill_circle_gradient_electromagnetic);
+            }
+        }
+
         texture()->set_image(new_texture);
+    }
+
+    // Field conversions
+    scls::Transform_Object_3D Electromagnetism_Field::field_position_to_gui_position(const scls::Transform_Object_3D& position) {
+        scls::Transform_Object_3D to_return;
+        to_return.set_x(width_in_pixel() / 4 + (position.x() - a_middle.x()) * a_pixels_by_unit_width);
+        to_return.set_y(height_in_pixel() / 4 + (position.y() - a_middle.y()) * a_pixels_by_unit_height);
+        return to_return;
     }
 }

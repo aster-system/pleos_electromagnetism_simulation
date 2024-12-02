@@ -81,6 +81,9 @@
 	<x value=0 type=scale>
 	<y attach=top>
 </gui_object>
+
+// Field handling
+
 <gui_object name="electromagnetism_simulation_field_simulator" type="text">
 	<border bottom=1 left=1 right=1 top=1>
 	<height value=3/5 type=scale>

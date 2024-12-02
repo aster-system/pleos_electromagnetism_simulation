@@ -31,7 +31,7 @@
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_FIELD
 
 // Include PLEOS Libs
-#include "../../pleos_libs/pleos_mathematics.h"
+#include "../../pleos_libs/pleos_physic.h"
 
 // The namespace "pleos" is used to simplify the all.
 namespace pleos {
@@ -41,6 +41,9 @@ namespace pleos {
         // Electromagnetism_Field constructor
         Electromagnetism_Field(scls::_Window_Advanced_Struct& window, std::string name, scls::GUI_Object* parent);
 
+        // Adds an electrical charge in the field
+        void add_electrical_charge(double charge, scls::Fraction x, scls::Fraction y);
+
         // Function called after that the window is resized
         virtual void after_resizing();
         // Function called after an XML loading
@@ -48,6 +51,19 @@ namespace pleos {
 
         // Loads the needed texture for the field
         void load_field_texture();
+
+        // Field conversions
+        scls::Transform_Object_3D field_position_to_gui_position(const scls::Transform_Object_3D& position);
+
+    private:
+
+        // Coordinate of the middle of the field
+        scls::Transform_Object_3D a_middle;
+        // Unit of the field
+        double a_pixels_by_unit_height = 100; double a_pixels_by_unit_width = 100;
+
+        // Electromagnetic objects in the field
+        std::vector<std::shared_ptr<Electrical_Charge>> a_objects;
     };
 }
 

@@ -54,6 +54,17 @@ namespace pleos {
 
         //******************
         //
+        // Field page
+        //
+        //******************
+
+        // Loads the objects in the field
+        void load_field_objects();
+        // Unloads the objects in the field
+        inline void unload_field_objects() {a_field_objects.get()->reset();};
+
+        //******************
+        //
         // Check the events
         //
         //******************
@@ -109,6 +120,7 @@ namespace pleos {
         std::shared_ptr<scls::GUI_Object> a_home_page;
 
         // Field page
+        std::shared_ptr<scls::GUI_Scroller> a_field_objects;
         std::shared_ptr<scls::GUI_Object> a_field_page;
         std::shared_ptr<Electromagnetism_Field> a_field_simulator;
     };

@@ -56,8 +56,13 @@ namespace pleos {
         if(object_name == "electromagnetism_simulation_field_body") {
             a_field_page = *parent->new_object<scls::GUI_Object>(object_name);
             return a_field_page;
+        } else if(object_name == "electromagnetism_simulation_field_objects") {
+            a_field_objects = *parent->new_object<scls::GUI_Scroller>(object_name);
+            return a_field_objects;
         } else if(object_name == "electromagnetism_simulation_field_simulator") {
             a_field_simulator = *parent->new_object<Electromagnetism_Field>(object_name);
+            a_field_simulator.get()->add_electrical_charge(17.28 * std::pow(10, -14), 0, 0);
+            a_field_simulator.get()->add_electrical_charge(-17.28 * std::pow(10, -14), 0.5, 0);
             return a_field_simulator;
         } return std::shared_ptr<scls::GUI_Object>();
     }
@@ -75,6 +80,17 @@ namespace pleos {
             a_navigation_field_button = *parent->new_object<scls::GUI_Text>(object_name);
             return a_navigation_field_button;
         } return std::shared_ptr<scls::GUI_Object>();
+    }
+
+    //******************
+    //
+    // Field page
+    //
+    //******************
+
+    // Loads the objects in the field
+    void Electromagnetism_Simulation::load_field_objects() {
+
     }
 
     //******************
