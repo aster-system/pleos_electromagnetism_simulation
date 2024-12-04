@@ -59,10 +59,11 @@ namespace pleos {
         } else if(object_name == "electromagnetism_simulation_field_objects") {
             a_field_objects = *parent->new_object<scls::GUI_Scroller>(object_name);
             return a_field_objects;
+        } else if(object_name == "electromagnetism_simulation_field_quantum") {
+            a_field_quantum = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_field_quantum;
         } else if(object_name == "electromagnetism_simulation_field_simulator") {
             a_field_simulator = *parent->new_object<Electromagnetism_Field>(object_name);
-            a_field_simulator.get()->add_electrical_charge(17.28 * std::pow(10, -14), 0, 0);
-            a_field_simulator.get()->add_electrical_charge(-17.28 * std::pow(10, -14), 0.5, 0);
             return a_field_simulator;
         } return std::shared_ptr<scls::GUI_Object>();
     }
@@ -88,9 +89,21 @@ namespace pleos {
     //
     //******************
 
-    // Loads the objects in the field
-    void Electromagnetism_Simulation::load_field_objects() {
+    // Loads the objects for the field at quantum scale
+    void Electromagnetism_Simulation::load_field_quantum() {
+        // Reset the field
+        a_field_simulator.get()->reset();
 
+        // Loads the random objects
+        for(int i = 0;i<5;i++) {
+            a_field_simulator.get()->add_random_electrical_charge(std::pow(10, -7), 2 * std::pow(10, -7), -2, 2, -1, 1);
+        } a_field_simulator.get()->add_random_electrical_charge(-2 * std::pow(10, -6), -std::pow(10, -6), -2, 2, -1, 1);
+        a_field_simulator.get()->load_field_texture();
+    }
+
+    // Loads the needed objects for the field
+    void Electromagnetism_Simulation::load_field_simulation() {
+        if(current_simulation() == PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM) {load_field_quantum();}
     }
 
     //******************
@@ -106,7 +119,22 @@ namespace pleos {
     }
 
     // Check the field events
-    void Electromagnetism_Simulation::check_field_events() {}
+    void Electromagnetism_Simulation::check_field_events() {
+        // Set the needed simulation
+        if(a_field_quantum.get() != 0 && a_field_quantum.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) {
+            set_current_simulation(PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM);
+            load_field_simulation();
+        }
+
+        // Reset the field
+        if(window_struct()->key_pressed_during_this_frame("a")) {load_field_simulation();}
+
+        // Update the field
+        if(window_struct()->key_pressed("p")) {
+            a_field_simulator.get()->update_field();
+            a_field_simulator.get()->load_field_texture();
+        }
+    }
 
     // Check the home events
     void Electromagnetism_Simulation::check_home_events() {}
@@ -119,7 +147,7 @@ namespace pleos {
         check_navigation_events();
 
         // Field events
-        if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE) check_field_events();
+        if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_FIELD_PAGE) check_field_events();
         // Home events
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE) check_home_events();
     }

@@ -36,6 +36,8 @@
 // Possibles pages
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE 0
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_FIELD_PAGE 1
+// Possibles simulation
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM 0
 
 // The namespace "pleos" is used to simplify the all.
 namespace pleos {
@@ -58,8 +60,10 @@ namespace pleos {
         //
         //******************
 
-        // Loads the objects in the field
-        void load_field_objects();
+        // Loads the objects for the field at quantum scale
+        void load_field_quantum();
+        // Loads the needed objects for the field
+        void load_field_simulation();
         // Unloads the objects in the field
         inline void unload_field_objects() {a_field_objects.get()->reset();};
 
@@ -79,7 +83,7 @@ namespace pleos {
         void update_event();
 
         // Function called after an XML loading
-        virtual void after_xml_loading() {scls::GUI_Page::after_xml_loading();display_home_page();};
+        virtual void after_xml_loading() {scls::GUI_Page::after_xml_loading();display_home_page();load_field_simulation();};
 
         //******************
         //
@@ -96,7 +100,9 @@ namespace pleos {
 
         // Returns / resets the current page
         inline unsigned short current_page() const {return a_current_state.current_page;};
+        inline unsigned short current_simulation() const {return a_current_state.current_simulation;};
         inline void set_current_page(unsigned short new_page) {a_current_state.current_page = new_page;};
+        inline void set_current_simulation(unsigned short new_simulation) {a_current_state.current_simulation = new_simulation;};
 
     private:
 
@@ -104,6 +110,9 @@ namespace pleos {
         struct {
             // Current page
             unsigned short current_page = PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE;
+
+            // Current simulation
+            unsigned short current_simulation = PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM;
         } a_current_state;
 
         //******************
@@ -122,6 +131,7 @@ namespace pleos {
         // Field page
         std::shared_ptr<scls::GUI_Scroller> a_field_objects;
         std::shared_ptr<scls::GUI_Object> a_field_page;
+        std::shared_ptr<scls::GUI_Text> a_field_quantum;
         std::shared_ptr<Electromagnetism_Field> a_field_simulator;
     };
 

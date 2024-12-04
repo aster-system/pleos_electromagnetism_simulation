@@ -42,7 +42,9 @@ namespace pleos {
         Electromagnetism_Field(scls::_Window_Advanced_Struct& window, std::string name, scls::GUI_Object* parent);
 
         // Adds an electrical charge in the field
-        void add_electrical_charge(double charge, scls::Fraction x, scls::Fraction y);
+        std::shared_ptr<Electrical_Charge> add_electrical_charge(double charge, double x, double y);
+        // Adds a random electrical charge in the field
+        void add_random_electrical_charge(double min_charge, double max_charge, double min_x, double max_x, double min_y, double max_y);
 
         // Function called after that the window is resized
         virtual void after_resizing();
@@ -51,14 +53,18 @@ namespace pleos {
 
         // Loads the needed texture for the field
         void load_field_texture();
+        // Reset the field
+        inline void reset(){a_objects.clear();};
+        // Updates the objects in the field
+        void update_field();
 
         // Field conversions
-        scls::Transform_Object_3D field_position_to_gui_position(const scls::Transform_Object_3D& position);
+        scls::Vector_3D field_position_to_gui_position(scls::Vector_3D position);
 
     private:
 
         // Coordinate of the middle of the field
-        scls::Transform_Object_3D a_middle;
+        scls::Vector_3D a_middle;
         // Unit of the field
         double a_pixels_by_unit_height = 100; double a_pixels_by_unit_width = 100;
 

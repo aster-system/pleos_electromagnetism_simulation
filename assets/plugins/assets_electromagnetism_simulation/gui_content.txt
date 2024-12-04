@@ -100,3 +100,18 @@
 	<x attach=left>
 	<y attach=bottom attached_object=electromagnetism_simulation_field_title offset=15>
 </gui_object>
+// Possible configurations
+<gui_object name="electromagnetism_simulation_field_quantum" type="text">
+	<border bottom=1 left=1 right=1 top=1>
+	<content font_size=25>Échelle quantique</content>
+	<height value=28 type=pixel>
+	<parent name="electromagnetism_simulation_field_objects">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=top>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>

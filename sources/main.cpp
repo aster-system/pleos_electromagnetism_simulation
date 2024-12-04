@@ -34,6 +34,7 @@
 SCLS_INIT
 
 int main(int argc, char* argv[]) {
+    srand(time(0));
     pleos::__Temp_Pleos_Window window(900, 600, argv[0]);
     window.load_from_xml("assets/window.txt");
 

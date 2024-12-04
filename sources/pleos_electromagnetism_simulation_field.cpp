@@ -31,9 +31,20 @@
 
 // The namespace "pleos" is used to simplify the all.
 namespace pleos {
-    // Quadratic gradient color for the Image class circle, made for electromagnetic fields
-    scls::Color fill_circle_gradient_electromagnetic(double distance, int radius, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha) {
+    // Quadratic gradient color for the Image class circle, made for electric fields
+    scls::Color fill_circle_gradient_electric_field(double distance, int radius, int x, int y, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha) {
         double needed_multiplication = std::pow(std::abs(1.0 - distance / static_cast<double>(radius)), 2);
+        return scls::Color(static_cast<double>(red) * needed_multiplication, static_cast<double>(green) * needed_multiplication, static_cast<double>(blue) * needed_multiplication, static_cast<double>(alpha) * needed_multiplication);
+    }
+    // Quadratic gradient color for the Image class circle, made for magnetic fields
+    double __needed_angle = 0;
+    scls::Color fill_circle_gradient_magnetic_field(double distance, int radius, int x, int y, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha) {
+        double needed_angle = scls::vector_2d_angle(x, y) + (__needed_angle);
+        while(needed_angle > SCLS_PI) {needed_angle -= SCLS_PI * 2;}
+        while(needed_angle < -SCLS_PI) {needed_angle += SCLS_PI * 2;}
+        if(needed_angle < 0) {red = 125;}
+
+        double needed_multiplication = std::pow(std::abs(1.0 - distance / static_cast<double>(radius)), 1);
         return scls::Color(static_cast<double>(red) * needed_multiplication, static_cast<double>(green) * needed_multiplication, static_cast<double>(blue) * needed_multiplication, static_cast<double>(alpha) * needed_multiplication);
     }
 
@@ -43,11 +54,26 @@ namespace pleos {
     }
 
     // Adds an electrical charge in the field
-    void Electromagnetism_Field::add_electrical_charge(double charge, scls::Fraction x, scls::Fraction y) {
+    std::shared_ptr<Electrical_Charge> Electromagnetism_Field::add_electrical_charge(double charge, double x, double y) {
         // Create the object
         std::shared_ptr<Electrical_Charge> current_charge = std::make_shared<Electrical_Charge>(charge);
-        current_charge.get()->set_x(x.to_double()); current_charge.get()->set_y(y.to_double());
+        current_charge.get()->set_x(x); current_charge.get()->set_y(y);
         a_objects.push_back(current_charge);
+        return current_charge;
+    }
+
+    // Adds a random electrical charge in the field
+    void Electromagnetism_Field::add_random_electrical_charge(double min_charge, double max_charge, double min_x, double max_x, double min_y, double max_y) {
+        double charge_number = (static_cast<double>(rand() % 99) / 100.0) + 0.01;
+        double mass_ratio = (max_charge - min_charge) / std::pow(10, -6);
+        double random_charge = min_charge + (max_charge - min_charge) * charge_number;
+        double random_x = min_x + (max_x - min_x) * (static_cast<double>(rand() % 100) / 100.0);
+        double random_y = min_y + (max_y - min_y) * (static_cast<double>(rand() % 100) / 100.0);
+        std::shared_ptr<Electrical_Charge> current_charge = add_electrical_charge(random_charge, random_x, random_y);
+        // Get the mass
+        double final_mass = std::abs(min_charge) / std::pow(10, -6) + 5.0 * mass_ratio * charge_number;
+        final_mass = std::pow(final_mass, 2);
+        current_charge.get()->set_mass(final_mass);
     }
 
     // Function called after that the window is resized
@@ -62,22 +88,54 @@ namespace pleos {
 
         // Create the fields
         for(int i = 0;i<static_cast<int>(a_objects.size());i++) {
-            scls::Transform_Object_3D position = field_position_to_gui_position(*(a_objects[i].get()));
+            // Create the electrical field
+            scls::Vector_3D position = field_position_to_gui_position(a_objects[i].get()->attached_transform()->position());
+            // Create the electrical field
+            double force_field = a_objects[i].get()->force_field_produced(1) * 0.01;
             if(a_objects[i].get()->charge() > 0) {
-                new_texture.get()->fill_circle_gradient(position.x(), position.y(), a_objects[i].get()->force_field_produced(1) * 50000, scls::Color(255, 0, 0), fill_circle_gradient_electromagnetic);
+                new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(255, 0, 0), fill_circle_gradient_electric_field);
             } else {
-                new_texture.get()->fill_circle_gradient(position.x(), position.y(), a_objects[i].get()->force_field_produced(1) * 50000, scls::Color(0, 0, 255), fill_circle_gradient_electromagnetic);
+                new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(0, 0, 255), fill_circle_gradient_electric_field);
             }
+            // Create the magnetical field
+            double magnetical_force = force_field * a_objects[i].get()->velocity().norm();
+            __needed_angle = scls::vector_2d_angle(a_objects[i].get()->velocity().x(), a_objects[i].get()->velocity().y());
+            new_texture.get()->fill_circle_gradient(position.x(), position.y(), magnetical_force, scls::Color(0, 255, 0), fill_circle_gradient_magnetic_field);
+            // Create the trajectory
+            scls::Vector_3D forward_position = a_objects[i].get()->attached_transform()->position() + a_objects[i].get()->velocity();
+            forward_position = field_position_to_gui_position(forward_position);
+            new_texture.get()->draw_line(position.x(), position.y(), forward_position.x(), forward_position.y(), scls::Color(255, 255, 255), 3);
         }
 
         texture()->set_image(new_texture);
     }
 
     // Field conversions
-    scls::Transform_Object_3D Electromagnetism_Field::field_position_to_gui_position(const scls::Transform_Object_3D& position) {
-        scls::Transform_Object_3D to_return;
+    scls::Vector_3D Electromagnetism_Field::field_position_to_gui_position(scls::Vector_3D position) {
+        scls::Vector_3D to_return;
         to_return.set_x(width_in_pixel() / 4 + (position.x() - a_middle.x()) * a_pixels_by_unit_width);
-        to_return.set_y(height_in_pixel() / 4 + (position.y() - a_middle.y()) * a_pixels_by_unit_height);
+        to_return.set_y(height_in_pixel() / 4 + ((-position.y()) - a_middle.y()) * a_pixels_by_unit_height);
         return to_return;
+    }
+
+    // Updates the objects in the field
+    void Electromagnetism_Field::update_field() {
+        // Update the objects
+        for(int i = 0;i<static_cast<int>(a_objects.size());i++) {
+            // Get the needed movement
+            scls::Vector_3D acceleration;
+            for(int j = 0;j<static_cast<int>(a_objects.size());j++) {
+                if(i != j) {
+                    // Get the needed acceleration
+                    scls::Vector_3D current_acceleration = a_objects[i].get()->vector_to(a_objects[j].get()) * a_objects[i].get()->force_field_produced(a_objects[j].get());
+                    if(scls::sign(a_objects[i].get()->charge()) != scls::sign(a_objects[j].get()->charge())){current_acceleration = current_acceleration * -1;}
+                    acceleration += current_acceleration * 5;
+                }
+            } a_objects[i].get()->accelerate((acceleration * window_struct().delta_time()) / a_objects[i].get()->mass());
+        }
+        // Simulate the physic in the object
+        for(int i = 0;i<static_cast<int>(a_objects.size());i++) {
+            a_objects[i].get()->simulate_physic(window_struct().delta_time());
+        }
     }
 }
