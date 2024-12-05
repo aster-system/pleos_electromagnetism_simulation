@@ -54,26 +54,31 @@ namespace pleos {
     }
 
     // Adds an electrical charge in the field
-    std::shared_ptr<Electrical_Charge> Electromagnetism_Field::add_electrical_charge(double charge, double x, double y) {
+    std::shared_ptr<Electrical_Charge> Electromagnetism_Field::add_electrical_charge(double charge, double x, double y, double mass) {
+        // Create the needed mass
+        if(mass == -1) {
+            mass = charge / std::pow(10, -6);
+            mass = std::pow(mass, 2);
+        }
+
         // Create the object
         std::shared_ptr<Electrical_Charge> current_charge = std::make_shared<Electrical_Charge>(charge);
-        current_charge.get()->set_x(x); current_charge.get()->set_y(y);
+        current_charge.get()->set_x(x); current_charge.get()->set_y(y); current_charge.get()->set_mass(mass);
         a_objects.push_back(current_charge);
         return current_charge;
     }
 
     // Adds a random electrical charge in the field
     void Electromagnetism_Field::add_random_electrical_charge(double min_charge, double max_charge, double min_x, double max_x, double min_y, double max_y) {
-        double charge_number = (static_cast<double>(rand() % 99) / 100.0) + 0.01;
+        double charge_number = (static_cast<double>(rand() % 100) / 100.0);
         double mass_ratio = (max_charge - min_charge) / std::pow(10, -6);
         double random_charge = min_charge + (max_charge - min_charge) * charge_number;
         double random_x = min_x + (max_x - min_x) * (static_cast<double>(rand() % 100) / 100.0);
         double random_y = min_y + (max_y - min_y) * (static_cast<double>(rand() % 100) / 100.0);
-        std::shared_ptr<Electrical_Charge> current_charge = add_electrical_charge(random_charge, random_x, random_y);
         // Get the mass
         double final_mass = std::abs(min_charge) / std::pow(10, -6) + 5.0 * mass_ratio * charge_number;
         final_mass = std::pow(final_mass, 2);
-        current_charge.get()->set_mass(final_mass);
+        std::shared_ptr<Electrical_Charge> current_charge = add_electrical_charge(random_charge, random_x, random_y, final_mass);
     }
 
     // Function called after that the window is resized
@@ -98,7 +103,7 @@ namespace pleos {
                 new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(0, 0, 255), fill_circle_gradient_electric_field);
             }
             // Create the magnetical field
-            double magnetical_force = force_field * a_objects[i].get()->velocity().norm();
+            double magnetical_force = force_field * a_objects[i].get()->velocity().norm() * 10;
             __needed_angle = scls::vector_2d_angle(a_objects[i].get()->velocity().x(), a_objects[i].get()->velocity().y());
             new_texture.get()->fill_circle_gradient(position.x(), position.y(), magnetical_force, scls::Color(0, 255, 0), fill_circle_gradient_magnetic_field);
             // Create the trajectory
@@ -129,7 +134,7 @@ namespace pleos {
                     // Get the needed acceleration
                     scls::Vector_3D current_acceleration = a_objects[i].get()->vector_to(a_objects[j].get()) * a_objects[i].get()->force_field_produced(a_objects[j].get());
                     if(scls::sign(a_objects[i].get()->charge()) != scls::sign(a_objects[j].get()->charge())){current_acceleration = current_acceleration * -1;}
-                    acceleration += current_acceleration * 5;
+                    acceleration += current_acceleration;
                 }
             } a_objects[i].get()->accelerate((acceleration * window_struct().delta_time()) / a_objects[i].get()->mass());
         }

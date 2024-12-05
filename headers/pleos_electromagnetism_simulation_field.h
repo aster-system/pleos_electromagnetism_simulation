@@ -42,7 +42,8 @@ namespace pleos {
         Electromagnetism_Field(scls::_Window_Advanced_Struct& window, std::string name, scls::GUI_Object* parent);
 
         // Adds an electrical charge in the field
-        std::shared_ptr<Electrical_Charge> add_electrical_charge(double charge, double x, double y);
+        std::shared_ptr<Electrical_Charge> add_electrical_charge(double charge, double x, double y, double mass);
+        inline std::shared_ptr<Electrical_Charge> add_electrical_charge(double charge, double x, double y){return add_electrical_charge(charge, x, y, -1);};
         // Adds a random electrical charge in the field
         void add_random_electrical_charge(double min_charge, double max_charge, double min_x, double max_x, double min_y, double max_y);
 

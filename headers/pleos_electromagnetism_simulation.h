@@ -38,6 +38,7 @@
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_FIELD_PAGE 1
 // Possibles simulation
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM 0
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_GAUSS 1
 
 // The namespace "pleos" is used to simplify the all.
 namespace pleos {
@@ -60,6 +61,8 @@ namespace pleos {
         //
         //******************
 
+        // Loads the objects for the field for Gauss theorem
+        void load_field_gauss();
         // Loads the objects for the field at quantum scale
         void load_field_quantum();
         // Loads the needed objects for the field
@@ -129,6 +132,7 @@ namespace pleos {
         std::shared_ptr<scls::GUI_Object> a_home_page;
 
         // Field page
+        std::shared_ptr<scls::GUI_Text> a_field_gauss;
         std::shared_ptr<scls::GUI_Scroller> a_field_objects;
         std::shared_ptr<scls::GUI_Object> a_field_page;
         std::shared_ptr<scls::GUI_Text> a_field_quantum;
