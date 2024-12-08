@@ -1,3 +1,9 @@
+// Load the textures
+<texture name="coulomb" src="assets/plugins/assets_electromagnetism_simulation/images/coulomb.png">
+<texture name="coulomb_law" src="assets/plugins/assets_electromagnetism_simulation/images/coulomb_law.png">
+<texture name="divergence" src="assets/plugins/assets_electromagnetism_simulation/images/divergence.png">
+<texture name="extract_coulomb_deuxieme_memoire" src="assets/plugins/assets_electromagnetism_simulation/images/extract_coulomb_deuxieme_memoire.png">
+
 // Load the needed pages
 <page_2d name="electromagnetism_simulation" displayed>
 	<content src="plugins/assets_electromagnetism_simulation/gui_content.txt" sub_paged>

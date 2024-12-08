@@ -62,6 +62,17 @@ namespace pleos {
         // Field conversions
         scls::Vector_3D field_position_to_gui_position(scls::Vector_3D position);
 
+        // Getters and setters
+        inline std::vector<std::shared_ptr<Electrical_Charge>>& objects() {return a_objects;};
+        inline void set_show_acceleration(bool new_show_acceleration){a_show_acceleration = new_show_acceleration;};
+        inline void set_show_electrical_div(bool new_electrical_div) {a_show_electrical_div = new_electrical_div;};
+        inline void set_show_magnetic_field(bool new_magnetic_field){a_show_magnetic_field = new_magnetic_field;};
+        inline void set_show_trajectory(bool new_show_trajectory){a_show_trajectory = new_show_trajectory;};
+        inline bool show_acceleration() const {return a_show_acceleration;};
+        inline bool show_electrical_div() const {return a_show_electrical_div;};
+        inline bool show_magnetic_field() const {return a_show_magnetic_field;};
+        inline bool show_trajectory() const {return a_show_trajectory;};
+
     private:
 
         // Coordinate of the middle of the field
@@ -71,6 +82,14 @@ namespace pleos {
 
         // Electromagnetic objects in the field
         std::vector<std::shared_ptr<Electrical_Charge>> a_objects;
+        // If the acceleration must be showed or not
+        bool a_show_acceleration = true;
+        // If the divergence of the electrical field must be showed or not
+        bool a_show_electrical_div = true;
+        // If the magnetic field must be showed or not
+        bool a_show_magnetic_field = true;
+        // If the trajectory must be showed or not
+        bool a_show_trajectory = true;
     };
 }
 

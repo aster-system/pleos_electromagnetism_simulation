@@ -36,6 +36,10 @@ namespace pleos {
         double needed_multiplication = std::pow(std::abs(1.0 - distance / static_cast<double>(radius)), 2);
         return scls::Color(static_cast<double>(red) * needed_multiplication, static_cast<double>(green) * needed_multiplication, static_cast<double>(blue) * needed_multiplication, static_cast<double>(alpha) * needed_multiplication);
     }
+    scls::Color fill_circle_gradient_electric_field_div(double distance, int radius, int x, int y, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha) {
+        double needed_multiplication = 1.0;
+        return scls::Color(static_cast<double>(red) * needed_multiplication, static_cast<double>(green) * needed_multiplication, static_cast<double>(blue) * needed_multiplication, static_cast<double>(alpha) * needed_multiplication);
+    }
     // Quadratic gradient color for the Image class circle, made for magnetic fields
     double __needed_angle = 0;
     scls::Color fill_circle_gradient_magnetic_field(double distance, int radius, int x, int y, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha) {
@@ -97,19 +101,42 @@ namespace pleos {
             scls::Vector_3D position = field_position_to_gui_position(a_objects[i].get()->attached_transform()->position());
             // Create the electrical field
             double force_field = a_objects[i].get()->force_field_produced(1) * 0.01;
-            if(a_objects[i].get()->charge() > 0) {
-                new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(255, 0, 0), fill_circle_gradient_electric_field);
+            if(show_electrical_div()) {
+                // Divergence of the electrical field
+                if(a_objects[i].get()->charge() > 0) {
+                    new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(255, 0, 0), fill_circle_gradient_electric_field_div);
+                } else {
+                    new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(0, 0, 255), fill_circle_gradient_electric_field_div);
+                }
             } else {
-                new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(0, 0, 255), fill_circle_gradient_electric_field);
+                // Electrical field
+                if(a_objects[i].get()->charge() > 0) {
+                    new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(255, 0, 0), fill_circle_gradient_electric_field);
+                } else {
+                    new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(0, 0, 255), fill_circle_gradient_electric_field);
+                }
             }
-            // Create the magnetical field
-            double magnetical_force = force_field * a_objects[i].get()->velocity().norm() * 10;
-            __needed_angle = scls::vector_2d_angle(a_objects[i].get()->velocity().x(), a_objects[i].get()->velocity().y());
-            new_texture.get()->fill_circle_gradient(position.x(), position.y(), magnetical_force, scls::Color(0, 255, 0), fill_circle_gradient_magnetic_field);
-            // Create the trajectory
-            scls::Vector_3D forward_position = a_objects[i].get()->attached_transform()->position() + a_objects[i].get()->velocity();
-            forward_position = field_position_to_gui_position(forward_position);
-            new_texture.get()->draw_line(position.x(), position.y(), forward_position.x(), forward_position.y(), scls::Color(255, 255, 255), 3);
+
+            if(show_magnetic_field()) {
+                // Create the magnetical field
+                double magnetical_force = force_field * a_objects[i].get()->velocity().norm() * 10;
+                __needed_angle = scls::vector_2d_angle(a_objects[i].get()->velocity().x(), a_objects[i].get()->velocity().y());
+                new_texture.get()->fill_circle_gradient(position.x(), position.y(), magnetical_force, scls::Color(0, 255, 0), fill_circle_gradient_magnetic_field);
+            }
+
+            if(show_trajectory()) {
+                // Create the trajectory
+                scls::Vector_3D forward_position = a_objects[i].get()->attached_transform()->position() + a_objects[i].get()->velocity();
+                forward_position = field_position_to_gui_position(forward_position);
+                new_texture.get()->draw_line(position.x() - 1, position.y() - 1, forward_position.x() - 1, forward_position.y() - 1, scls::Color(255, 255, 255), 2);
+            }
+
+            if(show_acceleration()) {
+                // Create the acceleration
+                scls::Vector_3D forward_position = a_objects[i].get()->attached_transform()->position() + a_objects[i].get()->acceleration();
+                forward_position = field_position_to_gui_position(forward_position);
+                new_texture.get()->draw_line(position.x() - 1, position.y() - 1, forward_position.x() - 1, forward_position.y() - 1, scls::Color(255, 0, 255), 2);
+            }
         }
 
         texture()->set_image(new_texture);
@@ -136,7 +163,7 @@ namespace pleos {
                     if(scls::sign(a_objects[i].get()->charge()) != scls::sign(a_objects[j].get()->charge())){current_acceleration = current_acceleration * -1;}
                     acceleration += current_acceleration;
                 }
-            } a_objects[i].get()->accelerate((acceleration * window_struct().delta_time()) / a_objects[i].get()->mass());
+            } a_objects[i].get()->set_acceleration(acceleration / a_objects[i].get()->mass());
         }
         // Simulate the physic in the object
         for(int i = 0;i<static_cast<int>(a_objects.size());i++) {

@@ -44,6 +44,8 @@ namespace pleos {
         if(to_return.get() != 0) return to_return;
 
         // Check page by page
+        to_return = __create_loaded_object_from_type_equations(object_name, object_type, parent);
+        if(to_return.get() != 0) return to_return;
         to_return = __create_loaded_object_from_type_field(object_name, object_type, parent);
         if(to_return.get() != 0) return to_return;
         to_return = __create_loaded_object_from_type_home(object_name, object_type, parent);
@@ -51,6 +53,43 @@ namespace pleos {
 
         // Classic object creation
         return GUI_Page::__create_loaded_object_from_type(object_name, object_type, parent);
+    }
+    std::shared_ptr<scls::GUI_Object> Electromagnetism_Simulation::__create_loaded_object_from_type_equations(std::string object_name, std::string object_type, scls::GUI_Object* parent) {
+        if(object_name == "electromagnetism_simulation_equations_body") {
+            a_equations_page = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_equations_page;
+        } else if(object_name == "electromagnetism_simulation_equations_context") {
+            a_equations_context = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_context;
+        } else if(object_name == "electromagnetism_simulation_equations_gauss") {
+            a_equations_gauss = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_gauss;
+        } else if(object_name == "electromagnetism_simulation_equations_gauss_page_1") {
+            a_equations_gauss_page_1 = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_gauss_page_1;
+        } else if(object_name == "electromagnetism_simulation_equations_gauss_page_1_explaination_1") {
+            std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_1_explaination_1 = *parent->new_object<scls::GUI_Text>(object_name);
+            a_equations_gauss_page_1_explaination_1.get()->set_max_width(0);
+            return a_equations_gauss_page_1_explaination_1;
+        } else if(object_name == "electromagnetism_simulation_equations_gauss_page_1_explaination_2") {
+            std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_1_explaination_2 = *parent->new_object<scls::GUI_Text>(object_name);
+            a_equations_gauss_page_1_explaination_2.get()->set_max_width(0);
+            return a_equations_gauss_page_1_explaination_2;
+        } else if(object_name == "electromagnetism_simulation_equations_gauss_page_1_next") {
+            a_equations_gauss_page_1_next = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_gauss_page_1_next;
+        } else if(object_name == "electromagnetism_simulation_equations_gauss_page_2") {
+            a_equations_gauss_page_2 = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_equations_gauss_page_2;
+        } else if(object_name == "electromagnetism_simulation_equations_gauss_page_2_explaination_1") {
+            std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_2_explaination_1 = *parent->new_object<scls::GUI_Text>(object_name);
+            a_equations_gauss_page_2_explaination_1.get()->set_max_width(0);
+            return a_equations_gauss_page_2_explaination_1;
+        } else if(object_name == "electromagnetism_simulation_equations_gauss_page_2_explaination_2") {
+            std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_2_explaination_1 = *parent->new_object<scls::GUI_Text>(object_name);
+            a_equations_gauss_page_2_explaination_1.get()->set_max_width(0);
+            return a_equations_gauss_page_2_explaination_1;
+        } return std::shared_ptr<scls::GUI_Object>();
     }
     std::shared_ptr<scls::GUI_Object> Electromagnetism_Simulation::__create_loaded_object_from_type_field(std::string object_name, std::string object_type, scls::GUI_Object* parent) {
         if(object_name == "electromagnetism_simulation_field_body") {
@@ -80,6 +119,9 @@ namespace pleos {
         if(object_name == "electromagnetism_simulation_navigation_home_button") {
             a_navigation_home_button = *parent->new_object<scls::GUI_Text>(object_name);
             return a_navigation_home_button;
+        } else if(object_name == "electromagnetism_simulation_navigation_equations_button") {
+            a_navigation_equations_button = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_navigation_equations_button;
         } else if(object_name == "electromagnetism_simulation_navigation_field_button") {
             a_navigation_field_button = *parent->new_object<scls::GUI_Text>(object_name);
             return a_navigation_field_button;
@@ -94,6 +136,14 @@ namespace pleos {
 
     // Loads the objects for the field for Gauss theorem
     void Electromagnetism_Simulation::load_field_gauss() {
+        load_field_thomson();return;
+
+        // Set the good settings
+        a_field_simulator.get()->set_show_acceleration(true);
+        a_field_simulator.get()->set_show_electrical_div(false);
+        a_field_simulator.get()->set_show_magnetic_field(false);
+        a_field_simulator.get()->set_show_trajectory(false);
+
         // Create two fixed points
         std::shared_ptr<Electrical_Charge> current_charge = a_field_simulator.get()->add_electrical_charge(-2 * std::pow(10, -6), -1, 0, 0.1);
         current_charge.get()->set_fixed(true);
@@ -103,6 +153,12 @@ namespace pleos {
 
     // Loads the objects for the field at quantum scale
     void Electromagnetism_Simulation::load_field_quantum() {
+        // Set the good settings
+        a_field_simulator.get()->set_show_acceleration(true);
+        a_field_simulator.get()->set_show_electrical_div(false);
+        a_field_simulator.get()->set_show_magnetic_field(true);
+        a_field_simulator.get()->set_show_trajectory(true);
+
         // Loads the random objects
         for(int i = 0;i<20;i++) {
             a_field_simulator.get()->add_random_electrical_charge(std::pow(10, -7), 2 * std::pow(10, -7), -1, 1, -1, 1);
@@ -122,6 +178,19 @@ namespace pleos {
         a_field_simulator.get()->load_field_texture();
     }
 
+    // Loads the objects for the field for Thomson theorem
+    void Electromagnetism_Simulation::load_field_thomson() {
+        // Set the good settings
+        a_field_simulator.get()->set_show_acceleration(true);
+        a_field_simulator.get()->set_show_electrical_div(false);
+        a_field_simulator.get()->set_show_magnetic_field(false);
+        a_field_simulator.get()->set_show_trajectory(false);
+
+        // Create one points
+        std::shared_ptr<Electrical_Charge> current_charge = a_field_simulator.get()->add_electrical_charge(-std::pow(10, -6), 0, 0, 0.1);
+        current_charge.get()->set_fixed(true);
+    }
+
     //******************
     //
     // Check the events
@@ -130,8 +199,17 @@ namespace pleos {
 
     // Check the navigation event
     void Electromagnetism_Simulation::check_navigation_events() {
+        if(a_navigation_equations_button.get() != 0 && a_navigation_equations_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_equations_page();
         if(a_navigation_field_button.get() != 0 && a_navigation_field_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_field_page();
         if(a_navigation_home_button.get() != 0 && a_navigation_home_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_home_page();
+    }
+
+    // Check the equations events
+    void Electromagnetism_Simulation::check_equations_events() {
+        // Go to the Gauss page 1
+        if(a_equations_gauss.get() != 0 && a_equations_gauss.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_equations_gauss_page();
+        // Go to the Gauss page 2
+        if(a_equations_gauss_page_1_next.get() != 0 && a_equations_gauss_page_1_next.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_equations_gauss_page_2();
     }
 
     // Check the field events
@@ -147,6 +225,31 @@ namespace pleos {
 
         // Reset the field
         if(window_struct()->key_pressed_during_this_frame("a")) {load_field_simulation();}
+
+        if(current_simulation() == PLEOS_ELECTROMAGNETISM_SIMULATION_GAUSS) {
+            // Precisely move charges if necessary
+            if(window_struct()->key_pressed("z")) {
+                std::vector<std::shared_ptr<Electrical_Charge>>& objects = a_field_simulator.get()->objects();
+                objects[0].get()->attached_transform()->move_x(window_struct()->delta_time());
+                objects[1].get()->attached_transform()->move_x(-window_struct()->delta_time());
+            } if(window_struct()->key_pressed("s")) {
+                std::vector<std::shared_ptr<Electrical_Charge>>& objects = a_field_simulator.get()->objects();
+                objects[0].get()->attached_transform()->move_x(-window_struct()->delta_time());
+                objects[1].get()->attached_transform()->move_x(window_struct()->delta_time());
+            }
+            // Precisely update charges if necessary
+            if(window_struct()->key_pressed("e")) {
+                std::vector<std::shared_ptr<Electrical_Charge>>& objects = a_field_simulator.get()->objects();
+                objects[0].get()->set_charge(objects[0].get()->charge() + window_struct()->delta_time() * (1.0 / 10e5));
+            } if(window_struct()->key_pressed("d")) {
+                std::vector<std::shared_ptr<Electrical_Charge>>& objects = a_field_simulator.get()->objects();
+                objects[0].get()->set_charge(objects[0].get()->charge() - window_struct()->delta_time() * (1.0 / 10e5));
+            }
+
+            // Update the field
+            a_field_simulator.get()->update_field();
+            a_field_simulator.get()->load_field_texture();
+        }
 
         // Update the field
         if(window_struct()->key_pressed("p")) {
@@ -165,6 +268,9 @@ namespace pleos {
         // Check the navigation event
         check_navigation_events();
 
+        // Equations events
+        if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_PAGE) check_equations_events();
+        if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_GAUSS_PAGE) check_equations_events();
         // Field events
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_FIELD_PAGE) check_field_events();
         // Home events
@@ -176,6 +282,33 @@ namespace pleos {
     // Handle the pages
     //
     //******************
+
+    // Displays the equations gauss page
+    void Electromagnetism_Simulation::display_equations_gauss_page() {
+        hide_all();
+        if(a_equations_gauss_page_1.get() != 0) a_equations_gauss_page_1.get()->set_visible(true);
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_GAUSS_PAGE);
+    }
+
+    // Displays the equations gauss page 2
+    void Electromagnetism_Simulation::display_equations_gauss_page_2() {
+        hide_all();
+        if(a_equations_gauss_page_2.get() != 0) a_equations_gauss_page_2.get()->set_visible(true);
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_GAUSS_PAGE);
+    }
+
+    // Displays the equations page
+    void Electromagnetism_Simulation::display_equations_page() {
+        hide_all();
+        if(a_equations_page.get() != 0) a_equations_page.get()->set_visible(true);
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_PAGE);
+    }
 
     // Displays the field page
     void Electromagnetism_Simulation::display_field_page() {
@@ -197,6 +330,9 @@ namespace pleos {
 
     // Hides all the pages
     void Electromagnetism_Simulation::hide_all() {
+        if(a_equations_gauss_page_1.get() != 0) a_equations_gauss_page_1.get()->set_visible(false);
+        if(a_equations_gauss_page_2.get() != 0) a_equations_gauss_page_2.get()->set_visible(false);
+        if(a_equations_page.get() != 0) a_equations_page.get()->set_visible(false);
         if(a_field_page.get() != 0) a_field_page.get()->set_visible(false);
         if(a_home_page.get() != 0) a_home_page.get()->set_visible(false);
 

@@ -24,12 +24,24 @@
 	</when>
 </gui_object>
 <gui_object name="electromagnetism_simulation_navigation_field_button" type="text">
-	<content font_size=28>Champs électromagnétiques</content>
+	<content font_size=28>Simulateur électromagnétique</content>
 	<height value=28 type=pixel>
 	<parent name="electromagnetism_simulation_navigation">
 	<texture alignment=fit>
 	<width value=1 type=scale>
 	<y attach=bottom attached_object="electromagnetism_simulation_navigation_home_button">
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_navigation_equations_button" type="text">
+	<content font_size=28>Équations de Maxwell</content>
+	<height value=28 type=pixel>
+	<parent name="electromagnetism_simulation_navigation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_navigation_field_button">
 
 	<when event="overflighted">
 		<cursor type=pointing_hand_cursor>
@@ -57,6 +69,209 @@
 	<width value=1 type=scale>
 	<x value=0 type=scale>
 	<y attach=top>
+</gui_object>
+
+//***************************************************
+//
+//   EQUATIONS
+//
+//***************************************************
+
+<gui_object name="electromagnetism_simulation_equations_body" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_body_title" type="text">
+	<content font_size=80>Équations de Maxwell</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_equations_body">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_context" type="text">
+	<border bottom=3 left=3 right=3 top=3>
+	<content font_size=40>Contexte</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_equations_body">
+	<texture alignment=fit>
+	<width value=1/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_body_title offset=10>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss" type="text">
+	<border bottom=3 left=3 right=3 top=3>
+	<content font_size=40>Théorème de Maxwell-Gauss</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_equations_body">
+	<texture alignment=fit>
+	<width value=1/3 type=scale>
+	<x value=1/3 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_context offset=10>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+
+// Gauss page 1
+<gui_object name="electromagnetism_simulation_equations_gauss_page_1" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_1_title" type="text">
+	<content font_size=80>Le théorème de Maxwell-Gauss</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_equations_gauss_page_1">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_1_sub_title" type="text">
+	<content font_size=40>La loi de Coulomb</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_equations_gauss_page_1">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_title offset=10>
+</gui_object>
+// Coulomb's explaination
+<gui_object name="electromagnetism_simulation_equations_gauss_page_1_explaination_1" type="text">
+	<content font_size=24>Née le 14 juin 1736 à Angoulême, Charles-Augustin Coulomb est un scientifique français du début de "l'époque des lumières".
+Il est surtout connu pour ses travaux sur le mécanisme, le frottement et l'électromagnétisme (bien que, à cette époque, cette discipline n'existait pas encore telle que nous l'a connaissons aujourd'hui).
+En 1788, il publie son "Sixième mémoire sur l'électricité", où il aborde la question de la théorie de l'électrostatique.
+Dans cette ouvrage, apparaît une loi très intéressante, aujourd'hui nommée loi de Coulomb :</content>
+
+	<height value=1/4 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_1">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_sub_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_1_image_1">
+	<border bottom=2 left=2 right=2 top=2>
+	<height value=1/3 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_1">
+	<texture name="coulomb" alignment=fit>
+	<width value=1/3 type=scale>
+	<x value=1/4 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_explaination_1>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_1_image_2">
+	<border bottom=2 left=2 right=2 top=2>
+	<height value=1/3 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_1">
+	<texture name="extract_coulomb_deuxieme_memoire" alignment=fit>
+	<width value=1/3 type=scale>
+	<x attach=right attached_object=electromagnetism_simulation_equations_gauss_page_1_image_1 offset=15>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_explaination_1>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_1_explaination_2" type="text">
+	<content font_size=24>Deux objets chargées respectivement de charge q1 et q2 s'attire / se repoussent (si leur signe est différent / similaire) entre eux, selon le produit de q1 et q2 par l'inverse du carré de leur distance.</content>
+
+	<height value=1/8 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_1">
+	<width value=2/3 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_image_1 offset=5>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_1_image_3">
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_1">
+	<texture name="coulomb_law" alignment=fit>
+	<width value=2/3 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_explaination_2>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_1_next" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&gt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_1">
+	<width value=1/10 type=scale>
+	<x attach=right offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+// Gauss page 2
+<gui_object name="electromagnetism_simulation_equations_gauss_page_2" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_2_title" type="text">
+	<content font_size=80>Le théorème de Maxwell-Gauss</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_equations_gauss_page_2">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_2_sub_title" type="text">
+	<content font_size=40>Le théorème de Gauss</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_equations_gauss_page_2">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_title offset=10>
+</gui_object>
+// Gauss modifications
+<gui_object name="electromagnetism_simulation_equations_gauss_page_2_explaination_1" type="text">
+	<content font_size=24>Cette explication de Coulomb n'était pas la plus mathémtique qu'il soit.
+Cependant, une explication plus mathématique ne se fût pas attendre, puis ce qu'elle fût abordée par Carl Freiderich Gauss, en 1813.
+L'idée ici était de concevoir le concept de la force appliquée aux particules comme un champ de vecteurs.
+Cela était possible, grâce à de nombreux outils mathématiques, développées par de nombreux mathématiciens (Euclide, Descartes, Laplace...).
+Ici, l'idée de Gauss est de définir un champ vectoriel électrique, représentant les forces appliquée autour de la source dans l'espace grâce à une fonction modélisant chaque vecteurs.
+De plus, nous utiliserons un opérateur nommé divergence, qui représente la somme des dérivées partielles de la fonction vectorielle (selon x, y et z) permettant de définir le champ.
+Grâce au résultat de Coulomb, Gauss a pu lier les charges des objets chargés avec le champ qu'ils produisent.</content>
+
+	<height value=1/4 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_2">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_2_sub_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_2_image_1">
+	<border bottom=2 left=2 right=2 top=2>
+	<height value=1/4 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_2">
+	<texture name="divergence" alignment=fit>
+	<width value=2/3 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_2_explaination_1>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_2_explaination_2" type="text">
+	<content font_size=24>Pour être très précis, le lien fait par Gauss est que la divergence d'un champ électrique est égal à la densité de charge dans le volume étudié, divisé par une valeur nommée la permittivité diélectrique du vide.
+Au final, nous obtenons un nombre de charges (en coulombs) par volume (en mètre cube) par la possibilité du milieu à conduire un champ (aussi nommée sa permittivité, en newtons / mètres).
+Avec cela, nous obtenons une force par coulomb divisé par des mètres, interprétable comme la force en newtons appliquée à un coulomb à une distance de un mètre.
+Si l'on augmente la distance, la force baisse.
+D'ailleurs, "une force par coulomb" est aussi représentable avec une unité très connue : le volt.</content>
+
+	<height value=1/4 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_2">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_2_image_1 offset=10>
 </gui_object>
 
 //***************************************************

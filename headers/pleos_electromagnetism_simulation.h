@@ -36,6 +36,8 @@
 // Possibles pages
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE 0
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_FIELD_PAGE 1
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_PAGE 2
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_GAUSS_PAGE 3
 // Possibles simulation
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM 0
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_GAUSS 1
@@ -51,6 +53,7 @@ namespace pleos {
         Electromagnetism_Simulation(scls::_Window_Advanced_Struct* window_struct, std::string name);
         // Loads an object in a page from XML
         virtual std::shared_ptr<scls::GUI_Object> __create_loaded_object_from_type(std::string object_name, std::string object_type, scls::GUI_Object* parent);
+        std::shared_ptr<scls::GUI_Object> __create_loaded_object_from_type_equations(std::string object_name, std::string object_type, scls::GUI_Object* parent);
         std::shared_ptr<scls::GUI_Object> __create_loaded_object_from_type_field(std::string object_name, std::string object_type, scls::GUI_Object* parent);
         std::shared_ptr<scls::GUI_Object> __create_loaded_object_from_type_home(std::string object_name, std::string object_type, scls::GUI_Object* parent);
         std::shared_ptr<scls::GUI_Object> __create_loaded_object_from_type_navigation(std::string object_name, std::string object_type, scls::GUI_Object* parent);
@@ -67,6 +70,8 @@ namespace pleos {
         void load_field_quantum();
         // Loads the needed objects for the field
         void load_field_simulation();
+        // Loads the objects for the field for Thomson theorem
+        void load_field_thomson();
         // Unloads the objects in the field
         inline void unload_field_objects() {a_field_objects.get()->reset();};
 
@@ -76,6 +81,8 @@ namespace pleos {
         //
         //******************
 
+        // Check the equations events
+        void check_equations_events();
         // Check the field events
         void check_field_events();
         // Check the home events
@@ -94,6 +101,11 @@ namespace pleos {
         //
         //******************
 
+        // Displays the equations gauss page
+        void display_equations_gauss_page();
+        void display_equations_gauss_page_2();
+        // Displays the equations page
+        void display_equations_page();
         // Displays the field page
         void display_field_page();
         // Displays the home page
@@ -126,15 +138,25 @@ namespace pleos {
 
         // Navigation button
         std::shared_ptr<scls::GUI_Text> a_navigation_home_button;
+        std::shared_ptr<scls::GUI_Text> a_navigation_equations_button;
         std::shared_ptr<scls::GUI_Text> a_navigation_field_button;
 
         // Pages
+        std::shared_ptr<scls::GUI_Object> a_equations_page;
+        std::shared_ptr<scls::GUI_Object> a_field_page;
         std::shared_ptr<scls::GUI_Object> a_home_page;
+
+        // Equations page
+        std::shared_ptr<scls::GUI_Text> a_equations_context;
+        std::shared_ptr<scls::GUI_Object> a_equations_gauss;
+        // Gauss page
+        std::shared_ptr<scls::GUI_Object> a_equations_gauss_page_1;
+        std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_1_next;
+        std::shared_ptr<scls::GUI_Object> a_equations_gauss_page_2;
 
         // Field page
         std::shared_ptr<scls::GUI_Text> a_field_gauss;
         std::shared_ptr<scls::GUI_Scroller> a_field_objects;
-        std::shared_ptr<scls::GUI_Object> a_field_page;
         std::shared_ptr<scls::GUI_Text> a_field_quantum;
         std::shared_ptr<Electromagnetism_Field> a_field_simulator;
     };
