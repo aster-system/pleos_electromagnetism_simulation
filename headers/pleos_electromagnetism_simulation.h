@@ -38,9 +38,11 @@
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_FIELD_PAGE 1
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_PAGE 2
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_GAUSS_PAGE 3
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_FARADAY_PAGE 4
 // Possibles simulation
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM 0
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_GAUSS 1
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_FARADAY 2
 
 // The namespace "pleos" is used to simplify the all.
 namespace pleos {
@@ -64,6 +66,8 @@ namespace pleos {
         //
         //******************
 
+        // Loads the objects for the field for Faraday experiment
+        void load_field_faraday();
         // Loads the objects for the field for Gauss theorem
         void load_field_gauss();
         // Loads the objects for the field at quantum scale
@@ -101,6 +105,8 @@ namespace pleos {
         //
         //******************
 
+        // Displays the equations faraday page
+        void display_equations_faraday_page();
         // Displays the equations gauss page
         void display_equations_gauss_page();
         void display_equations_gauss_page_2();
@@ -148,13 +154,17 @@ namespace pleos {
 
         // Equations page
         std::shared_ptr<scls::GUI_Text> a_equations_context;
+        std::shared_ptr<scls::GUI_Object> a_equations_faraday;
         std::shared_ptr<scls::GUI_Object> a_equations_gauss;
+        // Faraday page
+        std::shared_ptr<scls::GUI_Object> a_equations_faraday_page_1;
         // Gauss page
         std::shared_ptr<scls::GUI_Object> a_equations_gauss_page_1;
         std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_1_next;
         std::shared_ptr<scls::GUI_Object> a_equations_gauss_page_2;
 
         // Field page
+        std::shared_ptr<scls::GUI_Text> a_field_faraday;
         std::shared_ptr<scls::GUI_Text> a_field_gauss;
         std::shared_ptr<scls::GUI_Scroller> a_field_objects;
         std::shared_ptr<scls::GUI_Text> a_field_quantum;

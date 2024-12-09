@@ -61,6 +61,20 @@ namespace pleos {
         } else if(object_name == "electromagnetism_simulation_equations_context") {
             a_equations_context = *parent->new_object<scls::GUI_Text>(object_name);
             return a_equations_context;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday") {
+            a_equations_faraday = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_faraday;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_1") {
+            a_equations_faraday_page_1 = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_equations_faraday_page_1;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_1_explaination_1") {
+            std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_1_explaination_1 = *parent->new_object<scls::GUI_Text>(object_name);
+            a_equations_faraday_page_1_explaination_1.get()->set_max_width(0);
+            return a_equations_faraday_page_1_explaination_1;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_1_explaination_2") {
+            std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_1_explaination_2 = *parent->new_object<scls::GUI_Text>(object_name);
+            a_equations_faraday_page_1_explaination_2.get()->set_max_width(0);
+            return a_equations_faraday_page_1_explaination_2;
         } else if(object_name == "electromagnetism_simulation_equations_gauss") {
             a_equations_gauss = *parent->new_object<scls::GUI_Text>(object_name);
             return a_equations_gauss;
@@ -95,6 +109,9 @@ namespace pleos {
         if(object_name == "electromagnetism_simulation_field_body") {
             a_field_page = *parent->new_object<scls::GUI_Object>(object_name);
             return a_field_page;
+        } else if(object_name == "electromagnetism_simulation_field_faraday") {
+            a_field_faraday = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_field_faraday;
         } else if(object_name == "electromagnetism_simulation_field_gauss") {
             a_field_gauss = *parent->new_object<scls::GUI_Text>(object_name);
             return a_field_gauss;
@@ -134,10 +151,19 @@ namespace pleos {
     //
     //******************
 
+    // Loads the objects for the field for Faraday experiment
+    void Electromagnetism_Simulation::load_field_faraday() {
+        // Set the good settings
+        a_field_simulator.get()->set_show_acceleration(true);
+        a_field_simulator.get()->set_show_electrical_div(false);
+        a_field_simulator.get()->set_show_magnetic_field(true);
+        a_field_simulator.get()->set_show_trajectory(false);
+
+
+    }
+
     // Loads the objects for the field for Gauss theorem
     void Electromagnetism_Simulation::load_field_gauss() {
-        load_field_thomson();return;
-
         // Set the good settings
         a_field_simulator.get()->set_show_acceleration(true);
         a_field_simulator.get()->set_show_electrical_div(false);
@@ -175,6 +201,7 @@ namespace pleos {
         // Load the field
         if(current_simulation() == PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM) {load_field_quantum();}
         else if(current_simulation() == PLEOS_ELECTROMAGNETISM_SIMULATION_GAUSS) {load_field_gauss();}
+        else if(current_simulation() == PLEOS_ELECTROMAGNETISM_SIMULATION_FARADAY) {load_field_faraday();}
         a_field_simulator.get()->load_field_texture();
     }
 
@@ -206,6 +233,8 @@ namespace pleos {
 
     // Check the equations events
     void Electromagnetism_Simulation::check_equations_events() {
+        // Go to the Faraday page 1
+        if(a_equations_faraday.get() != 0 && a_equations_faraday.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_equations_faraday_page();
         // Go to the Gauss page 1
         if(a_equations_gauss.get() != 0 && a_equations_gauss.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_equations_gauss_page();
         // Go to the Gauss page 2
@@ -220,6 +249,9 @@ namespace pleos {
             load_field_simulation();
         } else if(a_field_gauss.get() != 0 && a_field_gauss.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) {
             set_current_simulation(PLEOS_ELECTROMAGNETISM_SIMULATION_GAUSS);
+            load_field_simulation();
+        } else if(a_field_faraday.get() != 0 && a_field_faraday.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) {
+            set_current_simulation(PLEOS_ELECTROMAGNETISM_SIMULATION_FARADAY);
             load_field_simulation();
         }
 
@@ -283,6 +315,15 @@ namespace pleos {
     //
     //******************
 
+    // Displays the equations faraday page
+    void Electromagnetism_Simulation::display_equations_faraday_page() {
+        hide_all();
+        if(a_equations_faraday_page_1.get() != 0) a_equations_faraday_page_1.get()->set_visible(true);
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_FARADAY_PAGE);
+    }
+
     // Displays the equations gauss page
     void Electromagnetism_Simulation::display_equations_gauss_page() {
         hide_all();
@@ -330,6 +371,7 @@ namespace pleos {
 
     // Hides all the pages
     void Electromagnetism_Simulation::hide_all() {
+        if(a_equations_faraday_page_1.get() != 0) a_equations_faraday_page_1.get()->set_visible(false);
         if(a_equations_gauss_page_1.get() != 0) a_equations_gauss_page_1.get()->set_visible(false);
         if(a_equations_gauss_page_2.get() != 0) a_equations_gauss_page_2.get()->set_visible(false);
         if(a_equations_page.get() != 0) a_equations_page.get()->set_visible(false);

@@ -2,6 +2,9 @@
 <texture name="coulomb" src="assets/plugins/assets_electromagnetism_simulation/images/coulomb.png">
 <texture name="coulomb_law" src="assets/plugins/assets_electromagnetism_simulation/images/coulomb_law.png">
 <texture name="divergence" src="assets/plugins/assets_electromagnetism_simulation/images/divergence.png">
+<texture name="faraday" src="assets/plugins/assets_electromagnetism_simulation/images/faraday.png">
+<texture name="faraday_lab" src="assets/plugins/assets_electromagnetism_simulation/images/faraday_lab.png">
+<texture name="gauss_maxwell_law" src="assets/plugins/assets_electromagnetism_simulation/images/gauss_maxwell_law.png">
 <texture name="extract_coulomb_deuxieme_memoire" src="assets/plugins/assets_electromagnetism_simulation/images/extract_coulomb_deuxieme_memoire.png">
 
 // Load the needed pages
