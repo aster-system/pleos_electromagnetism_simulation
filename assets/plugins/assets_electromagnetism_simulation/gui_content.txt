@@ -352,10 +352,19 @@ Parmi elles, notons celle de la rotation électromagnétique ou bien de la cage 
 	<parent name="electromagnetism_simulation_equations_faraday_page_1">
 	<texture name="faraday" alignment=fit>
 	<width value=1/5 type=scale>
-	<x value=1/4 type=object_scale>
+	<x value=1/5 type=object_scale>
 	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_1_explaination_1>
 </gui_object>
 <gui_object name="electromagnetism_simulation_equations_faraday_page_1_image_2">
+	<border bottom=2 left=2 right=2 top=2>
+	<height value=1/4 type=scale>
+	<parent name="electromagnetism_simulation_equations_faraday_page_1">
+	<texture name="barlow_wheel" alignment=fit>
+	<width value=1/6 type=scale>
+	<x value=4/9 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_1_explaination_1>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_1_image_3">
 	<border bottom=2 left=2 right=2 top=2>
 	<height value=1/4 type=scale>
 	<parent name="electromagnetism_simulation_equations_faraday_page_1">
@@ -368,13 +377,28 @@ Parmi elles, notons celle de la rotation électromagnétique ou bien de la cage 
 	<content font_size=24>Celle qui nous intéresse ici est celle de la rotation électromagnétique.
 Elle est assez simple, elle consiste en un câble électrique, noyé dans un seau plein de mercure et avec un aimant statique en son fond.
 La circulation d'un courant électrique dans le câble provoqua une rotation autour de l'aimant du câble, prouvant que le courant électrique crée une force interagissant avec celle produite par l'aimant.
-Cette expérience sera confirmé par Barlow et sa "roue de Barlow" en 1822.</content>
+Cette expérience sera confirmé par Barlow et sa "roue de Barlow" en 1822.
+Cette expérience permet aussi de comprendre que les sens des vecteurs dans un couple courant électrique - champ magnétique est beaucoup plus complexes qu'ils en ont l'air.
+Malgré toutes ces expériences fructueuses, la description mathématique de ces phénomènes resta mystérieuse pendant longtemps.</content>
 
 	<height value=1/4 type=scale>
 	<parent name="electromagnetism_simulation_equations_faraday_page_1">
 	<width value=3/4 type=scale>
 	<x value=1/2 type=object_scale>
 	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_1_image_1 offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_1_next" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&gt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_equations_faraday_page_1">
+	<width value=1/10 type=scale>
+	<x attach=right offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
 </gui_object>
 
 //***************************************************

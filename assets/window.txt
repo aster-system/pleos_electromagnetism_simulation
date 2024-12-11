@@ -1,4 +1,5 @@
 // Load the textures
+<texture name="barlow_wheel" src="assets/plugins/assets_electromagnetism_simulation/images/barlow_wheel.png">
 <texture name="coulomb" src="assets/plugins/assets_electromagnetism_simulation/images/coulomb.png">
 <texture name="coulomb_law" src="assets/plugins/assets_electromagnetism_simulation/images/coulomb_law.png">
 <texture name="divergence" src="assets/plugins/assets_electromagnetism_simulation/images/divergence.png">

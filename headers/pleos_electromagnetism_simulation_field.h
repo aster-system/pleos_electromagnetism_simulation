@@ -35,6 +35,19 @@
 
 // The namespace "pleos" is used to simplify the all.
 namespace pleos {
+    // Returns the texture of a magnet
+    std::shared_ptr<scls::Image> magnet_texture(int width, int height);
+
+    // Struct representating a magnet
+    struct Magnet {
+        // Charge of the field
+        double charge = 0;
+        // Physic of the magnet
+        Physic_Object physic;
+        // Texture of the magnet
+        std::shared_ptr<scls::Image> texture;
+    };
+
     class Electromagnetism_Field : public scls::GUI_Object {
         // Class representating a electromagnetic field in a GUI object
     public:
@@ -46,6 +59,9 @@ namespace pleos {
         inline std::shared_ptr<Electrical_Charge> add_electrical_charge(double charge, double x, double y){return add_electrical_charge(charge, x, y, -1);};
         // Adds a random electrical charge in the field
         void add_random_electrical_charge(double min_charge, double max_charge, double min_x, double max_x, double min_y, double max_y);
+        // Adds a magnet in the field
+        std::shared_ptr<Magnet> add_magnet(double charge, double x, double y, double mass);
+        inline std::shared_ptr<Magnet> add_magnet(double charge, double x, double y){return add_magnet(charge, x, y, -1);};
 
         // Function called after that the window is resized
         virtual void after_resizing();
@@ -55,7 +71,7 @@ namespace pleos {
         // Loads the needed texture for the field
         void load_field_texture();
         // Reset the field
-        inline void reset(){a_objects.clear();};
+        inline void reset(){a_magnets.clear();a_objects.clear();};
         // Updates the objects in the field
         void update_field();
 
@@ -81,6 +97,7 @@ namespace pleos {
         double a_pixels_by_unit_height = 100; double a_pixels_by_unit_width = 100;
 
         // Electromagnetic objects in the field
+        std::vector<std::shared_ptr<Magnet>> a_magnets;
         std::vector<std::shared_ptr<Electrical_Charge>> a_objects;
         // If the acceleration must be showed or not
         bool a_show_acceleration = true;

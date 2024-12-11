@@ -31,6 +31,13 @@
 
 // The namespace "pleos" is used to simplify the all.
 namespace pleos {
+    // Returns the texture of a magnet
+    std::shared_ptr<scls::Image> magnet_texture(int width, int height) {
+        std::shared_ptr<scls::Image> to_return = std::make_shared<scls::Image>(width, height, scls::Color(255, 0, 0));
+        to_return.get()->fill_rect(0, 0, width / 2.0, height, scls::Color(0, 0, 255));
+        return to_return;
+    }
+
     // Quadratic gradient color for the Image class circle, made for electric fields
     scls::Color fill_circle_gradient_electric_field(double distance, int radius, int x, int y, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha) {
         double needed_multiplication = std::pow(std::abs(1.0 - distance / static_cast<double>(radius)), 2);
@@ -43,12 +50,23 @@ namespace pleos {
     // Quadratic gradient color for the Image class circle, made for magnetic fields
     double __needed_angle = 0;
     scls::Color fill_circle_gradient_magnetic_field(double distance, int radius, int x, int y, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha) {
-        double needed_angle = scls::vector_2d_angle(x, y) + (__needed_angle);
+        // Apply the good color
+        double created_angle = scls::vector_2d_angle(x, y);
+        while(created_angle > SCLS_PI) {created_angle -= SCLS_PI * 2;}
+        while(created_angle < -SCLS_PI) {created_angle += SCLS_PI * 2;}
+        double needed_angle = created_angle + (__needed_angle);
         while(needed_angle > SCLS_PI) {needed_angle -= SCLS_PI * 2;}
         while(needed_angle < -SCLS_PI) {needed_angle += SCLS_PI * 2;}
         if(needed_angle < 0) {red = 125;}
 
-        double needed_multiplication = std::pow(std::abs(1.0 - distance / static_cast<double>(radius)), 1);
+        // Apply the equipotential
+        double diff = std::abs((SCLS_PI - __needed_angle) - created_angle);
+        while(diff > SCLS_PI / 2.0) {diff -= SCLS_PI;} diff = std::abs(diff);
+        double added_multiplication = diff / (SCLS_PI / 2.0);
+        added_multiplication = std::pow(added_multiplication, 1.0/2.0);
+
+        // Apply the distance
+        double needed_multiplication = std::pow(std::abs(1.0 - distance / static_cast<double>(radius)), 1) * added_multiplication;
         return scls::Color(static_cast<double>(red) * needed_multiplication, static_cast<double>(green) * needed_multiplication, static_cast<double>(blue) * needed_multiplication, static_cast<double>(alpha) * needed_multiplication);
     }
 
@@ -70,6 +88,23 @@ namespace pleos {
         current_charge.get()->set_x(x); current_charge.get()->set_y(y); current_charge.get()->set_mass(mass);
         a_objects.push_back(current_charge);
         return current_charge;
+    }
+
+    // Adds a magnet in the field
+    std::shared_ptr<Magnet> Electromagnetism_Field::add_magnet(double charge, double x, double y, double mass) {
+        // Create the needed mass
+        if(mass == -1) {
+            mass = charge / std::pow(10, -6);
+            mass = std::pow(mass, 2);
+        }
+
+        // Create the object
+        std::shared_ptr<Magnet> current_magnet = std::make_shared<Magnet>();
+        current_magnet.get()->physic.set_x(x); current_magnet.get()->physic.set_y(y); current_magnet.get()->physic.set_mass(mass);
+        current_magnet.get()->charge = charge;
+        current_magnet.get()->texture = magnet_texture(300, 50);
+        a_magnets.push_back(current_magnet);
+        return current_magnet;
     }
 
     // Adds a random electrical charge in the field
@@ -121,6 +156,8 @@ namespace pleos {
                 // Create the magnetical field
                 double magnetical_force = force_field * a_objects[i].get()->velocity().norm() * 10;
                 __needed_angle = scls::vector_2d_angle(a_objects[i].get()->velocity().x(), a_objects[i].get()->velocity().y());
+                while(__needed_angle > SCLS_PI) {__needed_angle -= SCLS_PI * 2;}
+                while(__needed_angle < -SCLS_PI) {__needed_angle += SCLS_PI * 2;}
                 new_texture.get()->fill_circle_gradient(position.x(), position.y(), magnetical_force, scls::Color(0, 255, 0), fill_circle_gradient_magnetic_field);
             }
 
@@ -137,6 +174,22 @@ namespace pleos {
                 forward_position = field_position_to_gui_position(forward_position);
                 new_texture.get()->draw_line(position.x() - 1, position.y() - 1, forward_position.x() - 1, forward_position.y() - 1, scls::Color(255, 0, 255), 2);
             }
+        }
+
+        // Create the magnets
+        for(int i = 0;i<static_cast<int>(a_magnets.size());i++) {
+            // Get the needed position
+            scls::Vector_3D position = field_position_to_gui_position(a_magnets[i].get()->physic.attached_transform()->position());
+            if(show_magnetic_field()) {
+                // Create the magnetical field
+                double force_field = std::abs(a_magnets[i].get()->charge * 10e7);
+                __needed_angle = 0;
+                while(__needed_angle > SCLS_PI) {__needed_angle -= SCLS_PI * 2;}
+                while(__needed_angle < -SCLS_PI) {__needed_angle += SCLS_PI * 2;}
+                new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(0, 255, 0), fill_circle_gradient_magnetic_field);
+            }
+            // Draw the magnet
+            new_texture.get()->paste(a_magnets[i].get()->texture.get(), position.x() - a_magnets[i].get()->texture.get()->width() / 2.0, position.y() - a_magnets[i].get()->texture.get()->height() / 2.0);
         }
 
         texture()->set_image(new_texture);

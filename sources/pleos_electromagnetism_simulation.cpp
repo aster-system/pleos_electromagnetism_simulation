@@ -159,7 +159,15 @@ namespace pleos {
         a_field_simulator.get()->set_show_magnetic_field(true);
         a_field_simulator.get()->set_show_trajectory(false);
 
-
+        // Create the magnet
+        std::shared_ptr<Magnet> current_magnet = a_field_simulator.get()->add_magnet(-3 * std::pow(10, -6), -2.5, 0, 0.1);
+        // Create needed charges
+        for(int i = 0;i<10;i++) {
+            std::shared_ptr<Electrical_Charge> current_charge = a_field_simulator.get()->add_electrical_charge(-std::pow(10, -7), 0, -1.0 + static_cast<double>(i) / 5.0, 0.1);
+            current_charge.get()->set_acceleration(scls::Vector_3D(1, 0, 0));
+            current_charge.get()->set_fixed(true);
+            current_charge.get()->set_velocity(scls::Vector_3D(0, -1, 0));
+        }
     }
 
     // Loads the objects for the field for Gauss theorem
@@ -171,7 +179,7 @@ namespace pleos {
         a_field_simulator.get()->set_show_trajectory(false);
 
         // Create two fixed points
-        std::shared_ptr<Electrical_Charge> current_charge = a_field_simulator.get()->add_electrical_charge(-2 * std::pow(10, -6), -1, 0, 0.1);
+        std::shared_ptr<Electrical_Charge> current_charge = a_field_simulator.get()->add_electrical_charge(-std::pow(10, -6), -1, 0, 0.1);
         current_charge.get()->set_fixed(true);
         current_charge = a_field_simulator.get()->add_electrical_charge(-2 * std::pow(10, -6), 1, 0, 0.1);
         current_charge.get()->set_fixed(true);
