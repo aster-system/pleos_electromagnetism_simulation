@@ -1,0 +1,8 @@
+Né le 14 juin 1736 à Angoulême, Charles-Augustin Coulomb est un scientifique français du début de "l'époque des lumières".
+Il est surtout connu pour ses travaux sur le mécanisme, le frottement et l'électromagnétisme (bien que, à cette époque, cette discipline n'existait pas encore telle que nous l'a connaissons aujourd'hui).
+En 1788, il publie son "Sixième mémoire sur l'électricité", où il aborde la question de la théorie de l'électrostatique (l'étude de l'électricité avec des charges constantes ou équilibrées).
+Dans cette ouvrage, apparaît une loi très intéressante, aujourd'hui nommée loi de Coulomb :</br>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/coulomb.png" height=300>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/extract_coulomb_deuxieme_memoire.png" height=300></br>
+Deux objets chargées respectivement de charge q1 et q2 s'attirent / se repoussent (si leur signe est différent / similaire) entre eux, selon le produit de q1 et q2 par l'inverse du carré de leur distance.</br>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/coulomb_law.png" height=150>

@@ -33,12 +33,22 @@
 // Include PLEOS Libs
 #include "pleos_electromagnetism_simulation_field.h"
 
+// Possibles modes
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_NAVIGATION 0
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION 1
 // Possibles pages
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE 0
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_FIELD_PAGE 1
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_PAGE 2
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_GAUSS_PAGE 3
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_FARADAY_PAGE 4
+// Possible presentation states
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_START 0
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_CONTEXT 1
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_1 100
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_SIMULATION_1 101
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_2 102
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_3 103
 // Possibles simulation
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM 0
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_GAUSS 1
@@ -78,6 +88,8 @@ namespace pleos {
         void load_field_thomson();
         // Unloads the objects in the field
         inline void unload_field_objects() {a_field_objects.get()->reset();};
+        // Updates the field in the simulation
+        void update_field(bool update_frame = true);
 
         //******************
         //
@@ -93,6 +105,8 @@ namespace pleos {
         void check_home_events();
         // Check the navigation events
         void check_navigation_events();
+        // Check the presentation events
+        void check_presentation_events();
         // Update the events
         void update_event();
 
@@ -110,6 +124,7 @@ namespace pleos {
         // Displays the equations gauss page
         void display_equations_gauss_page();
         void display_equations_gauss_page_2();
+        void display_equations_gauss_page_3();
         // Displays the equations page
         void display_equations_page();
         // Displays the field page
@@ -118,20 +133,32 @@ namespace pleos {
         void display_home_page();
         // Hides all the pages
         void hide_all();
+        // Sets the navigation mode
+        void set_navigation_mode();
+        // Sets the presentation mode
+        void set_presentation_mode();
 
         // Returns / resets the current page
+        inline unsigned char current_mode() const {return a_current_state.current_mode;};
         inline unsigned short current_page() const {return a_current_state.current_page;};
+        inline unsigned short current_presentation_state() const {return a_current_state.current_presentation_state;};
         inline unsigned short current_simulation() const {return a_current_state.current_simulation;};
+        inline void set_current_mode(unsigned char new_mode) {a_current_state.current_mode = new_mode;};
         inline void set_current_page(unsigned short new_page) {a_current_state.current_page = new_page;};
+        inline void set_current_presentation(unsigned short new_presentation_state) {a_current_state.current_presentation_state = new_presentation_state;};
         inline void set_current_simulation(unsigned short new_simulation) {a_current_state.current_simulation = new_simulation;};
 
     private:
 
         // Current state of the page
         struct {
+            // Current mode
+            unsigned char current_mode = PLEOS_ELECTROMAGNETISM_SIMULATION_NAVIGATION;
             // Current page
             unsigned short current_page = PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE;
 
+            // Current state of presentation
+            unsigned short current_presentation_state = PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_START;
             // Current simulation
             unsigned short current_simulation = PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM;
         } a_current_state;
@@ -142,10 +169,16 @@ namespace pleos {
         //
         //******************
 
-        // Navigation button
+        // Navigation
+        std::shared_ptr<scls::GUI_Text> a_navigation_presentation_button;
+        std::shared_ptr<scls::GUI_Object> a_navigation;
+        std::shared_ptr<scls::GUI_Object> a_presentation;
+        // Navigation buttons
         std::shared_ptr<scls::GUI_Text> a_navigation_home_button;
         std::shared_ptr<scls::GUI_Text> a_navigation_equations_button;
         std::shared_ptr<scls::GUI_Text> a_navigation_field_button;
+        // Presentation buttons
+        std::shared_ptr<scls::GUI_Text> a_presentation_maxwell_gauss_button;
 
         // Pages
         std::shared_ptr<scls::GUI_Object> a_equations_page;
@@ -162,8 +195,14 @@ namespace pleos {
         std::shared_ptr<scls::GUI_Object> a_equations_gauss_page_1;
         std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_1_next;
         std::shared_ptr<scls::GUI_Object> a_equations_gauss_page_2;
+        std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_2_next;
+        std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_2_previous;
+        std::shared_ptr<scls::GUI_Object> a_equations_gauss_page_3;
+        std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_3_next;
+        std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_3_previous;
 
         // Field page
+        std::shared_ptr<scls::GUI_Text> a_field_datas;
         std::shared_ptr<scls::GUI_Text> a_field_faraday;
         std::shared_ptr<scls::GUI_Text> a_field_gauss;
         std::shared_ptr<scls::GUI_Scroller> a_field_objects;

@@ -126,8 +126,8 @@ namespace pleos {
     // Loads the needed texture for the field
     void Electromagnetism_Field::load_field_texture() {
         // Create the new picture
-        int height = height_in_pixel() / 2;
-        int width = width_in_pixel() / 2;
+        int height = height_in_pixel() / 3;
+        int width = width_in_pixel() / 3;
         std::shared_ptr<scls::Image> new_texture = std::make_shared<scls::Image>(width, height, scls::Color(0, 0, 0));
 
         // Create the fields
@@ -198,8 +198,8 @@ namespace pleos {
     // Field conversions
     scls::Vector_3D Electromagnetism_Field::field_position_to_gui_position(scls::Vector_3D position) {
         scls::Vector_3D to_return;
-        to_return.set_x(width_in_pixel() / 4 + (position.x() - a_middle.x()) * a_pixels_by_unit_width);
-        to_return.set_y(height_in_pixel() / 4 + ((-position.y()) - a_middle.y()) * a_pixels_by_unit_height);
+        to_return.set_x(width_in_pixel() / 6 + (position.x() - a_middle.x()) * a_pixels_by_unit_width);
+        to_return.set_y(height_in_pixel() / 6 + ((-position.y()) - a_middle.y()) * a_pixels_by_unit_height);
         return to_return;
     }
 

@@ -1,0 +1,48 @@
+Partons de la loi de Coulomb pour arriver aux conclusions de Gauss.
+Donc, nous avons :
+</br><math>
+<vec><mi>F</mi></vec><mo>=</mo>
+<mi>q</mi><sub>1</sub><mi>q</mi><sub>2</sub><frac><mi>1</mi><mrow><mi>4</mi><pi><epsilon><sub>0</sub><mi>r</mi><msup>2</msup></mrow></frac><vec>u</vec>
+</math></br>
+Ne nous concentrons que sur la charge 1 et étudions là.
+Définissons le champ E comme le champ engendré par la charge 1.
+Ici, le champ ne dépend que de la charge 1.
+Donc, nous obtenons :
+</br><math>
+<vec>E</vec><sub>1</sub><mi>(M)</mi><mo>=</mo>
+<mi>q</mi><sub>M</sub>
+<frac><mi>1</mi><mrow><epsilon><sub>0</sub></mrow></frac>
+<frac><mrow><mi>q</mi><sub>1</sub></mrow><mrow><mi>4</mi><pi><mi>r</mi><sub>1-M</sub><msup>2</msup></mrow></frac><vec>u</vec>
+</math></br>
+Nous constatons que la valeur de chaque vecteurs de E ne dépend que sa charge et de sa distance à la charge 1.
+Les autres valeurs sont constantes, quelques soient les valeurs de M.
+De plus, nous reconnaissons la formule de la surface d'une sphère :
+</br><math>
+<mi>4</mi><pi><mi>r</mi><sub>1-M</sub><msup>2</msup>
+</math></br>
+Ici, elle est utilisée en tant que facteur via son inverse.
+Donc, nous pouvons définir une surface de Gauss S, contour d'une sphère V de centre la charge 1 et de rayon la distance entre M et la charge 1.
+Par de simples intégrations, on constate que la somme de l'action du champ sur cette surface est :</br>
+</br><math>
+<phi><sub><vec>E</vec></sub><mo>=</mo>
+<mi>E</mi><esh><esh><sub>S</sub><mi>dS</mi>
+</math></br>
+Or :
+</br><math>
+<mi>E</mi><esh><esh><sub>S</sub><mi>dS</mi><mo>=</mo>
+<frac><mrow><mi>q</mi><sub>1</sub></mrow><mrow><epsilon><sub>0</sub><mi>4</mi><pi><mi>r</mi><msup>2</msup></mrow></frac><esh><esh><sub>S</sub><mi>dS</mi><mo>=</mo>
+<frac><mrow><mi>q</mi><sub>1</sub></mrow><mrow><epsilon><sub>0</sub></mrow></frac>
+</math></br>
+De plus, selon le théorème de Gauss-Ostrogradski :
+</br><math>
+<phi><sub><vec>E</vec></sub><mo>=</mo>
+<mi>E</mi><esh><esh><sub>S</sub><mi>dS</mi><mo>=</mo>
+<esh><esh><esh><sub>V</sub><vec><nabla></vec><vec>E</vec><mi>dV</mi>
+</math></br>
+Finalement, si l'on divise le volume de la sphère à ces deux valeurs, nous obtenons :
+</br><math>
+<vec><nabla></vec><vec>E</vec><mo>=</mo>
+<frac><mrow><mi>q</mi><sub>1</sub></mrow><mrow><mi>v</mi><epsilon><sub>0</sub></mrow></frac><mo>=</mo>
+<frac><mrow><rho><sub>1</sub></mrow><mrow><epsilon><sub>0</sub></mrow></frac>
+</math></br>
+En partant de tout cela, nous pourrons justifier d'autres égalités très intéressantes.

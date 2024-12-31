@@ -4,9 +4,27 @@
 //
 //***************************************************
 
+<gui_object name="electromagnetism_simulation_navigation_presentation" type="text" visible>
+	<border bottom=1 left=1 right=1 top=1>
+	<content font_size=24>Mode présentation</content>
+	<height value=1/8 type=scale>
+	<width value=1/5 type=scale>
+	<texture alignment=fit>
+	<x attach=left>
+	<y attach=bottom>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+
+//***************************************************
+// Pure navigation
+//***************************************************
+
 <gui_object name="electromagnetism_simulation_navigation" type="object" visible>
 	<border bottom=1 left=1 right=1 top=1>
-	<height value=1 type=scale>
+	<height value=7/8 type=scale>
 	<width value=1/5 type=scale>
 	<x attach=left>
 	<y attach=top>
@@ -42,6 +60,42 @@
 	<texture alignment=fit>
 	<width value=1 type=scale>
 	<y attach=bottom attached_object="electromagnetism_simulation_navigation_field_button">
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+
+//***************************************************
+// Presentation navigation
+//***************************************************
+
+<gui_object name="electromagnetism_simulation_presentation" type="object" visible>
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=7/8 type=scale>
+	<width value=1/5 type=scale>
+	<x attach=left>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_presentation_home_button" type="text">
+	<content font_size=28>Accueil</content>
+	<height value=28 type=pixel>
+	<parent name="electromagnetism_simulation_presentation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=top>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_presentation_chapter_1_button" type="text">
+	<content font_size=24>I - Science : Les équations de Maxwell</content>
+	<height value=24 type=pixel>
+	<parent name="electromagnetism_simulation_presentation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_presentation_home_button">
 
 	<when event="overflighted">
 		<cursor type=pointing_hand_cursor>
@@ -149,7 +203,7 @@
 	<y value=0 type=scale>
 </gui_object>
 <gui_object name="electromagnetism_simulation_equations_gauss_page_1_title" type="text">
-	<content font_size=80>Le théorème de Maxwell-Gauss</content>
+	<content font_size=80>I - 1. Le théorème de Maxwell-Gauss</content>
 	<height value=80 type=pixel>
 	<parent name="electromagnetism_simulation_equations_gauss_page_1">
 	<texture alignment=fit>
@@ -166,54 +220,14 @@
 	<x value=0 type=scale>
 	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_title offset=10>
 </gui_object>
-
 // Coulomb's explaination
 <gui_object name="electromagnetism_simulation_equations_gauss_page_1_explaination_1" type="text">
-	<content font_size=24>Née le 14 juin 1736 à Angoulême, Charles-Augustin Coulomb est un scientifique français du début de "l'époque des lumières".
-Il est surtout connu pour ses travaux sur le mécanisme, le frottement et l'électromagnétisme (bien que, à cette époque, cette discipline n'existait pas encore telle que nous l'a connaissons aujourd'hui).
-En 1788, il publie son "Sixième mémoire sur l'électricité", où il aborde la question de la théorie de l'électrostatique.
-Dans cette ouvrage, apparaît une loi très intéressante, aujourd'hui nommée loi de Coulomb :</content>
-
-	<height value=1/4 type=scale>
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/maxwell_gauss_explaination_1.txt"></content>
+	<height value=3/4 type=scale>
 	<parent name="electromagnetism_simulation_equations_gauss_page_1">
 	<width value=3/4 type=scale>
 	<x value=1/2 type=object_scale>
 	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_sub_title offset=10>
-</gui_object>
-<gui_object name="electromagnetism_simulation_equations_gauss_page_1_image_1">
-	<border bottom=2 left=2 right=2 top=2>
-	<height value=1/3 type=scale>
-	<parent name="electromagnetism_simulation_equations_gauss_page_1">
-	<texture name="coulomb" alignment=fit>
-	<width value=1/3 type=scale>
-	<x value=1/4 type=object_scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_explaination_1>
-</gui_object>
-<gui_object name="electromagnetism_simulation_equations_gauss_page_1_image_2">
-	<border bottom=2 left=2 right=2 top=2>
-	<height value=1/3 type=scale>
-	<parent name="electromagnetism_simulation_equations_gauss_page_1">
-	<texture name="extract_coulomb_deuxieme_memoire" alignment=fit>
-	<width value=1/3 type=scale>
-	<x attach=right attached_object=electromagnetism_simulation_equations_gauss_page_1_image_1 offset=15>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_explaination_1>
-</gui_object>
-<gui_object name="electromagnetism_simulation_equations_gauss_page_1_explaination_2" type="text">
-	<content font_size=24>Deux objets chargées respectivement de charge q1 et q2 s'attire / se repoussent (si leur signe est différent / similaire) entre eux, selon le produit de q1 et q2 par l'inverse du carré de leur distance.</content>
-
-	<height value=1/8 type=scale>
-	<parent name="electromagnetism_simulation_equations_gauss_page_1">
-	<width value=2/3 type=scale>
-	<x value=1/2 type=object_scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_image_1 offset=5>
-</gui_object>
-<gui_object name="electromagnetism_simulation_equations_gauss_page_1_image_3">
-	<height value=1/10 type=scale>
-	<parent name="electromagnetism_simulation_equations_gauss_page_1">
-	<texture name="coulomb_law" alignment=fit>
-	<width value=2/3 type=scale>
-	<x value=1/2 type=object_scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_explaination_2>
 </gui_object>
 <gui_object name="electromagnetism_simulation_equations_gauss_page_1_next" type="text">
 	<border bottom=2 left=2 right=2 top=2>
@@ -238,7 +252,7 @@ Dans cette ouvrage, apparaît une loi très intéressante, aujourd'hui nommée l
 	<y value=0 type=scale>
 </gui_object>
 <gui_object name="electromagnetism_simulation_equations_gauss_page_2_title" type="text">
-	<content font_size=80>Le théorème de Maxwell-Gauss</content>
+	<content font_size=80>I - 1. Le théorème de Maxwell-Gauss</content>
 	<height value=80 type=pixel>
 	<parent name="electromagnetism_simulation_equations_gauss_page_2">
 	<texture alignment=fit>
@@ -253,55 +267,91 @@ Dans cette ouvrage, apparaît une loi très intéressante, aujourd'hui nommée l
 	<texture alignment=fit>
 	<width value=1 type=scale>
 	<x value=0 type=scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_1_title offset=10>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_2_title offset=10>
 </gui_object>
 // Gauss modifications
 <gui_object name="electromagnetism_simulation_equations_gauss_page_2_explaination_1" type="text">
-	<content font_size=24>Cette explication de Coulomb n'était pas la plus mathémtique qu'il soit.
-Cependant, une explication plus mathématique ne se fût pas attendre, puis ce qu'elle fût abordée par Carl Freiderich Gauss, en 1813.
-L'idée ici était de concevoir le concept de la force appliquée aux particules comme un champ de vecteurs.
-Cela était possible, grâce à de nombreux outils mathématiques, développées par de nombreux mathématiciens (Euclide, Descartes, Laplace...).
-Ici, l'idée de Gauss est de définir un champ vectoriel électrique, représentant les forces appliquée autour de la source dans l'espace grâce à une fonction modélisant chaque vecteurs.
-De plus, nous utiliserons un opérateur nommé divergence, qui représente la somme des dérivées partielles de la fonction vectorielle (selon x, y et z) permettant de définir le champ.
-Grâce au résultat de Coulomb, Gauss a pu lier les charges des objets chargés avec le champ qu'ils produisent.</content>
-
-	<height value=1/4 type=scale>
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/maxwell_gauss_explaination_2.txt"></content>
+	<height value=3/4 type=scale>
 	<parent name="electromagnetism_simulation_equations_gauss_page_2">
 	<width value=3/4 type=scale>
 	<x value=1/2 type=object_scale>
 	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_2_sub_title offset=10>
 </gui_object>
-<gui_object name="electromagnetism_simulation_equations_gauss_page_2_image_1">
+<gui_object name="electromagnetism_simulation_equations_gauss_page_2_next" type="text">
 	<border bottom=2 left=2 right=2 top=2>
-	<height value=1/4 type=scale>
-	<parent name="electromagnetism_simulation_equations_gauss_page_2">
-	<texture name="divergence" alignment=fit>
-	<width value=2/3 type=scale>
-	<x value=1/2 type=object_scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_2_explaination_1>
-</gui_object>
-<gui_object name="electromagnetism_simulation_equations_gauss_page_2_explaination_2" type="text">
-	<content font_size=22>Pour être très précis, le lien fait par Gauss est que la divergence d'un champ électrique est égal à la densité de charge dans le volume étudié, divisé par une valeur nommée la permittivité diélectrique du vide.
-Au final, nous obtenons un nombre de charges (en coulombs) par volume (en mètre cube) par la possibilité du milieu à conduire un champ (aussi nommée sa permittivité, en newtons / mètres).
-Avec cela, nous obtenons une force par coulomb divisé par des mètres, interprétable comme la force en newtons appliquée à un coulomb à une distance de un mètre.
-Si l'on augmente la distance, la force baisse.
-D'ailleurs, "une force par coulomb" est aussi représentable avec une unité très connue : le volt.
-Bien que l'équation présentée par Gauss fût bien plus avancée que celle exposé, se fût Maxwell qui l'a fit rentrer parfaitement dans l'univers de l'électromagnétisme.
-Cette ouverture mathématique rend possible des choses, qui n'auraient pas été possibles sans.</content>
-
-	<height value=1/5 type=scale>
-	<parent name="electromagnetism_simulation_equations_gauss_page_2">
-	<width value=3/4 type=scale>
-	<x value=1/2 type=object_scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_2_image_1 offset=10>
-</gui_object>
-<gui_object name="electromagnetism_simulation_equations_gauss_page_2_image_2">
+	<content font_size=24>&gt;</content>
 	<height value=1/10 type=scale>
 	<parent name="electromagnetism_simulation_equations_gauss_page_2">
-	<texture name="gauss_maxwell_law" alignment=fit>
-	<width value=2/3 type=scale>
+	<width value=1/10 type=scale>
+	<x attach=right offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_2_previous" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&lt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_2">
+	<width value=1/10 type=scale>
+	<x attach=left offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+
+// Gauss page 3
+<gui_object name="electromagnetism_simulation_equations_gauss_page_3" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_3_title" type="text">
+	<content font_size=80>I - 1. Le théorème de Maxwell-Gauss</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_equations_gauss_page_3">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_3_sub_title" type="text">
+	<content font_size=40>La démonstration mathématique</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_equations_gauss_page_3">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_3_title offset=10>
+</gui_object>
+// Gauss modifications
+<gui_object name="electromagnetism_simulation_equations_gauss_page_3_explaination_1" type="text">
+	<content font_size=18 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/maxwell_gauss_explaination_3.txt"></content>
+	<height value=3/4 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_3">
+	<width value=3/4 type=scale>
 	<x value=1/2 type=object_scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_2_explaination_2>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss_page_3_sub_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_gauss_page_3_previous" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&lt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_equations_gauss_page_3">
+	<width value=1/10 type=scale>
+	<x attach=left offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
 </gui_object>
 
 //***************************************************
@@ -335,57 +385,12 @@ Cette ouverture mathématique rend possible des choses, qui n'auraient pas été
 	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_1_title offset=10>
 </gui_object>
 <gui_object name="electromagnetism_simulation_equations_faraday_page_1_explaination_1" type="text">
-	<content font_size=24>Née le 22 septembre 1791 à Londres, Michael Faraday est un scientifique expérimentateur anglais.
-Il n'était pas connu comme le meilleur mathématicien de son temps, mais définitivement un des meilleurs expérimentateurs.
-En s'appuyant sur pleins de travaux d'autres scientifiques (notamment Orsted et John Dalton) et le soutien de plusieurs intellectuels (comme Humphry David), il a pu réaliser une grande quantité d'expérience, qui allait ouvrir la voie au futur de l'électromagnetisme.
-Parmi elles, notons celle de la rotation électromagnétique ou bien de la cage de Faraday.</content>
-
-	<height value=1/4 type=scale>
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/maxwell_faraday_explaination_1.txt"></content>
+	<height value=3/4 type=scale>
 	<parent name="electromagnetism_simulation_equations_faraday_page_1">
 	<width value=3/4 type=scale>
 	<x value=1/2 type=object_scale>
 	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_1_sub_title offset=10>
-</gui_object>
-<gui_object name="electromagnetism_simulation_equations_faraday_page_1_image_1">
-	<border bottom=2 left=2 right=2 top=2>
-	<height value=1/4 type=scale>
-	<parent name="electromagnetism_simulation_equations_faraday_page_1">
-	<texture name="faraday" alignment=fit>
-	<width value=1/5 type=scale>
-	<x value=1/5 type=object_scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_1_explaination_1>
-</gui_object>
-<gui_object name="electromagnetism_simulation_equations_faraday_page_1_image_2">
-	<border bottom=2 left=2 right=2 top=2>
-	<height value=1/4 type=scale>
-	<parent name="electromagnetism_simulation_equations_faraday_page_1">
-	<texture name="barlow_wheel" alignment=fit>
-	<width value=1/6 type=scale>
-	<x value=4/9 type=object_scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_1_explaination_1>
-</gui_object>
-<gui_object name="electromagnetism_simulation_equations_faraday_page_1_image_3">
-	<border bottom=2 left=2 right=2 top=2>
-	<height value=1/4 type=scale>
-	<parent name="electromagnetism_simulation_equations_faraday_page_1">
-	<texture name="faraday_lab" alignment=fit>
-	<width value=1/4 type=scale>
-	<x value=2/3 type=object_scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_1_explaination_1>
-</gui_object>
-<gui_object name="electromagnetism_simulation_equations_faraday_page_1_explaination_2" type="text">
-	<content font_size=24>Celle qui nous intéresse ici est celle de la rotation électromagnétique.
-Elle est assez simple, elle consiste en un câble électrique, noyé dans un seau plein de mercure et avec un aimant statique en son fond.
-La circulation d'un courant électrique dans le câble provoqua une rotation autour de l'aimant du câble, prouvant que le courant électrique crée une force interagissant avec celle produite par l'aimant.
-Cette expérience sera confirmé par Barlow et sa "roue de Barlow" en 1822.
-Cette expérience permet aussi de comprendre que les sens des vecteurs dans un couple courant électrique - champ magnétique est beaucoup plus complexes qu'ils en ont l'air.
-Malgré toutes ces expériences fructueuses, la description mathématique de ces phénomènes resta mystérieuse pendant longtemps.</content>
-
-	<height value=1/4 type=scale>
-	<parent name="electromagnetism_simulation_equations_faraday_page_1">
-	<width value=3/4 type=scale>
-	<x value=1/2 type=object_scale>
-	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_1_image_1 offset=10>
 </gui_object>
 <gui_object name="electromagnetism_simulation_equations_faraday_page_1_next" type="text">
 	<border bottom=2 left=2 right=2 top=2>
@@ -425,8 +430,7 @@ Malgré toutes ces expériences fructueuses, la description mathématique de ces
 </gui_object>
 
 // Field handling
-
-<gui_object name="electromagnetism_simulation_field_simulator" type="text">
+<gui_object name="electromagnetism_simulation_field_simulator" type="simulator">
 	<border bottom=1 left=1 right=1 top=1>
 	<height value=3/5 type=scale>
 	<parent name="electromagnetism_simulation_field_body">
@@ -484,4 +488,15 @@ Malgré toutes ces expériences fructueuses, la description mathématique de ces
 	<when event="overflighted">
 		<cursor type=pointing_hand_cursor>
 	</when>
+</gui_object>
+
+// Footer
+<gui_object name="electromagnetism_simulation_field_datas" type="text">
+	<content font_size=24></content>
+	<height value=2/5 type=scale>
+	<parent name="electromagnetism_simulation_field_body">
+	<texture alignment=fit alignment_vertical=top>
+	<width value=5/6 type=scale>
+	<x attach=right>
+	<y attach=bottom attached_object=electromagnetism_simulation_field_simulator>
 </gui_object>

@@ -1,0 +1,16 @@
+Cette explication de Coulomb n'était pas la plus mathémtique qu'il soit.
+Cependant, une explication plus mathématique ne se fût pas attendre, puis ce qu'elle fût abordée par Carl Freiderich Gauss, en 1813.
+L'idée ici était de concevoir le concept de la force appliquée aux particules comme un champ de vecteurs.
+Cela était possible, grâce à de nombreux outils mathématiques, développées par de nombreux mathématiciens (Euclide, Descartes, Laplace...).
+Ici, l'idée de Gauss est de définir un champ vectoriel électrique, représentant les forces appliquée autour de la source dans l'espace grâce à une fonction modélisant chaque vecteurs.
+De plus, nous utiliserons un opérateur nommé divergence, qui représente la somme des dérivées partielles de la fonction vectorielle (selon x, y et z) permettant de définir le champ.
+Grâce au résultat de Coulomb, Gauss a pu lier les charges des objets chargés avec le champ qu'ils produisent.</br>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/divergence.png" height=200></br>
+Pour être très précis, le lien fait par Gauss est que la divergence d'un champ électrique est égal à la densité de charge dans le volume étudié, divisé par une valeur nommée la permittivité diélectrique du vide.
+Au final, nous obtenons un nombre de charges (en coulombs) par volume (en mètre cube) par la possibilité du milieu à conduire un champ (aussi nommée sa permittivité, en newtons / mètres).
+Avec cela, nous obtenons une force par coulomb divisé par des mètres, interprétable comme la force en newtons appliquée à un coulomb à une distance de un mètre.
+Si l'on augmente la distance, la force baisse.
+D'ailleurs, "une force par coulomb" est aussi représentable avec une unité très connue : le volt.
+Bien que l'équation présentée par Gauss fût bien plus avancée que celle exposé, se fût Maxwell qui l'a fit rentrer parfaitement dans l'univers de l'électromagnétisme.
+Cette ouverture mathématique rend possible des choses, qui n'auraient pas été possibles sans.</br>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/gauss_maxwell_law.png" height=100>

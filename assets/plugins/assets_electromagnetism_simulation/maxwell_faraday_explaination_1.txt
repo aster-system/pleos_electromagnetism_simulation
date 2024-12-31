@@ -1,0 +1,13 @@
+Né le 22 septembre 1791 à Londres, Michael Faraday est un scientifique expérimentateur anglais.
+Il n'était pas connu comme le meilleur mathématicien de son temps, mais définitivement un des meilleurs expérimentateurs.
+En s'appuyant sur pleins de travaux d'autres scientifiques (notamment Orsted et John Dalton) et le soutien de plusieurs intellectuels (comme Humphry David), il a pu réaliser une grande quantité d'expérience, qui allait ouvrir la voie au futur de l'électromagnetisme.
+Parmi elles, notons celle de la rotation électromagnétique ou bien de la cage de Faraday.</br>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/faraday.png" height=200>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/faraday_lab.png" height=200>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/barlow_wheel.png" height=200></br>
+Celle qui nous intéresse ici est celle de la rotation électromagnétique.
+Elle est assez simple, elle consiste en un câble électrique, noyé dans un seau plein de mercure et avec un aimant statique en son fond.
+La circulation d'un courant électrique dans le câble provoqua une rotation autour de l'aimant du câble, prouvant que le courant électrique crée une force interagissant avec celle produite par l'aimant.
+Cette expérience sera confirmé par Barlow et sa "roue de Barlow" en 1822.
+Cette expérience permet aussi de comprendre que les sens des vecteurs dans un couple courant électrique - champ magnétique est beaucoup plus complexes qu'ils en ont l'air.
+Malgré toutes ces expériences fructueuses, la description mathématique de ces phénomènes resta mystérieuse pendant longtemps.
