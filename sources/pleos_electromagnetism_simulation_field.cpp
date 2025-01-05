@@ -48,6 +48,7 @@ namespace pleos {
         return scls::Color(static_cast<double>(red) * needed_multiplication, static_cast<double>(green) * needed_multiplication, static_cast<double>(blue) * needed_multiplication, static_cast<double>(alpha) * needed_multiplication);
     }
     // Quadratic gradient color for the Image class circle, made for magnetic fields
+    double __equipotential_factor = 1.0/2.0;
     double __needed_angle = 0;
     scls::Color fill_circle_gradient_magnetic_field(double distance, int radius, int x, int y, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha) {
         // Apply the good color
@@ -63,11 +64,29 @@ namespace pleos {
         double diff = std::abs((SCLS_PI - __needed_angle) - created_angle);
         while(diff > SCLS_PI / 2.0) {diff -= SCLS_PI;} diff = std::abs(diff);
         double added_multiplication = diff / (SCLS_PI / 2.0);
-        added_multiplication = std::pow(added_multiplication, 1.0/2.0);
+        added_multiplication = std::pow(added_multiplication, __equipotential_factor);
 
         // Apply the distance
         double needed_multiplication = std::pow(std::abs(1.0 - distance / static_cast<double>(radius)), 1) * added_multiplication;
         return scls::Color(static_cast<double>(red) * needed_multiplication, static_cast<double>(green) * needed_multiplication, static_cast<double>(blue) * needed_multiplication, static_cast<double>(alpha) * needed_multiplication);
+    }
+
+    // Magnetic application for a charge
+    scls::Vector_3D Magnet::magnetic_application(Electrical_Charge* object) {
+        scls::Vector_3D to_return = charge.get()->vector_to(object);
+        double needed_angle = scls::vector_2d_angle(to_return.x(), to_return.y());
+        to_return *= object->electrical_field_force(position());
+
+        // Handle the charges
+        while(needed_angle > SCLS_PI * 2.0) {needed_angle -= SCLS_PI * 2.0;}
+        while(needed_angle <= 0) {needed_angle += SCLS_PI * 2.0;}
+        if(object->charge() >= 0) {
+            if(needed_angle <= SCLS_HALF_PI || needed_angle >= SCLS_PI * 2.0 - SCLS_HALF_PI){to_return *= -1;}
+        } else {
+            if(needed_angle >= SCLS_HALF_PI && needed_angle <= SCLS_PI * 2.0 - SCLS_HALF_PI){to_return *= -1;}
+        }
+
+        return to_return;
     }
 
     // Electromagnetism_Field constructor
@@ -100,8 +119,8 @@ namespace pleos {
 
         // Create the object
         std::shared_ptr<Magnet> current_magnet = std::make_shared<Magnet>();
-        current_magnet.get()->physic.set_x(x); current_magnet.get()->physic.set_y(y); current_magnet.get()->physic.set_mass(mass);
-        current_magnet.get()->charge = charge;
+        current_magnet.get()->charge.get()->set_x(x); current_magnet.get()->charge.get()->set_y(y); current_magnet.get()->charge.get()->set_mass(mass);
+        current_magnet.get()->charge.get()->set_charge(charge);
         current_magnet.get()->texture = magnet_texture(300, 50);
         a_magnets.push_back(current_magnet);
         return current_magnet;
@@ -126,8 +145,8 @@ namespace pleos {
     // Loads the needed texture for the field
     void Electromagnetism_Field::load_field_texture() {
         // Create the new picture
-        int height = height_in_pixel() / 3;
-        int width = width_in_pixel() / 3;
+        int height = height_in_pixel() / 2;
+        int width = width_in_pixel() / 2;
         std::shared_ptr<scls::Image> new_texture = std::make_shared<scls::Image>(width, height, scls::Color(0, 0, 0));
 
         // Create the fields
@@ -135,7 +154,7 @@ namespace pleos {
             // Create the electrical field
             scls::Vector_3D position = field_position_to_gui_position(a_objects[i].get()->attached_transform()->position());
             // Create the electrical field
-            double force_field = a_objects[i].get()->force_field_produced(1) * 0.01;
+            double force_field = a_objects[i].get()->electrical_field_force(1) * 0.01;
             if(show_electrical_div()) {
                 // Divergence of the electrical field
                 if(a_objects[i].get()->charge() > 0) {
@@ -152,8 +171,9 @@ namespace pleos {
                 }
             }
 
-            if(show_magnetic_field()) {
+            if(show_magnetic_field_particules()) {
                 // Create the magnetical field
+                __equipotential_factor = 0.0;
                 double magnetical_force = force_field * a_objects[i].get()->velocity().norm() * 10;
                 __needed_angle = scls::vector_2d_angle(a_objects[i].get()->velocity().x(), a_objects[i].get()->velocity().y());
                 while(__needed_angle > SCLS_PI) {__needed_angle -= SCLS_PI * 2;}
@@ -177,19 +197,31 @@ namespace pleos {
         }
 
         // Create the magnets
+        __equipotential_factor = 1.0/2.0;
         for(int i = 0;i<static_cast<int>(a_magnets.size());i++) {
             // Get the needed position
-            scls::Vector_3D position = field_position_to_gui_position(a_magnets[i].get()->physic.attached_transform()->position());
-            if(show_magnetic_field()) {
+            scls::Vector_3D rotation = a_magnets[i].get()->charge.get()->rotation();
+            scls::Vector_3D position = field_position_to_gui_position(a_magnets[i].get()->position());
+            if(show_magnetic_field_magnets()) {
                 // Create the magnetical field
-                double force_field = std::abs(a_magnets[i].get()->charge * 10e7);
-                __needed_angle = 0;
+                double force_field = std::abs(a_magnets[i].get()->charge.get()->charge() * 10e7);
+                __needed_angle = scls::degrees_to_radians(rotation.y()) + SCLS_HALF_PI;
                 while(__needed_angle > SCLS_PI) {__needed_angle -= SCLS_PI * 2;}
                 while(__needed_angle < -SCLS_PI) {__needed_angle += SCLS_PI * 2;}
                 new_texture.get()->fill_circle_gradient(position.x(), position.y(), force_field, scls::Color(0, 255, 0), fill_circle_gradient_magnetic_field);
             }
-            // Draw the magnet
-            new_texture.get()->paste(a_magnets[i].get()->texture.get(), position.x() - a_magnets[i].get()->texture.get()->width() / 2.0, position.y() - a_magnets[i].get()->texture.get()->height() / 2.0);
+            // Draw the need triangles
+            scls::Vector_3D magnet_size = scls::Vector_3D(1.5, 0.2, 0);
+            scls::Vector_3D point_1 = scls::Vector_3D(0, 0, magnet_size.y() / 2.0);point_1.rotate(rotation);point_1.set_y(point_1.z());
+            scls::Vector_3D point_2 = scls::Vector_3D(0, 0, -magnet_size.y() / 2.0);point_2.rotate(rotation);point_2.set_y(point_2.z());
+            scls::Vector_3D point_3 = scls::Vector_3D(-magnet_size.x() / 2.0, 0, 0);point_3.rotate(rotation);point_3.set_y(point_3.z());
+            scls::Vector_3D point_4 = scls::Vector_3D(magnet_size.x() / 2.0, 0, 0);point_4.rotate(rotation);point_4.set_y(point_4.z());
+            point_1 = position + point_1 * a_pixels_by_unit_width;
+            point_2 = position + point_2 * a_pixels_by_unit_width;
+            point_3 = position + point_3 * a_pixels_by_unit_width;
+            point_4 = position + point_4 * a_pixels_by_unit_width;
+            new_texture.get()->fill_triangle(point_1.x(), point_1.y(), point_2.x(), point_2.y(), point_3.x(), point_3.y(), scls::Color(255, 0, 0));
+            new_texture.get()->fill_triangle(point_1.x(), point_1.y(), point_2.x(), point_2.y(), point_4.x(), point_4.y(), scls::Color(0, 0, 255));
         }
 
         texture()->set_image(new_texture);
@@ -198,8 +230,8 @@ namespace pleos {
     // Field conversions
     scls::Vector_3D Electromagnetism_Field::field_position_to_gui_position(scls::Vector_3D position) {
         scls::Vector_3D to_return;
-        to_return.set_x(width_in_pixel() / 6 + (position.x() - a_middle.x()) * a_pixels_by_unit_width);
-        to_return.set_y(height_in_pixel() / 6 + ((-position.y()) - a_middle.y()) * a_pixels_by_unit_height);
+        to_return.set_x(width_in_pixel() / 4 + (position.x() - a_middle.x()) * a_pixels_by_unit_width);
+        to_return.set_y(height_in_pixel() / 4 + ((-position.y()) - a_middle.y()) * a_pixels_by_unit_height);
         return to_return;
     }
 
@@ -209,15 +241,54 @@ namespace pleos {
         for(int i = 0;i<static_cast<int>(a_objects.size());i++) {
             // Get the needed movement
             scls::Vector_3D acceleration;
-            for(int j = 0;j<static_cast<int>(a_objects.size());j++) {
-                if(i != j) {
-                    // Get the needed acceleration
-                    scls::Vector_3D current_acceleration = a_objects[i].get()->vector_to(a_objects[j].get()) * a_objects[i].get()->force_field_produced(a_objects[j].get());
-                    if(scls::sign(a_objects[i].get()->charge()) != scls::sign(a_objects[j].get()->charge())){current_acceleration = current_acceleration * -1;}
-                    acceleration += current_acceleration;
+            scls::Vector_3D magnetic_action_magnets; scls::Vector_3D magnetic_action_objects;
+
+            // Get the forces particules-to-particules
+            if(apply_particule_to_particule_electrical_force() || apply_particule_to_particule_electrical_force()) {
+                for(int j = 0;j<static_cast<int>(a_objects.size());j++) {
+                    if(i != j) {
+                        // Get the needed acceleration
+                        // Electrical field
+                        scls::Vector_3D current_acceleration = a_objects[i].get()->vector_to(a_objects[j].get()) * a_objects[i].get()->electrical_field_force(a_objects[j].get());
+                        if(scls::sign(a_objects[i].get()->charge()) != scls::sign(a_objects[j].get()->charge())){current_acceleration = current_acceleration * -1;}
+                        if(apply_particule_to_particule_electrical_force()) {acceleration += current_acceleration;}
+                        // Magnetical field
+                        magnetic_action_objects += current_acceleration * -1.0;
+                    }
                 }
-            } a_objects[i].get()->set_acceleration(acceleration / a_objects[i].get()->mass());
+                if(a_objects.size() > 1){magnetic_action_objects /= static_cast<int>(a_objects.size()) - 1;} magnetic_action_objects *= 1000;
+            }
+
+            // Get the movement of each magnets
+            if(apply_magnet_to_particule_force()) {
+                for(int j = 0;j<static_cast<int>(a_magnets.size());j++) {
+                    // Magnetical field
+                    scls::Vector_3D current_field = a_magnets[j].get()->magnetic_application(a_objects[i].get());
+                    magnetic_action_magnets += current_field;
+                } magnetic_action_magnets *= 0.001;
+            }
+
+            // Set the final values
+            a_objects[i].get()->set_acceleration(acceleration / a_objects[i].get()->mass());
+            if(apply_particule_to_particule_electrical_force()){a_objects[i].get()->set_velocity(Electrical_Charge::magnetical_field_force(magnetic_action_magnets + magnetic_action_objects, a_objects[i].get()));}
         }
+
+        // Update the magnets
+        for(int i = 0;i<static_cast<int>(a_magnets.size());i++) {
+            // Get the needed movement
+            scls::Vector_3D magnetic_action_objects;
+            for(int j = 0;j<static_cast<int>(a_objects.size());j++) {
+                // Get the needed acceleration
+                // Magnetical field
+                magnetic_action_objects += a_magnets[i].get()->magnetic_application(a_objects[j].get());
+            }
+
+            // Set the final values
+            magnetic_action_objects *= 0.001;
+            magnetic_action_objects *= window_struct().delta_time();
+            a_magnets[i].get()->charge.get()->accelerate(magnetic_action_objects);
+        }
+
         // Simulate the physic in the object
         for(int i = 0;i<static_cast<int>(a_objects.size());i++) {
             a_objects[i].get()->simulate_physic(window_struct().delta_time());

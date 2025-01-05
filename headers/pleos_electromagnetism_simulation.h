@@ -42,6 +42,7 @@
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_PAGE 2
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_GAUSS_PAGE 3
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_FARADAY_PAGE 4
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_THOMSON_PAGE 5
 // Possible presentation states
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_START 0
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_CONTEXT 1
@@ -49,6 +50,11 @@
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_SIMULATION_1 101
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_2 102
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_3 103
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_1 200
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_SIMULATION_1 201
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_2 202
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_3 203
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_THOMSON_THEOREM_1 300
 // Possibles simulation
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM 0
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_GAUSS 1
@@ -121,12 +127,16 @@ namespace pleos {
 
         // Displays the equations faraday page
         void display_equations_faraday_page();
+        void display_equations_faraday_page_2();
+        void display_equations_faraday_page_3();
         // Displays the equations gauss page
         void display_equations_gauss_page();
         void display_equations_gauss_page_2();
         void display_equations_gauss_page_3();
         // Displays the equations page
         void display_equations_page();
+        // Displays the equations thomson page
+        void display_equations_thomson_page();
         // Displays the field page
         void display_field_page();
         // Displays the home page
@@ -189,8 +199,15 @@ namespace pleos {
         std::shared_ptr<scls::GUI_Text> a_equations_context;
         std::shared_ptr<scls::GUI_Object> a_equations_faraday;
         std::shared_ptr<scls::GUI_Object> a_equations_gauss;
+        std::shared_ptr<scls::GUI_Object> a_equations_thomson;
         // Faraday page
         std::shared_ptr<scls::GUI_Object> a_equations_faraday_page_1;
+        std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_1_next;
+        std::shared_ptr<scls::GUI_Object> a_equations_faraday_page_2;
+        std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_2_next;
+        std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_2_previous;
+        std::shared_ptr<scls::GUI_Object> a_equations_faraday_page_3;
+        std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_3_previous;
         // Gauss page
         std::shared_ptr<scls::GUI_Object> a_equations_gauss_page_1;
         std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_1_next;
@@ -200,6 +217,8 @@ namespace pleos {
         std::shared_ptr<scls::GUI_Object> a_equations_gauss_page_3;
         std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_3_next;
         std::shared_ptr<scls::GUI_Text> a_equations_gauss_page_3_previous;
+        // Thompson page
+        std::shared_ptr<scls::GUI_Object> a_equations_thomson_page_1;
 
         // Field page
         std::shared_ptr<scls::GUI_Text> a_field_datas;

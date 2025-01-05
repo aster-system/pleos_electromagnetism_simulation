@@ -167,8 +167,22 @@
 	<height value=40 type=pixel>
 	<parent name="electromagnetism_simulation_equations_body">
 	<texture alignment=fit>
-	<width value=1/3 type=scale>
+	<width value=1/4 type=scale>
 	<x value=1/3 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_context offset=10>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_thomson" type="text">
+	<border bottom=3 left=3 right=3 top=3>
+	<content font_size=40>Théorème de Maxwell-Thomson</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_equations_body">
+	<texture alignment=fit>
+	<width value=1/4 type=scale>
+	<x value=2/3 type=object_scale>
 	<y attach=bottom attached_object=electromagnetism_simulation_equations_context offset=10>
 
 	<when event="overflighted">
@@ -177,12 +191,12 @@
 </gui_object>
 <gui_object name="electromagnetism_simulation_equations_faraday" type="text">
 	<border bottom=3 left=3 right=3 top=3>
-	<content font_size=40>Théorème de Maxwell-Faraday</content>
+	<content font_size=40>Théorème de Maxwell-Faraday et Maxwell-Ampère</content>
 	<height value=40 type=pixel>
 	<parent name="electromagnetism_simulation_equations_body">
 	<texture alignment=fit>
-	<width value=1/3 type=scale>
-	<x value=1/3 type=object_scale>
+	<width value=1/2 type=scale>
+	<x value=1/2 type=object_scale>
 	<y attach=bottom attached_object=electromagnetism_simulation_equations_gauss offset=10>
 
 	<when event="overflighted">
@@ -358,7 +372,7 @@
 // Maxwell Faraday
 //***************************************************
 
-// Gauss page 1
+// Faraday page 1
 <gui_object name="electromagnetism_simulation_equations_faraday_page_1" type="object">
 	<border bottom=1 left=1 right=1 top=1>
 	<height value=1 type=scale>
@@ -367,7 +381,7 @@
 	<y value=0 type=scale>
 </gui_object>
 <gui_object name="electromagnetism_simulation_equations_faraday_page_1_title" type="text">
-	<content font_size=80>Le théorème de Maxwell-Faraday</content>
+	<content font_size=80>I - 2. Le théorème de Maxwell-Faraday</content>
 	<height value=80 type=pixel>
 	<parent name="electromagnetism_simulation_equations_faraday_page_1">
 	<texture alignment=fit>
@@ -376,7 +390,7 @@
 	<y attach=top>
 </gui_object>
 <gui_object name="electromagnetism_simulation_equations_faraday_page_1_sub_title" type="text">
-	<content font_size=40>Les expériences de Faraday</content>
+	<content font_size=40>Le lien électricité - aimant</content>
 	<height value=40 type=pixel>
 	<parent name="electromagnetism_simulation_equations_faraday_page_1">
 	<texture alignment=fit>
@@ -404,6 +418,152 @@
 	<when event="overflighted">
 		<cursor type=pointing_hand_cursor>
 	</when>
+</gui_object>
+// Faraday page 2
+<gui_object name="electromagnetism_simulation_equations_faraday_page_2" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_2_title" type="text">
+	<content font_size=80>I - 2. Le théorème de Maxwell-Faraday</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_equations_faraday_page_2">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_2_sub_title" type="text">
+	<content font_size=40>Les expériences de Faraday</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_equations_faraday_page_2">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_2_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_2_explaination_1" type="text">
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/maxwell_faraday_explaination_2.txt"></content>
+	<height value=3/4 type=scale>
+	<parent name="electromagnetism_simulation_equations_faraday_page_2">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_2_sub_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_2_next" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&gt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_equations_faraday_page_2">
+	<width value=1/10 type=scale>
+	<x attach=right offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_2_previous" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&lt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_equations_faraday_page_2">
+	<width value=1/10 type=scale>
+	<x attach=left offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+// Faraday page 2
+<gui_object name="electromagnetism_simulation_equations_faraday_page_3" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_3_title" type="text">
+	<content font_size=80>I - 2. Le théorème de Maxwell-Faraday</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_equations_faraday_page_3">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_3_sub_title" type="text">
+	<content font_size=40>Un peu de mathématique</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_equations_faraday_page_3">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_3_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_3_explaination_1" type="text">
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/maxwell_faraday_explaination_3.txt"></content>
+	<height value=3/4 type=scale>
+	<parent name="electromagnetism_simulation_equations_faraday_page_3">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_faraday_page_3_sub_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_faraday_page_3_previous" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&lt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_equations_faraday_page_3">
+	<width value=1/10 type=scale>
+	<x attach=left offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+
+//***************************************************
+// Maxwell Thomson
+//***************************************************
+
+// Thomson page 1
+<gui_object name="electromagnetism_simulation_equations_thomson_page_1" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_thomson_page_1_title" type="text">
+	<content font_size=80>I - 3. Le théorème de Maxwell-Thomson</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_equations_thomson_page_1">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_thomson_page_1_sub_title" type="text">
+	<content font_size=40>Un simple postulat</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_equations_thomson_page_1">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_thomson_page_1_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_thomson_page_1_explaination_1" type="text">
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/maxwell_thomson_explaination_1.txt"></content>
+	<height value=3/4 type=scale>
+	<parent name="electromagnetism_simulation_equations_thomson_page_1">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_thomson_page_1_sub_title offset=10>
 </gui_object>
 
 //***************************************************
@@ -463,7 +623,7 @@
 </gui_object>
 <gui_object name="electromagnetism_simulation_field_gauss" type="text">
 	<border bottom=1 left=1 right=1 top=1>
-	<content font_size=25>Théorème de Maxwell-Gauss</content>
+	<content font_size=25>Expérience de Coulomb</content>
 	<height value=28 type=pixel>
 	<parent name="electromagnetism_simulation_field_objects">
 	<texture alignment=fit>
@@ -477,7 +637,7 @@
 </gui_object>
 <gui_object name="electromagnetism_simulation_field_faraday" type="text">
 	<border bottom=1 left=1 right=1 top=1>
-	<content font_size=22>Expérience de Faraday / Barlow</content>
+	<content font_size=22>Expérience de Ørsted</content>
 	<height value=28 type=pixel>
 	<parent name="electromagnetism_simulation_field_objects">
 	<texture alignment=fit>

@@ -71,10 +71,32 @@ namespace pleos {
             std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_1_explaination_1 = *parent->new_object<scls::GUI_Text>(object_name);
             a_equations_faraday_page_1_explaination_1.get()->set_max_width(0);
             return a_equations_faraday_page_1_explaination_1;
-        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_1_explaination_2") {
-            std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_1_explaination_2 = *parent->new_object<scls::GUI_Text>(object_name);
-            a_equations_faraday_page_1_explaination_2.get()->set_max_width(0);
-            return a_equations_faraday_page_1_explaination_2;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_1_next") {
+            a_equations_faraday_page_1_next = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_faraday_page_1_next;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_2") {
+            a_equations_faraday_page_2 = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_equations_faraday_page_2;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_2_explaination_1") {
+            std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_2_explaination_1 = *parent->new_object<scls::GUI_Text>(object_name);
+            a_equations_faraday_page_2_explaination_1.get()->set_max_width(0);
+            return a_equations_faraday_page_2_explaination_1;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_2_next") {
+            a_equations_faraday_page_2_next = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_faraday_page_2_next;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_2_previous") {
+            a_equations_faraday_page_2_previous = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_faraday_page_2_previous;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_3") {
+            a_equations_faraday_page_3 = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_equations_faraday_page_3;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_3_explaination_1") {
+            std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_3_explaination_2 = *parent->new_object<scls::GUI_Text>(object_name);
+            a_equations_faraday_page_3_explaination_2.get()->set_max_width(0);
+            return a_equations_faraday_page_3_explaination_2;
+        } else if(object_name == "electromagnetism_simulation_equations_faraday_page_3_previous") {
+            a_equations_faraday_page_3_previous = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_faraday_page_3_previous;
         } else if(object_name == "electromagnetism_simulation_equations_gauss") {
             a_equations_gauss = *parent->new_object<scls::GUI_Text>(object_name);
             return a_equations_gauss;
@@ -115,6 +137,16 @@ namespace pleos {
         } else if(object_name == "electromagnetism_simulation_equations_gauss_page_3_previous") {
             a_equations_gauss_page_3_previous = *parent->new_object<scls::GUI_Text>(object_name);
             return a_equations_gauss_page_3_previous;
+        } else if(object_name == "electromagnetism_simulation_equations_thomson") {
+            a_equations_thomson  = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_thomson;
+        } else if(object_name == "electromagnetism_simulation_equations_thomson_page_1") {
+            a_equations_thomson_page_1  = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_equations_thomson_page_1;
+        } else if(object_name == "electromagnetism_simulation_equations_thomson_page_1_explaination_1") {
+            std::shared_ptr<scls::GUI_Text> a_equations_thomson_page_1_explaination_1 = *parent->new_object<scls::GUI_Text>(object_name);
+            a_equations_thomson_page_1_explaination_1.get()->set_max_width(0);
+            return a_equations_thomson_page_1_explaination_1;
         } return std::shared_ptr<scls::GUI_Object>();
     }
     std::shared_ptr<scls::GUI_Object> Electromagnetism_Simulation::__create_loaded_object_from_type_field(std::string object_name, std::string object_type, scls::GUI_Object* parent) {
@@ -178,28 +210,39 @@ namespace pleos {
     // Loads the objects for the field for Faraday experiment
     void Electromagnetism_Simulation::load_field_faraday() {
         // Set the good settings
+        a_field_simulator.get()->set_apply_magnet_to_particule_force(false);
+        a_field_simulator.get()->set_apply_particule_to_particule_electrical_force(false);
+        a_field_simulator.get()->set_apply_particule_to_particule_magnetical_force(false);
         a_field_simulator.get()->set_show_acceleration(true);
         a_field_simulator.get()->set_show_electrical_div(false);
-        a_field_simulator.get()->set_show_magnetic_field(true);
-        a_field_simulator.get()->set_show_trajectory(false);
+        a_field_simulator.get()->set_show_magnetic_field_magnets(true);
+        a_field_simulator.get()->set_show_magnetic_field_particules(false);
+        a_field_simulator.get()->set_show_trajectory(true);
 
         // Create the magnet
-        std::shared_ptr<Magnet> current_magnet = a_field_simulator.get()->add_magnet(-3 * std::pow(10, -6), -2.5, 0, 0.1);
+        std::shared_ptr<Magnet> current_magnet = a_field_simulator.get()->add_magnet(-3 * std::pow(10, -6), 0.001, 0, 0.1);
+        current_magnet.get()->charge.get()->rotate_y(90);
         // Create needed charges
-        for(int i = 0;i<10;i++) {
-            std::shared_ptr<Electrical_Charge> current_charge = a_field_simulator.get()->add_electrical_charge(-std::pow(10, -7), 0, -1.0 + static_cast<double>(i) / 5.0, 0.1);
-            current_charge.get()->set_acceleration(scls::Vector_3D(1, 0, 0));
+        int charge_number = 10; double y_start = -1.0;
+        for(int i = 0;i<charge_number;i++) {
+            double current_y = y_start + static_cast<double>(i) / (static_cast<double>(charge_number) / 2.0);
+            std::shared_ptr<Electrical_Charge> current_charge = a_field_simulator.get()->add_electrical_charge(-std::pow(10, -7), 0, current_y, 0.1);
             current_charge.get()->set_fixed(true);
-            current_charge.get()->set_velocity(scls::Vector_3D(0, -1, 0));
+            if(current_y > 0){current_charge.get()->set_velocity(scls::Vector_3D(0, 1, 0));}
+            else{current_charge.get()->set_velocity(scls::Vector_3D(0, -1, 0));}
         }
     }
 
     // Loads the objects for the field for Gauss theorem
     void Electromagnetism_Simulation::load_field_gauss() {
         // Set the good settings
+        a_field_simulator.get()->set_apply_magnet_to_particule_force(false);
+        a_field_simulator.get()->set_apply_particule_to_particule_electrical_force(true);
+        a_field_simulator.get()->set_apply_particule_to_particule_magnetical_force(false);
         a_field_simulator.get()->set_show_acceleration(true);
         a_field_simulator.get()->set_show_electrical_div(false);
-        a_field_simulator.get()->set_show_magnetic_field(false);
+        a_field_simulator.get()->set_show_magnetic_field_magnets(false);
+        a_field_simulator.get()->set_show_magnetic_field_particules(false);
         a_field_simulator.get()->set_show_trajectory(false);
 
         // Create two fixed points
@@ -212,9 +255,13 @@ namespace pleos {
     // Loads the objects for the field at quantum scale
     void Electromagnetism_Simulation::load_field_quantum() {
         // Set the good settings
+        a_field_simulator.get()->set_apply_magnet_to_particule_force(true);
+        a_field_simulator.get()->set_apply_particule_to_particule_electrical_force(true);
+        a_field_simulator.get()->set_apply_particule_to_particule_magnetical_force(true);
         a_field_simulator.get()->set_show_acceleration(true);
         a_field_simulator.get()->set_show_electrical_div(false);
-        a_field_simulator.get()->set_show_magnetic_field(true);
+        a_field_simulator.get()->set_show_magnetic_field_magnets(true);
+        a_field_simulator.get()->set_show_magnetic_field_particules(true);
         a_field_simulator.get()->set_show_trajectory(true);
 
         // Loads the random objects
@@ -242,7 +289,8 @@ namespace pleos {
         // Set the good settings
         a_field_simulator.get()->set_show_acceleration(true);
         a_field_simulator.get()->set_show_electrical_div(false);
-        a_field_simulator.get()->set_show_magnetic_field(false);
+        a_field_simulator.get()->set_show_magnetic_field_magnets(false);
+        a_field_simulator.get()->set_show_magnetic_field_particules(false);
         a_field_simulator.get()->set_show_trajectory(false);
 
         // Create one points
@@ -270,7 +318,21 @@ namespace pleos {
             final_text = std::string("Deux particules séparées de ") + scls::format_number_to_text(distance, 2) + std::string(" mètres.</br>");
             final_text += std::string("La première particule à une charge de ") + scls::format_number_to_text(std::abs(p_1.get()->charge() * 1000000), 2) + std::string(" micro-coulombs.</br>");
             final_text += std::string("La deuxième particule à une charge de ") + scls::format_number_to_text(std::abs(p_2.get()->charge() * 1000000), 2) + std::string(" micro-coulombs.</br>");
-            final_text += std::string("La force entre ces deux particule est de ") + scls::format_number_to_text(std::abs(p_2.get()->force_field_produced(p_1.get()) * 1000), 2) + std::string(" milli-newtons.");
+            final_text += std::string("La force entre ces deux particule est de ") + scls::format_number_to_text(std::abs(p_2.get()->electrical_field_force(p_1.get()) * 1000), 2) + std::string(" milli-newtons.");
+
+            a_field_datas.get()->set_text(final_text);
+        }
+        else if(current_simulation() == PLEOS_ELECTROMAGNETISM_SIMULATION_FARADAY) {
+            std::string final_text = std::string("");
+            std::shared_ptr<Electrical_Charge> p_1 = a_field_simulator.get()->objects()[0];
+            std::shared_ptr<Electrical_Charge> p_2 = a_field_simulator.get()->objects()[1];
+
+            // Sets the distance of the two particules
+            std::vector<std::shared_ptr<Magnet>>& magnets = a_field_simulator.get()->magnets();
+            double rotation_y = 90.0 - magnets[0].get()->charge.get()->rotation().y();
+            while(rotation_y < -180.0){rotation_y+=360.0;}
+            while(rotation_y > 180.0){rotation_y-=360.0;}
+            final_text = std::string("La boussole a ") + scls::format_number_to_text(std::abs(rotation_y), 2) + std::string("° d'écarts de sa position normale.</br>");
 
             a_field_datas.get()->set_text(final_text);
         }
@@ -293,6 +355,14 @@ namespace pleos {
     void Electromagnetism_Simulation::check_equations_events() {
         // Go to the Faraday page 1
         if(a_equations_faraday.get() != 0 && a_equations_faraday.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_faraday_page();}
+        // Go to the Faraday page 2
+        if(a_equations_faraday_page_1_next.get() != 0 && a_equations_faraday_page_1_next.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_faraday_page_2();}
+        // Go to the Faraday page 1 from page 2
+        if(a_equations_faraday_page_2_previous.get() != 0 && a_equations_faraday_page_2_previous.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_faraday_page();}
+        // Go to the Faraday page 3
+        if(a_equations_faraday_page_2_next.get() != 0 && a_equations_faraday_page_2_next.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_faraday_page_3();}
+        // Go to the Faraday page 2 from page 3
+        if(a_equations_faraday_page_3_previous.get() != 0 && a_equations_faraday_page_3_previous.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_faraday_page_2();}
         // Go to the Gauss page 1
         if(a_equations_gauss.get() != 0 && a_equations_gauss.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_gauss_page();}
         // Go to the Gauss page 2
@@ -303,6 +373,8 @@ namespace pleos {
         if(a_equations_gauss_page_2_next.get() != 0 && a_equations_gauss_page_2_next.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_gauss_page_3();}
         // Go to the Gauss page 2 from page 3
         if(a_equations_gauss_page_3_previous.get() != 0 && a_equations_gauss_page_3_previous.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_gauss_page_2();}
+        // Go to the Thompson page 1
+        if(a_equations_thomson.get() != 0 && a_equations_thomson.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_thomson_page();}
     }
 
     // Check the field events
@@ -321,30 +393,79 @@ namespace pleos {
 
         // Reset the field
         if(window_struct()->key_pressed_during_this_frame("a")) {load_field_simulation();}
+        bool edited = false;
 
         if(current_simulation() == PLEOS_ELECTROMAGNETISM_SIMULATION_GAUSS) {
             // Precisely move charges if necessary
-            if(window_struct()->key_pressed("z")) {
+            if(window_struct()->key_pressed("d")) {
                 std::vector<std::shared_ptr<Electrical_Charge>>& objects = a_field_simulator.get()->objects();
                 objects[0].get()->attached_transform()->move_x(window_struct()->delta_time());
                 objects[1].get()->attached_transform()->move_x(-window_struct()->delta_time());
-            } if(window_struct()->key_pressed("s")) {
+            } if(window_struct()->key_pressed("q")) {
                 std::vector<std::shared_ptr<Electrical_Charge>>& objects = a_field_simulator.get()->objects();
                 objects[0].get()->attached_transform()->move_x(-window_struct()->delta_time());
                 objects[1].get()->attached_transform()->move_x(window_struct()->delta_time());
             }
             // Precisely update charges if necessary
-            if(window_struct()->key_pressed("e")) {
+            if(window_struct()->key_pressed("c")) {
                 std::vector<std::shared_ptr<Electrical_Charge>>& objects = a_field_simulator.get()->objects();
                 objects[0].get()->set_charge(objects[0].get()->charge() + window_struct()->delta_time() * (1.0 / 10e5));
-            } if(window_struct()->key_pressed("d")) {
+            } if(window_struct()->key_pressed("w")) {
                 std::vector<std::shared_ptr<Electrical_Charge>>& objects = a_field_simulator.get()->objects();
                 objects[0].get()->set_charge(objects[0].get()->charge() - window_struct()->delta_time() * (1.0 / 10e5));
             }
 
             // Update the field
             update_field();
-        } else if(window_struct()->key_pressed("p")) {update_field();}
+        } else if(current_simulation() == PLEOS_ELECTROMAGNETISM_SIMULATION_FARADAY) {
+            std::vector<std::shared_ptr<Magnet>>& magnets = a_field_simulator.get()->magnets();
+            std::vector<std::shared_ptr<Electrical_Charge>>& objects = a_field_simulator.get()->objects();
+
+            // Precisely update charges if necessary
+            if(window_struct()->key_pressed("c")) {
+                for(int i = 0;i<static_cast<int>(objects.size());i++){objects[i].get()->accelerate(scls::Vector_3D(0, window_struct()->delta_time(), 0));}
+                edited = true;
+            } if(window_struct()->key_pressed("w")) {
+                for(int i = 0;i<static_cast<int>(objects.size());i++){objects[i].get()->accelerate(scls::Vector_3D(0, -window_struct()->delta_time(), 0));}
+                edited = true;
+            }
+
+            // Rotate the magnet
+            if(window_struct()->key_pressed("p")) {
+                double factor = 1;
+                double rotation_y = magnets[0].get()->charge.get()->rotation().y();
+                while(rotation_y < 0){rotation_y += 360;}
+                while(rotation_y > 360){rotation_y -= 360;}
+                // Apply the rotation
+                if(window_struct()->key_pressed("d")) {
+                    if(rotation_y < 180){
+                        factor = std::pow(std::abs(rotation_y)/90.0, 1.0/2.0);
+                        magnets[0].get()->charge.get()->rotate(scls::Vector_3D(0, window_struct()->delta_time() * -90.0 * factor, 0));
+                    }
+                    else{
+                        factor = std::pow(std::abs(rotation_y - 360.0)/90.0, 1.0/2.0);
+                        magnets[0].get()->charge.get()->rotate(scls::Vector_3D(0, window_struct()->delta_time() * 90.0 * factor, 0));
+                    }
+                } else if(window_struct()->key_pressed("q")) {
+                    factor = std::pow(std::abs(180.0 - rotation_y)/90.0, 1.0/2.0);
+                    if(rotation_y < 180){
+                        magnets[0].get()->charge.get()->rotate(scls::Vector_3D(0, window_struct()->delta_time() * 90.0 * factor, 0));
+                    }
+                    else{
+                        magnets[0].get()->charge.get()->rotate(scls::Vector_3D(0, window_struct()->delta_time() * -90.0 * factor, 0));
+                    }
+                } else {
+                    factor = 1.0 - std::pow(std::abs(rotation_y)/90.0, 1.0/2.0);
+                    if(rotation_y < 180){magnets[0].get()->charge.get()->rotate(scls::Vector_3D(0, window_struct()->delta_time() * 90.0 * factor, 0));}
+                    else{magnets[0].get()->charge.get()->rotate(scls::Vector_3D(0, window_struct()->delta_time() * -90.0 * factor, 0));}
+                }
+                edited = true;
+            }
+        }
+
+        // Update the field
+        if(window_struct()->key_pressed("p")) {edited = true;}
+        if(edited){update_field();}
     }
 
     // Check the home events
@@ -372,6 +493,28 @@ namespace pleos {
                 // Go to Maxwell-Gauss theorem page 3
                 set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_3);
                 display_equations_gauss_page_3();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_3) {
+                // Go to Maxwell-Faraday theorem page 1
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_1);
+                display_equations_faraday_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_1) {
+                // Go to Maxwell-Faraday theorem simulation page 1
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_SIMULATION_1);
+                set_current_simulation(PLEOS_ELECTROMAGNETISM_SIMULATION_FARADAY);
+                load_field_simulation();
+                display_field_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_SIMULATION_1) {
+                // Go to Maxwell-Faraday theorem page 2
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_2);
+                display_equations_faraday_page_2();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_2) {
+                // Go to Maxwell-Faraday theorem page 3
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_3);
+                display_equations_faraday_page_3();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_3) {
+                // Go to Maxwell-Thomson theorem page 1
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_THOMSON_THEOREM_1);
+                display_equations_thomson_page();
             }
         }
 
@@ -395,6 +538,28 @@ namespace pleos {
                 // Go to Maxwell-Gauss theorem page 2
                 set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_2);
                 display_equations_gauss_page_2();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_1) {
+                // Go to Maxwell-Gauss theorem page 3
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_3);
+                display_equations_gauss_page_3();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_SIMULATION_1) {
+                // Go to Maxwell-Faraday theorem page 1
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_1);
+                display_equations_faraday_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_2) {
+                // Go to Maxwell-Faraday theorem simulation page 1
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_SIMULATION_1);
+                set_current_simulation(PLEOS_ELECTROMAGNETISM_SIMULATION_FARADAY);
+                load_field_simulation();
+                display_field_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_3) {
+                // Go to Maxwell-Faraday theorem page 2
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_2);
+                display_equations_faraday_page_2();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_THOMSON_THEOREM_1) {
+                // Go to Maxwell-Faraday theorem page 3
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_3);
+                display_equations_faraday_page_3();
             }
         }
     }
@@ -416,6 +581,7 @@ namespace pleos {
         // Equations events
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_PAGE) check_equations_events();
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_GAUSS_PAGE) check_equations_events();
+        if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_FARADAY_PAGE) check_equations_events();
         // Field events
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_FIELD_PAGE) check_field_events();
         // Home events
@@ -432,6 +598,24 @@ namespace pleos {
     void Electromagnetism_Simulation::display_equations_faraday_page() {
         hide_all();
         if(a_equations_faraday_page_1.get() != 0) a_equations_faraday_page_1.get()->set_visible(true);
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_FARADAY_PAGE);
+    }
+
+    // Displays the equations faraday page 2
+    void Electromagnetism_Simulation::display_equations_faraday_page_2() {
+        hide_all();
+        if(a_equations_faraday_page_2.get() != 0) a_equations_faraday_page_2.get()->set_visible(true);
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_FARADAY_PAGE);
+    }
+
+    // Displays the equations faraday page 3
+    void Electromagnetism_Simulation::display_equations_faraday_page_3() {
+        hide_all();
+        if(a_equations_faraday_page_3.get() != 0) a_equations_faraday_page_3.get()->set_visible(true);
 
         // Set the needed datas
         set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_FARADAY_PAGE);
@@ -473,6 +657,15 @@ namespace pleos {
         set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_PAGE);
     }
 
+    // Displays the equations thomson page
+    void Electromagnetism_Simulation::display_equations_thomson_page() {
+        hide_all();
+        if(a_equations_thomson_page_1.get() != 0) a_equations_thomson_page_1.get()->set_visible(true);
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_THOMSON_PAGE);
+    }
+
     // Displays the field page
     void Electromagnetism_Simulation::display_field_page() {
         hide_all();
@@ -493,11 +686,14 @@ namespace pleos {
 
     // Hides all the pages
     void Electromagnetism_Simulation::hide_all() {
-        if(a_equations_faraday_page_1.get() != 0) a_equations_faraday_page_1.get()->set_visible(false);
+        if(a_equations_faraday_page_1.get() != 0) {a_equations_faraday_page_1.get()->set_visible(false);}
+        if(a_equations_faraday_page_2.get() != 0) {a_equations_faraday_page_2.get()->set_visible(false);}
+        if(a_equations_faraday_page_3.get() != 0) {a_equations_faraday_page_3.get()->set_visible(false);}
         if(a_equations_gauss_page_1.get() != 0) a_equations_gauss_page_1.get()->set_visible(false);
         if(a_equations_gauss_page_2.get() != 0) a_equations_gauss_page_2.get()->set_visible(false);
         if(a_equations_gauss_page_3.get() != 0) a_equations_gauss_page_3.get()->set_visible(false);
         if(a_equations_page.get() != 0) a_equations_page.get()->set_visible(false);
+        if(a_equations_thomson_page_1.get() != 0){a_equations_thomson_page_1.get()->set_visible(false);}
         if(a_field_page.get() != 0) a_field_page.get()->set_visible(false);
         if(a_home_page.get() != 0) a_home_page.get()->set_visible(false);
 

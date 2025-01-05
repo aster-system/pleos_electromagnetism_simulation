@@ -41,11 +41,16 @@ namespace pleos {
     // Struct representating a magnet
     struct Magnet {
         // Charge of the field
-        double charge = 0;
-        // Physic of the magnet
-        Physic_Object physic;
+        std::shared_ptr<Electrical_Charge> charge = std::make_shared<Electrical_Charge>();
         // Texture of the magnet
         std::shared_ptr<scls::Image> texture;
+
+        // Magnetic application for a charge
+        scls::Vector_3D magnetic_application(Electrical_Charge* object);
+
+        // Methods
+        inline double mass() const {return charge.get()->mass();};
+        inline scls::Vector_3D position() const {return charge.get()->attached_transform()->position();};
     };
 
     class Electromagnetism_Field : public scls::GUI_Object {
@@ -79,14 +84,23 @@ namespace pleos {
         scls::Vector_3D field_position_to_gui_position(scls::Vector_3D position);
 
         // Getters and setters
+        inline bool apply_magnet_to_particule_force()const{return a_apply_magnet_to_particule_force;};
+        inline bool apply_particule_to_particule_electrical_force()const{return a_apply_particule_to_particule_electrical_force;};
+        inline bool apply_particule_to_particule_magnetical_force()const{return a_apply_particule_to_particule_magnetical_force;};
+        inline std::vector<std::shared_ptr<Magnet>>& magnets() {return a_magnets;};
         inline std::vector<std::shared_ptr<Electrical_Charge>>& objects() {return a_objects;};
+        inline void set_apply_magnet_to_particule_force(bool new_apply_magnet_to_particule_force){a_apply_magnet_to_particule_force=new_apply_magnet_to_particule_force;};
+        inline void set_apply_particule_to_particule_electrical_force(bool new_apply_particule_to_particule_electrical_force){a_apply_particule_to_particule_electrical_force=new_apply_particule_to_particule_electrical_force;};
+        inline void set_apply_particule_to_particule_magnetical_force(bool new_apply_particule_to_particule_magnetical_force){a_apply_particule_to_particule_magnetical_force=new_apply_particule_to_particule_magnetical_force;};
         inline void set_show_acceleration(bool new_show_acceleration){a_show_acceleration = new_show_acceleration;};
         inline void set_show_electrical_div(bool new_electrical_div) {a_show_electrical_div = new_electrical_div;};
-        inline void set_show_magnetic_field(bool new_magnetic_field){a_show_magnetic_field = new_magnetic_field;};
+        inline void set_show_magnetic_field_magnets(bool new_magnetic_field_magnets){a_show_magnetic_field_magnets = new_magnetic_field_magnets;};
+        inline void set_show_magnetic_field_particules(bool new_magnetic_field_particules){a_show_magnetic_field_particules = new_magnetic_field_particules;};
         inline void set_show_trajectory(bool new_show_trajectory){a_show_trajectory = new_show_trajectory;};
         inline bool show_acceleration() const {return a_show_acceleration;};
         inline bool show_electrical_div() const {return a_show_electrical_div;};
-        inline bool show_magnetic_field() const {return a_show_magnetic_field;};
+        inline bool show_magnetic_field_magnets() const {return a_show_magnetic_field_magnets;};
+        inline bool show_magnetic_field_particules() const {return a_show_magnetic_field_particules;};
         inline bool show_trajectory() const {return a_show_trajectory;};
 
     private:
@@ -96,6 +110,13 @@ namespace pleos {
         // Unit of the field
         double a_pixels_by_unit_height = 100; double a_pixels_by_unit_width = 100;
 
+        // If the acceleration must be showed or not
+        bool a_apply_magnet_to_particule_force = true;
+        // If the particule-to-particule electrical force must be showed or not
+        bool a_apply_particule_to_particule_electrical_force = true;
+        //If the particule-to-particule magnetical force must be showed or not
+        bool a_apply_particule_to_particule_magnetical_force = true;
+
         // Electromagnetic objects in the field
         std::vector<std::shared_ptr<Magnet>> a_magnets;
         std::vector<std::shared_ptr<Electrical_Charge>> a_objects;
@@ -103,8 +124,10 @@ namespace pleos {
         bool a_show_acceleration = true;
         // If the divergence of the electrical field must be showed or not
         bool a_show_electrical_div = true;
-        // If the magnetic field must be showed or not
-        bool a_show_magnetic_field = true;
+        // If the magnetic field of the magnets must be showed or not
+        bool a_show_magnetic_field_magnets = true;
+        // If the magnetic field of the particules must be showed or not
+        bool a_show_magnetic_field_particules = true;
         // If the trajectory must be showed or not
         bool a_show_trajectory = true;
     };

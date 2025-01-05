@@ -1,0 +1,14 @@
+Après que le phénomène d'apparition des champs magnétiques fût expliqué, une question subsistait : quelle est la divergence d'un champ magnétique ?
+La réponse est en réalité très simple : dans une surface fermée, elle est toujours de 0 :
+</br></br>
+<math>
+<vec><nabla></vec><mo>.</mo><vec>B</vec><mo>=</mo><mi>0</mi></frac>
+</math>
+</br></br>
+Bien que, après une étude précise des équations d'induction électromagnétique, ce résultat soit assez évident, il offre une étude plus précise pour les aimants.
+En effet, cette équation prouve qu'un aimant a toujours 2 pôles, nommés par conventions "+" et "-".
+La coupure d'un gros aimant donne deux aimants plus petits, toujours avec des pôles "+" ou "-".
+Il n'existe pas de monopôles magnétiques.
+En réalité, il s'agit d'un postulat : rien d'autre que des observations ne prouve ce résultat.
+En d'autres termes, personne n'a jamais observé de monopôles magnétiques.
+Bien que son nom soit dans l'équation, le scientifique britannique William Thomson (1824 - 1907), plus communément appelé Lord Kelvin, n'a pas grandement influencé cette équation en particulier, mais son nom est retenu en hommage à l'aide qu'il a apporté à Maxwell dans la création de sa théorie.

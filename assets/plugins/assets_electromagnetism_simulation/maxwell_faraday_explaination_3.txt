@@ -1,0 +1,33 @@
+Maintenant que nous avons ces deux équations et cette loi, nous pouvons les généraliser en seulement deux équations.
+La plus simple à convertir est la loi de Lenz-Faraday.
+</br>
+<math>
+<esh><sub>C</sub><vec>E</vec><mo>.</mo><mi>dL</mi>
+<mo>=</mo><frac><mrow><mi>d</mi><phi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></frac>
+<mo>=</mo><frac><mrow><mi>d</mi><esh><sub>S</sub><vec>E</vec><mo>.</mo><mi>dS</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></frac>
+</math>
+</br>
+En passant à la forme locale de cette équation grâce au théorème de Stokes, nous avons la deuxième équation de Maxwell :
+</br>
+<math>
+<vec><nabla></vec><mo>.</mo><vec>E</vec><mo>=</mo><mo>-</mo><frac><mrow><epsilon><vec>B</vec></mrow><mrow><epsilon><mi>t</mi></mrow></frac>
+</math>
+</br>
+Cette équation peut être retournée (en multipliant t des deux côtés et en changeant le côté du rotationnel), pour obtenir une équation plus proche du théorème d'Ampère :
+</br>
+<math>
+<vec><nabla></vec><mo>.</mo><vec>B</vec><mo>=</mo><mo>-</mo><vec>E</vec><mi>t</mi><mo>=</mo><mu><sub>0</sub><vec>j</vec><sub>e</sub>
+</math>
+</br>
+Pour spécifier le calcul, nous changeons le vecteur variation du champ électrique dans le temps par le vecteur courant j multiplié par la perméabilité magnétique du vide.
+Cependant, ce calcul n'est pas complet.
+Par exemple, il ne compte pas l'aimantation naturelle, qui peut être générée en plus du champ généré par induction.
+La meilleur façon de l'inclure dans le calcul est de définir un courant dit d'aimantation, et réecrire l'équation de cette forme :
+</br>
+<math>
+<vec><nabla></vec><mo>.</mo><vec>B</vec><mo>=</mo><mu><sub>0</sub><vec>j</vec><sub>E</sub><mo>+</mo><mu><sub>0</sub><vec>j</vec><sub>M</sub>
+</math>
+</br>
+Avec cette écriture, on peut spécifier cette équation pour les aimants permanents, en remplaçant <math><vec>j</vec><sub>E</sub></math> par 0.
+L'explication de l'existence de ce courant (et donc, des aimants permanents) a été trouvée en 1906 par le scientifique français Pierre Weiss (1865 - 1940) en 1906.
+Cette équation est considérée comme la troisième équation de Maxwell.

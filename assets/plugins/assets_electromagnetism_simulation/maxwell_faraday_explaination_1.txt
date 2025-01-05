@@ -1,13 +1,19 @@
-Né le 22 septembre 1791 à Londres, Michael Faraday est un scientifique expérimentateur anglais.
-Il n'était pas connu comme le meilleur mathématicien de son temps, mais définitivement un des meilleurs expérimentateurs.
-En s'appuyant sur pleins de travaux d'autres scientifiques (notamment Orsted et John Dalton) et le soutien de plusieurs intellectuels (comme Humphry David), il a pu réaliser une grande quantité d'expérience, qui allait ouvrir la voie au futur de l'électromagnetisme.
-Parmi elles, notons celle de la rotation électromagnétique ou bien de la cage de Faraday.</br>
-<img src="assets/plugins/assets_electromagnetism_simulation/images/faraday.png" height=200>
-<img src="assets/plugins/assets_electromagnetism_simulation/images/faraday_lab.png" height=200>
-<img src="assets/plugins/assets_electromagnetism_simulation/images/barlow_wheel.png" height=200></br>
-Celle qui nous intéresse ici est celle de la rotation électromagnétique.
-Elle est assez simple, elle consiste en un câble électrique, noyé dans un seau plein de mercure et avec un aimant statique en son fond.
-La circulation d'un courant électrique dans le câble provoqua une rotation autour de l'aimant du câble, prouvant que le courant électrique crée une force interagissant avec celle produite par l'aimant.
-Cette expérience sera confirmé par Barlow et sa "roue de Barlow" en 1822.
-Cette expérience permet aussi de comprendre que les sens des vecteurs dans un couple courant électrique - champ magnétique est beaucoup plus complexes qu'ils en ont l'air.
-Malgré toutes ces expériences fructueuses, la description mathématique de ces phénomènes resta mystérieuse pendant longtemps.
+Avant le 19ème siècle, absolument personne ne suspecté le lien entre les courants électriques et les champs magnétiques.
+Le premier à se rendre compte qu'un lien existait bel et bien est le scientifique danois Hans Christian Ørsted (1777 - 1851).
+En 1820, il réalisa l'expérience où il provoqua le mouvement d'une boussole grâce à un courant électrique.
+Pour plus de précisions, il repéta l'expérience de multiples fois, avec de multiples configurations différentes.
+Cependant, il ne suggéra pas d'explications au phénomènes.
+</br>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/orsted.png" height=200>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/orsted_experience.png" height=200>
+</br>
+En s'inspirant de ces travaux, la prochaines avancées est effectuées par le scientifique français André-Marie Ampère (1775 - 1836).
+Premièrement, il établit une loi permettan d'anticiper le sens de rotation de la boussole pour l'expérience d'Ampère, nommé le bonhomme d'Ampère.
+Cependant, l'idée la plus intéressante qu'il aura est de transformer le fil électrique en circuit fermé (en spirale).
+Grâce à cette réalisation, il découvre le lien précis entre la circulation de champs électriques et la génération d'un champ magnétique : le champ magnétique s'enroule autour d'un fil traversé par un courant électrique, selon le modèle du bonhomme d'Ampère.
+La seule donnée manquante ici est là force du courant, qu'il compila dans une simple équation : le théorème d'Ampère.
+Dans cette équation, C est le circuit fermé, u est la perméabilité du vide (en tesla par milli-ampères) et I l'intensité du courant traversant C (en ampères).
+</br></br>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/ampere.png" height=200>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/magnetic_field_rotation.png" height=200>
+<math><esh><sub>C</sub><mo>.</mo><mi>dL</mi><mo>=</mo><mi>u</mi><sub>0</sub><mi>I</mi><sub>C</sub></math>

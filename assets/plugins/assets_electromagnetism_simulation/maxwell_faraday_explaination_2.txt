@@ -1,0 +1,21 @@
+Après avoir découvert le lien entre magnétisme et courant, la question que beaucoup de scientifiques se sont posées est la suivante : le théorème d'Ampère est-il réciproque ?
+Est-ce qu'un champ magnétique peut générer un courant ?
+La réponse la plus satisfaisant fût donnée par le scientifique britannique Michael Faraday (1791 - 1867) en 1831.
+Suite à divers observation, il se rendit compte de quelque chose : la variation d'un champ magnétique autour d'un circuit fermé provoque une tension dans ce circuit, et donc un courant.
+Cette réponse est nommée loi de Lenz-Faraday, car elle est redigée avec l'aide du scientifique italien Emil Lenz (1804 - 1865).
+Pour simplier les calculs, Faraday inventa le concept de flux magnétique : l'application d'un champ magnétique 3D traversant une surface 2D.
+</br>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/faraday.png" height=200>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/faraday_lab.png" height=200>
+</br>
+En bon (très bon) expérimentateur, Faraday put en tiré une loi mathématique assez précise.
+La force crée dans le fil E (en volts par secondes) est égal à la dérivée du flux ϕ (en webers) par rapport au temps t (en secondes).
+</br>
+<math>
+<esh><sub>C</sub><vec>E</vec><mo>.</mo><mi>dL</mi><mo>=</mo><frac><mrow><mi>d</mi><phi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></frac>
+</math>
+</br>
+Cette loi permet de définir deux autres choses très importantes : la définition du volt et du weber.
+Le volt, validé en 1880, est la puissance produite par un ampère dans un courant électrique, plus communément appelé tension électrique.
+Pour rappel, la puissance est la capacité d'un système à maintenir une force dans le temps, en force par temps.
+Le weber est la capacité d'un champ magnétique à exercer une tension dans un point précis d'un circuit spirale (qu'on peut donc généraliser avec une intégration).
