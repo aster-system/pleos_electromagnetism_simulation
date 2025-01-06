@@ -65,6 +65,18 @@
 		<cursor type=pointing_hand_cursor>
 	</when>
 </gui_object>
+<gui_object name="electromagnetism_simulation_navigation_techniques_button" type="text">
+	<content font_size=28>Techniques</content>
+	<height value=28 type=pixel>
+	<parent name="electromagnetism_simulation_navigation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_navigation_equations_button">
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
 
 //***************************************************
 // Presentation navigation
@@ -659,4 +671,91 @@
 	<width value=5/6 type=scale>
 	<x attach=right>
 	<y attach=bottom attached_object=electromagnetism_simulation_field_simulator>
+</gui_object>
+
+//***************************************************
+//
+//   TECHNIQUES
+//
+//***************************************************
+
+<gui_object name="electromagnetism_simulation_techniques_body" type="object" visible>
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_title" type="text">
+	<content font_size=80>II. La technique</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_body">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_context" type="text">
+	<content font_size=24>Bien que ces équations permettent de bien comprendre le phénomène électromagnétisme, vouloir propager à très grande échelle une technologie aussi complexe reste un grand défi pour les scientifiques du 19ème siècle
+Pas le choix : il faut simplifier tout ça.
+C'est dans ce contexte que plusieurs techniques sont développés pour utiliser facilement les équations de Maxwell.</content>
+	<height value=1/8 type=scale>
+	<parent name="electromagnetism_simulation_techniques_body">
+	<texture alignment=fit>
+	<width value=2/3 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_title offset=15>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=40>Le courant électrique</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_body">
+	<texture alignment=fit>
+	<width value=1/2 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_context offset=15>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+
+//***************************************************
+// Current
+//***************************************************
+
+// Current page 1
+<gui_object name="electromagnetism_simulation_techniques_current_page_1" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_1_title" type="text">
+	<content font_size=80>II - 1. Les courants électriques</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_current_page_1">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_1_sub_title" type="text">
+	<content font_size=40>Des lois bien connues</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_current_page_1">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_current_page_1_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_1_explaination_1" type="text">
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/current_explaination_1.txt"></content>
+	<height value=3/4 type=scale>
+	<parent name="electromagnetism_simulation_techniques_current_page_1">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_current_page_1_sub_title offset=10>
 </gui_object>

@@ -1,0 +1,19 @@
+Grâce à ces formules, nous pouvons avoir un nouveau point de vue sur ce qu'est un courant électrique, beaucoup plus proche de la réalité.
+Un courant électrique représente donc un mouvement de charges électriques.
+Nous pouvons calculer le nombre de charges passant par un certain endroit du circuit, plus communément appelée l'intensité du circuit, exprimée en ampères (un ampère représente un coulomb de charges électriques par secondes).
+Ce mouvement est induit par une force, qui, à un instant t, est plus communément appelée la tension électrique, exprimée en volts (un volt représente une force de 1 newtons par coulombs).
+Dans le plus simple des modèles, seule les équations de Maxwell et un peu de mécanique newtonienne suffisent à décrire un courant électrique.
+Grâce à ces modèles, nous pouvons établir des lois très connues (surtout au collèges et au lycées) : les lois de Kirchhoff, établies par le physicien allemand Gustav Kirchhoff (1824 - 1887) en 1845.
+Il y en a 2 :
+</br></br>
+La première loi est la loi des noeuds : dans un circuit en série, l'intensité est similaire partout dans le circuit.
+Dans un circuit en dérivation, l'intensité de la branche principale est la somme des intensités des branches secondaires.
+Cette loi est assez logique : un certain nombre de coulomb va sortir du générateur.
+Ils sont assimilables ici à des billes : lancer des billes depuis le générateur, et étudier leur fonctionnement dans des circuits en série et en dérivation : vous obtenez les mêmes lois pour vos billes que pour le courant.
+Aucune bille ne va apparaître ou disparaître par magie : c'est la même chose pour les charges.
+</br></br>
+La deuxième loi est la loi des mailles : dans un circuit en série, la tension du générateur est égale à la somme des tensions de chaque dipôles du circuit.
+Dans un circuit en dérivation, les tensions de chaque branches secondaires sont toutes les mêmes (si aucun phénomène extérieur n'influe sur elles), et l'intérieure des branches suit la même loi que pour les circuits en série.
+Cette loi est un petit plus dure à se représenter.
+Comme la tension peut représenter une force, le passage par chaque dipôle d'un circuit en série peut modifier son effet pour le prochain dipôle, et doit être totalement consommer pour ne pas déstabiliser le système (qui se stabiliserait à une puissance qui lui permet de tout consommer).
+Pour un circuit en dérivation, avant l'entrée dans une branche, la force reste la même : seule l'intensité décroit pour se départager dans chaque branches.

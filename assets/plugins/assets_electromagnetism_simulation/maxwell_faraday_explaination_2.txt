@@ -16,6 +16,6 @@ La force crée dans le fil E (en volts par secondes) est égal à la dérivée d
 </math>
 </br>
 Cette loi permet de définir deux autres choses très importantes : la définition du volt et du weber.
-Le volt, validé en 1880, est la puissance produite par un ampère dans un courant électrique, plus communément appelé tension électrique.
+Le volt, validé en 1880, est la puissance produite par un coulomb par secondes dans un courant électrique, plus communément appelé tension électrique.
 Pour rappel, la puissance est la capacité d'un système à maintenir une force dans le temps, en force par temps.
 Le weber est la capacité d'un champ magnétique à exercer une tension dans un point précis d'un circuit spirale (qu'on peut donc généraliser avec une intégration).

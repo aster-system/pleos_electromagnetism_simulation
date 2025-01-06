@@ -45,11 +45,13 @@ namespace pleos {
 
         // Check page by page
         to_return = __create_loaded_object_from_type_equations(object_name, object_type, parent);
-        if(to_return.get() != 0) return to_return;
+        if(to_return.get() != 0){return to_return;}
         to_return = __create_loaded_object_from_type_field(object_name, object_type, parent);
-        if(to_return.get() != 0) return to_return;
+        if(to_return.get() != 0){return to_return;}
         to_return = __create_loaded_object_from_type_home(object_name, object_type, parent);
-        if(to_return.get() != 0) return to_return;
+        if(to_return.get() != 0){return to_return;}
+        to_return = __create_loaded_object_from_type_techniques(object_name, object_type, parent);
+        if(to_return.get() != 0){return to_return;}
 
         // Classic object creation
         return GUI_Page::__create_loaded_object_from_type(object_name, object_type, parent);
@@ -195,9 +197,28 @@ namespace pleos {
         } else if(object_name == "electromagnetism_simulation_navigation_presentation") {
             a_navigation_presentation_button = *parent->new_object<scls::GUI_Text>(object_name);
             return a_navigation_presentation_button;
+        } else if(object_name == "electromagnetism_simulation_navigation_techniques_button") {
+            a_navigation_techniques_button = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_navigation_techniques_button;
         } else if(object_name == "electromagnetism_simulation_presentation") {
             a_presentation = *parent->new_object<scls::GUI_Text>(object_name);
             return a_presentation;
+        } return std::shared_ptr<scls::GUI_Object>();
+    }
+    std::shared_ptr<scls::GUI_Object> Electromagnetism_Simulation::__create_loaded_object_from_type_techniques(std::string object_name, std::string object_type, scls::GUI_Object* parent) {
+        if(object_name == "electromagnetism_simulation_techniques_body") {
+            a_techniques_page = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_techniques_page;
+        } else if(object_name == "electromagnetism_simulation_techniques_context") {
+            std::shared_ptr<scls::GUI_Text> a_techniques_explainaition = *parent->new_object<scls::GUI_Text>(object_name);
+            a_techniques_explainaition.get()->set_max_width(0);
+            return a_techniques_explainaition;
+        } else if(object_name == "electromagnetism_simulation_techniques_current") {
+            a_techniques_current = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_techniques_current;
+        } else if(object_name == "electromagnetism_simulation_techniques_current_page_1") {
+            a_techniques_current_page_1 = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_techniques_current_page_1;
         } return std::shared_ptr<scls::GUI_Object>();
     }
 
@@ -349,6 +370,7 @@ namespace pleos {
         if(a_navigation_equations_button.get() != 0 && a_navigation_equations_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_equations_page();
         if(a_navigation_field_button.get() != 0 && a_navigation_field_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_field_page();
         if(a_navigation_home_button.get() != 0 && a_navigation_home_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_home_page();
+        if(a_navigation_techniques_button.get() != 0 && a_navigation_techniques_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_page();}
     }
 
     // Check the equations events
@@ -564,6 +586,12 @@ namespace pleos {
         }
     }
 
+    // Check the techniques events
+    void Electromagnetism_Simulation::check_techniques_events() {
+        // Go to the current page 1
+        if(a_techniques_current.get() != 0 && a_techniques_current.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_current_page();}
+    }
+
     // Update the events
     void Electromagnetism_Simulation::update_event() {
         GUI_Page::update_event();
@@ -586,6 +614,8 @@ namespace pleos {
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_FIELD_PAGE) check_field_events();
         // Home events
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE) check_home_events();
+        // Techniques events
+        if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_PAGE){check_techniques_events();}
     }
 
     //******************
@@ -684,6 +714,24 @@ namespace pleos {
         set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE);
     }
 
+    // Displays the techniques page
+    void Electromagnetism_Simulation::display_techniques_page() {
+        hide_all();
+        if(a_techniques_page.get() != 0){a_techniques_page.get()->set_visible(true);}
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_PAGE);
+    }
+
+    // Displays the techniques current page
+    void Electromagnetism_Simulation::display_techniques_current_page() {
+        hide_all();
+        if(a_techniques_current_page_1.get() != 0){a_techniques_current_page_1.get()->set_visible(true);}
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_PAGE);
+    }
+
     // Hides all the pages
     void Electromagnetism_Simulation::hide_all() {
         if(a_equations_faraday_page_1.get() != 0) {a_equations_faraday_page_1.get()->set_visible(false);}
@@ -696,6 +744,8 @@ namespace pleos {
         if(a_equations_thomson_page_1.get() != 0){a_equations_thomson_page_1.get()->set_visible(false);}
         if(a_field_page.get() != 0) a_field_page.get()->set_visible(false);
         if(a_home_page.get() != 0) a_home_page.get()->set_visible(false);
+        if(a_techniques_page.get() != 0) {a_techniques_page.get()->set_visible(false);}
+        if(a_techniques_current_page_1.get() != 0) {a_techniques_current_page_1.get()->set_visible(false);}
 
         if(current_mode() == PLEOS_ELECTROMAGNETISM_SIMULATION_NAVIGATION) {a_navigation.get()->set_visible(true);a_presentation.get()->set_visible(false);}
         if(current_mode() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION) {a_navigation.get()->set_visible(false);a_presentation.get()->set_visible(true);}
