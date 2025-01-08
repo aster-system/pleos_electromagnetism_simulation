@@ -1,0 +1,24 @@
+Les théories que nous allons étudier ici, les 4 équations de Maxwell, ont été publiées par le physicien anglais James Clark Maxwell (1831 - 1879) en 1873.
+Bien que plutôt empiriques, ces lois peuvent aussi être décrites avec des équations.
+Les phénomènes de charges électriques et de forces magnétiques étaient connues depuis l'antiquité.
+De plus, la production de courant électrique était rendu possible par l'électrochimie, comme avec la pile à courant continue du chimiste l'italien Alessandro Volta (1745 - 1827) en 1800.
+Cependant, à cette époque là, personne ne comprenait exactement ce phénomène.
+Le meilleur moyen pour les étudier était alors les récentes loi du mouvement du physicien et mathématicien britannique Isaac Newton (1642 - 1727).
+</br></br>
+<math><mi>F</mi><sub>ext</sub><mo>=</mo><mi>0</mi></math>&nbsp;implique&nbsp;<math><mdelta><mi>F</mi><mo>=</mo><mi>0</mi></math>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<math><mi>f</mi><mo>=</mo><mi>m</mi><mo>*</mo><mi>a</mi></math>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<math><mi>F</mi><sub>a</sub><mo>=</mo><mi>F</mi><sub>r</sub></math>
+</br></br>
+Pour finir avec les choses nécessaires, le calcul différentiel moderne a aussi commencé à être développé avant tout cela, par de nombreux mathématicien comme Newton ou le mathématicien allemand Gottfried Wilhelm Leibniz (1646 - 1716).
+Le calcul infinitésimal était en plein essort, avec l'arrivée de plusieurs concepts très importants : dérivée, intégrale, topologique (auquel on doit le principe de champ, comme un espace de vecteurs).
+</br></br>
+<math><mi>f'(x)</mi><mo>=</mo><frac><mrow><mi>f(x + h)</mi><mo>-</mo><mi>f(x)</mi></mrow><mrow><mi>h</mi></mrow></frac></math>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<math><esh><sub>[a;b]</sub><mi>f(x)dx</mi><mo>=</mo><mi>F(b)</mi><mo>-</mo><mi>F(a)</mi></math>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<math><esh><sub>M</sub><mi>dw</mi><mo>=</mo><esh><sub><phi>M</sub><mi>i</mi><mo>*</mo><mi>w</mi></math>
+</br></br>
+Il faut cependant chasser certains idées qui peuvent nous paraître évidentes aujourd'hui, comme le concept d'électrons, étudiées bien après par divers scientifique, comme le danois Niels Bohr (1885 - 1962).
+D'autres sciences n'étaient pas assez développées pour être utiles, comme la thermodynamique du physicien autrichien Ludwig Boltzmann (1844 - 1906), ou la relativité restreinte du célèbre allemand Albert Einstein (1879 - 1955).

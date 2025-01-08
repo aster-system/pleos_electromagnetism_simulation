@@ -44,6 +44,10 @@
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_FARADAY_PAGE 4
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_THOMSON_PAGE 5
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_PAGE 6
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_CURRENT_PAGE 7
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_MOTOR_PAGE 8
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_SOCIAL_PAGE 9
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_CONTEXT_PAGE 10
 // Possible presentation states
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_START 0
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_CONTEXT 1
@@ -56,6 +60,13 @@
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_2 202
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_3 203
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_THOMSON_THEOREM_1 300
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_1 400
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_1 500
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_2 501
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_3 502
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_MOTOR_1 600
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_MOTOR_2 601
+#define PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_SOCIAL 700
 // Possibles simulation
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_QUANTUM 0
 #define PLEOS_ELECTROMAGNETISM_SIMULATION_GAUSS 1
@@ -76,6 +87,7 @@ namespace pleos {
         std::shared_ptr<scls::GUI_Object> __create_loaded_object_from_type_field(std::string object_name, std::string object_type, scls::GUI_Object* parent);
         std::shared_ptr<scls::GUI_Object> __create_loaded_object_from_type_home(std::string object_name, std::string object_type, scls::GUI_Object* parent);
         std::shared_ptr<scls::GUI_Object> __create_loaded_object_from_type_navigation(std::string object_name, std::string object_type, scls::GUI_Object* parent);
+        std::shared_ptr<scls::GUI_Object> __create_loaded_object_from_type_social(std::string object_name, std::string object_type, scls::GUI_Object* parent);
         std::shared_ptr<scls::GUI_Object> __create_loaded_object_from_type_techniques(std::string object_name, std::string object_type, scls::GUI_Object* parent);
 
         //******************
@@ -115,6 +127,8 @@ namespace pleos {
         void check_navigation_events();
         // Check the presentation events
         void check_presentation_events();
+        // Check the social events
+        void check_social_events();
         // Check the techniques events
         void check_techniques_events();
         // Update the events
@@ -129,6 +143,8 @@ namespace pleos {
         //
         //******************
 
+        // Displays the equations context page
+        void display_equations_context_page();
         // Displays the equations faraday page
         void display_equations_faraday_page();
         void display_equations_faraday_page_2();
@@ -145,10 +161,17 @@ namespace pleos {
         void display_field_page();
         // Displays the home page
         void display_home_page();
+        // Displays the social page
+        void display_social_page();
         // Displays the techniques page
         void display_techniques_page();
         // Displays the techniques current page
         void display_techniques_current_page();
+        void display_techniques_current_page_2();
+        void display_techniques_current_page_3();
+        // Displays the techniques motor page
+        void display_techniques_motor_page();
+        void display_techniques_motor_page_2();
         // Hides all the pages
         void hide_all();
         // Sets the navigation mode
@@ -195,6 +218,7 @@ namespace pleos {
         std::shared_ptr<scls::GUI_Text> a_navigation_home_button;
         std::shared_ptr<scls::GUI_Text> a_navigation_equations_button;
         std::shared_ptr<scls::GUI_Text> a_navigation_field_button;
+        std::shared_ptr<scls::GUI_Text> a_navigation_social_button;
         std::shared_ptr<scls::GUI_Text> a_navigation_techniques_button;
         // Presentation buttons
         std::shared_ptr<scls::GUI_Text> a_presentation_maxwell_gauss_button;
@@ -203,6 +227,7 @@ namespace pleos {
         std::shared_ptr<scls::GUI_Object> a_equations_page;
         std::shared_ptr<scls::GUI_Object> a_field_page;
         std::shared_ptr<scls::GUI_Object> a_home_page;
+        std::shared_ptr<scls::GUI_Object> a_social_page;
         std::shared_ptr<scls::GUI_Object> a_techniques_page;
 
         // Equations page
@@ -210,6 +235,8 @@ namespace pleos {
         std::shared_ptr<scls::GUI_Object> a_equations_faraday;
         std::shared_ptr<scls::GUI_Object> a_equations_gauss;
         std::shared_ptr<scls::GUI_Object> a_equations_thomson;
+        // Context page
+        std::shared_ptr<scls::GUI_Object> a_equations_context_page;
         // Faraday page
         std::shared_ptr<scls::GUI_Object> a_equations_faraday_page_1;
         std::shared_ptr<scls::GUI_Text> a_equations_faraday_page_1_next;
@@ -238,10 +265,25 @@ namespace pleos {
         std::shared_ptr<scls::GUI_Text> a_field_quantum;
         std::shared_ptr<Electromagnetism_Field> a_field_simulator;
 
+        // Social page
+
+
         // Techniques page
         std::shared_ptr<scls::GUI_Text> a_techniques_current;
+        std::shared_ptr<scls::GUI_Text> a_techniques_motor;
         // Current page
         std::shared_ptr<scls::GUI_Object> a_techniques_current_page_1;
+        std::shared_ptr<scls::GUI_Text> a_techniques_current_page_1_next;
+        std::shared_ptr<scls::GUI_Object> a_techniques_current_page_2;
+        std::shared_ptr<scls::GUI_Text> a_techniques_current_page_2_previous;
+        std::shared_ptr<scls::GUI_Text> a_techniques_current_page_2_next;
+        std::shared_ptr<scls::GUI_Object> a_techniques_current_page_3;
+        std::shared_ptr<scls::GUI_Text> a_techniques_current_page_3_previous;
+        // Motor page
+        std::shared_ptr<scls::GUI_Object> a_techniques_motor_page_1;
+        std::shared_ptr<scls::GUI_Text> a_techniques_motor_page_1_next;
+        std::shared_ptr<scls::GUI_Object> a_techniques_motor_page_2;
+        std::shared_ptr<scls::GUI_Text> a_techniques_motor_page_2_previous;
     };
 
     class __Temp_Pleos_Window : public scls::Window {

@@ -77,6 +77,18 @@
 		<cursor type=pointing_hand_cursor>
 	</when>
 </gui_object>
+<gui_object name="electromagnetism_simulation_navigation_social_button" type="text">
+	<content font_size=28>Social</content>
+	<height value=28 type=pixel>
+	<parent name="electromagnetism_simulation_navigation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_navigation_techniques_button">
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
 
 //***************************************************
 // Presentation navigation
@@ -107,7 +119,103 @@
 	<parent name="electromagnetism_simulation_presentation">
 	<texture alignment=fit>
 	<width value=1 type=scale>
-	<y attach=bottom attached_object="electromagnetism_simulation_presentation_home_button">
+	<y attach=bottom attached_object="electromagnetism_simulation_presentation_home_button" offset=20>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_presentation_chapter_1_0_button" type="text">
+	<content font_size=24>I - 0 : Le contexte</content>
+	<height value=24 type=pixel>
+	<parent name="electromagnetism_simulation_presentation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_presentation_chapter_1_button">
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_presentation_chapter_1_1_button" type="text">
+	<content font_size=24>I - 1 : Le théorème de Maxwell-Gauss</content>
+	<height value=24 type=pixel>
+	<parent name="electromagnetism_simulation_presentation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_presentation_chapter_1_0_button">
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_presentation_chapter_1_2_button" type="text">
+	<content font_size=24>I - 2 : Le théorème de Maxwell-Faraday</content>
+	<height value=24 type=pixel>
+	<parent name="electromagnetism_simulation_presentation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_presentation_chapter_1_1_button">
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_presentation_chapter_1_3_button" type="text">
+	<content font_size=24>I - 3 : Le théorème de Maxwell-Thomson</content>
+	<height value=24 type=pixel>
+	<parent name="electromagnetism_simulation_presentation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_presentation_chapter_1_2_button">
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_presentation_chapter_2_button" type="text">
+	<content font_size=24>II - Technique : Utiliser les équations de Maxwell</content>
+	<height value=24 type=pixel>
+	<parent name="electromagnetism_simulation_presentation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_presentation_chapter_1_3_button" offset=20>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_presentation_chapter_2_1_button" type="text">
+	<content font_size=24>II - 1 : Les courants électriques</content>
+	<height value=24 type=pixel>
+	<parent name="electromagnetism_simulation_presentation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_presentation_chapter_2_button">
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_presentation_chapter_2_2_button" type="text">
+	<content font_size=24>II - 2 : Les moteurs électriques</content>
+	<height value=24 type=pixel>
+	<parent name="electromagnetism_simulation_presentation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_presentation_chapter_2_1_button">
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_presentation_chapter_3_button" type="text">
+	<content font_size=24>III : Les impacts sociaux</content>
+	<height value=24 type=pixel>
+	<parent name="electromagnetism_simulation_presentation">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<y attach=bottom attached_object="electromagnetism_simulation_presentation_chapter_2_2_button" offset=15>
 
 	<when event="overflighted">
 		<cursor type=pointing_hand_cursor>
@@ -214,6 +322,44 @@
 	<when event="overflighted">
 		<cursor type=pointing_hand_cursor>
 	</when>
+</gui_object>
+
+//***************************************************
+// Context
+//***************************************************
+
+<gui_object name="electromagnetism_simulation_equations_context_page" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_context_title" type="text">
+	<content font_size=80>I - 0. Le contexte</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_equations_context_page">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_context_sub_title" type="text">
+	<content font_size=40>La science au XIXème siècle</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_equations_context_page">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_context_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_equations_context_explaination" type="text">
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/context_explaination.txt"></content>
+	<height value=3/4 type=scale>
+	<parent name="electromagnetism_simulation_equations_context_page">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_equations_context_sub_title offset=10>
 </gui_object>
 
 //***************************************************
@@ -675,6 +821,38 @@
 
 //***************************************************
 //
+//   SOCIAL
+//
+//***************************************************
+
+<gui_object name="electromagnetism_simulation_social_body" type="object" visible>
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_social_title" type="text">
+	<content font_size=80>III. Les impacts sociaux</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_social_body">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_social_context" type="text">
+	<content font_size=24 src="assets/plugins/assets_electromagnetism_simulation/social.txt" max_width=0></content>
+	<height value=4/5 type=scale>
+	<parent name="electromagnetism_simulation_social_body">
+	<texture alignment=fit>
+	<width value=4/5 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_social_title offset=15>
+</gui_object>
+
+//***************************************************
+//
 //   TECHNIQUES
 //
 //***************************************************
@@ -720,6 +898,20 @@ C'est dans ce contexte que plusieurs techniques sont développés pour utiliser 
 		<cursor type=pointing_hand_cursor>
 	</when>
 </gui_object>
+<gui_object name="electromagnetism_simulation_techniques_motor" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=40>Les moteurs / alternateurs électriques</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_body">
+	<texture alignment=fit>
+	<width value=1/2 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_current offset=15>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
 
 //***************************************************
 // Current
@@ -758,4 +950,223 @@ C'est dans ce contexte que plusieurs techniques sont développés pour utiliser 
 	<width value=3/4 type=scale>
 	<x value=1/2 type=object_scale>
 	<y attach=bottom attached_object=electromagnetism_simulation_techniques_current_page_1_sub_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_1_next" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&gt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_techniques_current_page_1">
+	<width value=1/10 type=scale>
+	<x attach=right offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+// Current page 2
+<gui_object name="electromagnetism_simulation_techniques_current_page_2" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_2_title" type="text">
+	<content font_size=80>II - 1. Les courants électriques</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_current_page_2">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_2_sub_title" type="text">
+	<content font_size=40>La loi d'Ohm et l'effet Joule</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_current_page_2">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_current_page_2_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_2_explaination_1" type="text">
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/current_explaination_2.txt"></content>
+	<height value=3/4 type=scale>
+	<parent name="electromagnetism_simulation_techniques_current_page_2">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_current_page_2_sub_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_2_next" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&gt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_techniques_current_page_2">
+	<width value=1/10 type=scale>
+	<x attach=right offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_2_previous" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&lt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_techniques_current_page_2">
+	<width value=1/10 type=scale>
+	<x attach=left offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+// Current page 3
+<gui_object name="electromagnetism_simulation_techniques_current_page_3" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_3_title" type="text">
+	<content font_size=80>II - 1. Les courants électriques</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_current_page_3">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_3_sub_title" type="text">
+	<content font_size=40>Des utilisations "modernes"</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_current_page_3">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_current_page_3_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_3_explaination_1" type="text">
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/current_explaination_3.txt"></content>
+	<height value=3/4 type=scale>
+	<parent name="electromagnetism_simulation_techniques_current_page_3">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_current_page_3_sub_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_current_page_3_previous" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&lt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_techniques_current_page_3">
+	<width value=1/10 type=scale>
+	<x attach=left offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+
+//***************************************************
+// Motor
+//***************************************************
+
+// Motor page 1
+<gui_object name="electromagnetism_simulation_techniques_motor_page_1" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_motor_page_1_title" type="text">
+	<content font_size=80>II - 2. Les moteurs électriques</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_motor_page_1">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_motor_page_1_sub_title" type="text">
+	<content font_size=40>De l'électricité au mouvement mécanique</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_motor_page_1">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_motor_page_1_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_motor_page_1_explaination_1" type="text">
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/motor_explaination_1.txt"></content>
+	<height value=3/4 type=scale>
+	<parent name="electromagnetism_simulation_techniques_motor_page_1">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_motor_page_1_sub_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_motor_page_1_next" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&gt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_techniques_motor_page_1">
+	<width value=1/10 type=scale>
+	<x attach=right offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
+</gui_object>
+// Current page 2
+<gui_object name="electromagnetism_simulation_techniques_motor_page_2" type="object">
+	<border bottom=1 left=1 right=1 top=1>
+	<height value=1 type=scale>
+	<width value=4/5 type=scale>
+	<x attach=right>
+	<y value=0 type=scale>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_motor_page_2_title" type="text">
+	<content font_size=80>II - 2. Les moteurs électriques</content>
+	<height value=80 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_motor_page_2">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=top>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_motor_page_2_sub_title" type="text">
+	<content font_size=40>Du mouvement mécanique à l'électricité</content>
+	<height value=40 type=pixel>
+	<parent name="electromagnetism_simulation_techniques_motor_page_2">
+	<texture alignment=fit>
+	<width value=1 type=scale>
+	<x value=0 type=scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_motor_page_2_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_motor_page_2_explaination_1" type="text">
+	<content font_size=24 max_width=0 src="assets/plugins/assets_electromagnetism_simulation/motor_explaination_2.txt"></content>
+	<height value=3/4 type=scale>
+	<parent name="electromagnetism_simulation_techniques_motor_page_2">
+	<width value=3/4 type=scale>
+	<x value=1/2 type=object_scale>
+	<y attach=bottom attached_object=electromagnetism_simulation_techniques_motor_page_2_sub_title offset=10>
+</gui_object>
+<gui_object name="electromagnetism_simulation_techniques_motor_page_2_previous" type="text">
+	<border bottom=2 left=2 right=2 top=2>
+	<content font_size=24>&lt;</content>
+	<height value=1/10 type=scale>
+	<parent name="electromagnetism_simulation_techniques_motor_page_2">
+	<width value=1/10 type=scale>
+	<x attach=left offset=20>
+	<y value=1/2 type=object_scale>
+
+	<when event="overflighted">
+		<cursor type=pointing_hand_cursor>
+	</when>
 </gui_object>

@@ -1,0 +1,8 @@
+En voyant l'expérience d'Ørsted, on peut avoir envie de tenter quelque chose d'un peu plus complexe : faire tourner l'aimant indéfiniment.
+Pour cela, l'idée est de modifier le système pour rendre la rotation de l'aimant constante, en faisant passer l'aimant par différent champs de courants différents pour entretenir le mouvement.
+Beaucoup de prototypes différents ont été produits, dont celui de l'ingénieur allemand Moritz von Jacobi (1801 - 1874), publié en 1834.
+</br></br>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/von_jacobi_engine.png" height=300>
+</br></br>
+Bien que ce moteur date d'avant les lois de Maxwell, c'est bien après leur publication que les brevets vont pleuvoir les uns après les autres.
+Chaque type de moteur rempli une tâche bien spécifique : machine asynchrone, moteur à courant continu, moteur à courant alternatif...

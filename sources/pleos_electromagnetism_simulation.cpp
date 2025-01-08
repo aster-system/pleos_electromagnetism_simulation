@@ -50,6 +50,8 @@ namespace pleos {
         if(to_return.get() != 0){return to_return;}
         to_return = __create_loaded_object_from_type_home(object_name, object_type, parent);
         if(to_return.get() != 0){return to_return;}
+        to_return = __create_loaded_object_from_type_social(object_name, object_type, parent);
+        if(to_return.get() != 0){return to_return;}
         to_return = __create_loaded_object_from_type_techniques(object_name, object_type, parent);
         if(to_return.get() != 0){return to_return;}
 
@@ -63,6 +65,9 @@ namespace pleos {
         } else if(object_name == "electromagnetism_simulation_equations_context") {
             a_equations_context = *parent->new_object<scls::GUI_Text>(object_name);
             return a_equations_context;
+        } else if(object_name == "electromagnetism_simulation_equations_context_page") {
+            a_equations_context_page = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_equations_context_page;
         } else if(object_name == "electromagnetism_simulation_equations_faraday") {
             a_equations_faraday = *parent->new_object<scls::GUI_Text>(object_name);
             return a_equations_faraday;
@@ -197,12 +202,21 @@ namespace pleos {
         } else if(object_name == "electromagnetism_simulation_navigation_presentation") {
             a_navigation_presentation_button = *parent->new_object<scls::GUI_Text>(object_name);
             return a_navigation_presentation_button;
+        } else if(object_name == "electromagnetism_simulation_navigation_social_button") {
+            a_navigation_social_button = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_navigation_social_button;
         } else if(object_name == "electromagnetism_simulation_navigation_techniques_button") {
             a_navigation_techniques_button = *parent->new_object<scls::GUI_Text>(object_name);
             return a_navigation_techniques_button;
         } else if(object_name == "electromagnetism_simulation_presentation") {
             a_presentation = *parent->new_object<scls::GUI_Text>(object_name);
             return a_presentation;
+        } return std::shared_ptr<scls::GUI_Object>();
+    }
+    std::shared_ptr<scls::GUI_Object> Electromagnetism_Simulation::__create_loaded_object_from_type_social(std::string object_name, std::string object_type, scls::GUI_Object* parent) {
+        if(object_name == "electromagnetism_simulation_social_body") {
+            a_social_page = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_social_page;
         } return std::shared_ptr<scls::GUI_Object>();
     }
     std::shared_ptr<scls::GUI_Object> Electromagnetism_Simulation::__create_loaded_object_from_type_techniques(std::string object_name, std::string object_type, scls::GUI_Object* parent) {
@@ -219,6 +233,39 @@ namespace pleos {
         } else if(object_name == "electromagnetism_simulation_techniques_current_page_1") {
             a_techniques_current_page_1 = *parent->new_object<scls::GUI_Object>(object_name);
             return a_techniques_current_page_1;
+        } else if(object_name == "electromagnetism_simulation_techniques_current_page_1_next") {
+            a_techniques_current_page_1_next = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_techniques_current_page_1_next;
+        } else if(object_name == "electromagnetism_simulation_techniques_current_page_2") {
+            a_techniques_current_page_2 = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_techniques_current_page_2;
+        } else if(object_name == "electromagnetism_simulation_techniques_current_page_2_previous") {
+            a_techniques_current_page_2_previous = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_techniques_current_page_2_previous;
+        } else if(object_name == "electromagnetism_simulation_techniques_current_page_2_next") {
+            a_techniques_current_page_2_next = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_techniques_current_page_2_next;
+        } else if(object_name == "electromagnetism_simulation_techniques_current_page_3") {
+            a_techniques_current_page_3 = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_techniques_current_page_3;
+        } else if(object_name == "electromagnetism_simulation_techniques_current_page_3_previous") {
+            a_techniques_current_page_3_previous = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_techniques_current_page_3_previous;
+        } else if(object_name == "electromagnetism_simulation_techniques_motor") {
+            a_techniques_motor = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_techniques_motor;
+        } else if(object_name == "electromagnetism_simulation_techniques_motor_page_1") {
+            a_techniques_motor_page_1 = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_techniques_motor_page_1;
+        } else if(object_name == "electromagnetism_simulation_techniques_motor_page_1_next") {
+            a_techniques_motor_page_1_next = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_techniques_motor_page_1_next;
+        } else if(object_name == "electromagnetism_simulation_techniques_motor_page_2") {
+            a_techniques_motor_page_2 = *parent->new_object<scls::GUI_Object>(object_name);
+            return a_techniques_motor_page_2;
+        } else if(object_name == "electromagnetism_simulation_techniques_motor_page_2_previous") {
+            a_techniques_motor_page_2_previous = *parent->new_object<scls::GUI_Text>(object_name);
+            return a_techniques_motor_page_2_previous;
         } return std::shared_ptr<scls::GUI_Object>();
     }
 
@@ -370,11 +417,15 @@ namespace pleos {
         if(a_navigation_equations_button.get() != 0 && a_navigation_equations_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_equations_page();
         if(a_navigation_field_button.get() != 0 && a_navigation_field_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_field_page();
         if(a_navigation_home_button.get() != 0 && a_navigation_home_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)) display_home_page();
+        if(a_navigation_social_button.get() != 0 && a_navigation_social_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_social_page();}
         if(a_navigation_techniques_button.get() != 0 && a_navigation_techniques_button.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_page();}
     }
 
     // Check the equations events
     void Electromagnetism_Simulation::check_equations_events() {
+        // Go to the context page
+        if(a_equations_context.get() != 0 && a_equations_context.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_context_page();}
+
         // Go to the Faraday page 1
         if(a_equations_faraday.get() != 0 && a_equations_faraday.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_equations_faraday_page();}
         // Go to the Faraday page 2
@@ -498,6 +549,10 @@ namespace pleos {
         // Go to next page
         if(window_struct()->key_pressed_during_this_frame("e")) {
             if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_START) {
+                // Go to context page
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_CONTEXT);
+                display_equations_context_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_CONTEXT) {
                 // Go to Maxwell-gauss theorem page 1
                 set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_1);
                 display_equations_gauss_page();
@@ -537,15 +592,47 @@ namespace pleos {
                 // Go to Maxwell-Thomson theorem page 1
                 set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_THOMSON_THEOREM_1);
                 display_equations_thomson_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_THOMSON_THEOREM_1) {
+                // Go to technique page
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_1);
+                display_techniques_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_1) {
+                // Go to technique current page 1
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_1);
+                display_techniques_current_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_1) {
+                // Go to technique current page 2
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_2);
+                display_techniques_current_page_2();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_2) {
+                // Go to technique current page 3
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_3);
+                display_techniques_current_page_3();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_3) {
+                // Go to technique motor page 1
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_MOTOR_1);
+                display_techniques_motor_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_MOTOR_1) {
+                // Go to technique motor page 2
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_MOTOR_2);
+                display_techniques_motor_page_2();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_MOTOR_2) {
+                // Go to social page
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_SOCIAL);
+                display_social_page();
             }
         }
 
         // Go to previous page
         if(window_struct()->key_pressed_during_this_frame("a")) {
-            if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_1) {
+            if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_CONTEXT) {
                 // Go to home page
                 set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_START);
                 display_home_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_1) {
+                // Go to context page
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_CONTEXT);
+                display_equations_context_page();
             } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_SIMULATION_1) {
                 // Go to Maxwell-gauss theorem page 1
                 set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_GAUSS_THEOREM_1);
@@ -582,6 +669,34 @@ namespace pleos {
                 // Go to Maxwell-Faraday theorem page 3
                 set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_FARADAY_THEOREM_3);
                 display_equations_faraday_page_3();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_1) {
+                // Go to Thomson theorem
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_MAXWELL_THOMSON_THEOREM_1);
+                display_equations_thomson_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_1) {
+                // Go to technique page 1
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_1);
+                display_techniques_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_2) {
+                // Go to technique current page 1
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_1);
+                display_techniques_current_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_3) {
+                // Go to technique current page 2
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_2);
+                display_techniques_current_page_2();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_MOTOR_1) {
+                // Go to technique current page 3
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_CURRENT_3);
+                display_techniques_current_page_3();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_MOTOR_2) {
+                // Go to technique motor page 1
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_MOTOR_1);
+                display_techniques_motor_page();
+            } else if(current_presentation_state() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_SOCIAL) {
+                // Go to technique motor page 2
+                set_current_presentation(PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION_TECHNIQUE_MOTOR_2);
+                display_techniques_motor_page_2();
             }
         }
     }
@@ -590,6 +705,21 @@ namespace pleos {
     void Electromagnetism_Simulation::check_techniques_events() {
         // Go to the current page 1
         if(a_techniques_current.get() != 0 && a_techniques_current.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_current_page();}
+        // Go to the current page 2
+        if(a_techniques_current_page_1_next.get() != 0 && a_techniques_current_page_1_next.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_current_page_2();}
+        // Go to the current page 1 from page 2
+        if(a_techniques_current_page_2_previous.get() != 0 && a_techniques_current_page_2_previous.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_current_page();}
+        // Go to the current page 3
+        if(a_techniques_current_page_2_next.get() != 0 && a_techniques_current_page_2_next.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_current_page_3();}
+        // Go to the current page 2 from page 3
+        if(a_techniques_current_page_3_previous.get() != 0 && a_techniques_current_page_3_previous.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_current_page_2();}
+
+        // Go to the motor page 1
+        if(a_techniques_motor.get() != 0 && a_techniques_motor.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_motor_page();}
+        // Go to the motor page 2
+        if(a_techniques_motor_page_1_next.get() != 0 && a_techniques_motor_page_1_next.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_motor_page_2();}
+        // Go to the motor page 1 from page 2
+        if(a_techniques_motor_page_2_previous.get() != 0 && a_techniques_motor_page_2_previous.get()->is_clicked_during_this_frame(GLFW_MOUSE_BUTTON_LEFT)){display_techniques_motor_page();}
     }
 
     // Update the events
@@ -608,6 +738,7 @@ namespace pleos {
 
         // Equations events
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_PAGE) check_equations_events();
+        if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_CONTEXT_PAGE) check_equations_events();
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_GAUSS_PAGE) check_equations_events();
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_FARADAY_PAGE) check_equations_events();
         // Field events
@@ -616,6 +747,8 @@ namespace pleos {
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE) check_home_events();
         // Techniques events
         if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_PAGE){check_techniques_events();}
+        if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_CURRENT_PAGE){check_techniques_events();}
+        if(current_page() == PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_MOTOR_PAGE){check_techniques_events();}
     }
 
     //******************
@@ -623,6 +756,15 @@ namespace pleos {
     // Handle the pages
     //
     //******************
+
+    // Displays the equations context page
+    void Electromagnetism_Simulation::display_equations_context_page() {
+        hide_all();
+        if(a_equations_context_page.get() != 0){a_equations_context_page.get()->set_visible(true);}
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_EQUATIONS_CONTEXT_PAGE);
+    }
 
     // Displays the equations faraday page
     void Electromagnetism_Simulation::display_equations_faraday_page() {
@@ -714,6 +856,15 @@ namespace pleos {
         set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_HOME_PAGE);
     }
 
+    // Displays the social page
+    void Electromagnetism_Simulation::display_social_page() {
+        hide_all();
+        if(a_social_page.get() != 0){a_social_page.get()->set_visible(true);}
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_SOCIAL_PAGE);
+    }
+
     // Displays the techniques page
     void Electromagnetism_Simulation::display_techniques_page() {
         hide_all();
@@ -729,11 +880,48 @@ namespace pleos {
         if(a_techniques_current_page_1.get() != 0){a_techniques_current_page_1.get()->set_visible(true);}
 
         // Set the needed datas
-        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_PAGE);
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_CURRENT_PAGE);
+    }
+
+    // Displays the techniques current page 2
+    void Electromagnetism_Simulation::display_techniques_current_page_2() {
+        hide_all();
+        if(a_techniques_current_page_2.get() != 0){a_techniques_current_page_2.get()->set_visible(true);}
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_CURRENT_PAGE);
+    }
+
+    // Displays the techniques current page 3
+    void Electromagnetism_Simulation::display_techniques_current_page_3() {
+        hide_all();
+        if(a_techniques_current_page_3.get() != 0){a_techniques_current_page_3.get()->set_visible(true);}
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_CURRENT_PAGE);
+    }
+
+    // Displays the techniques motor page
+    void Electromagnetism_Simulation::display_techniques_motor_page() {
+        hide_all();
+        if(a_techniques_motor_page_1.get() != 0){a_techniques_motor_page_1.get()->set_visible(true);}
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_MOTOR_PAGE);
+    }
+
+    // Displays the techniques motor page 2
+    void Electromagnetism_Simulation::display_techniques_motor_page_2() {
+        hide_all();
+        if(a_techniques_motor_page_2.get() != 0){a_techniques_motor_page_2.get()->set_visible(true);}
+
+        // Set the needed datas
+        set_current_page(PLEOS_ELECTROMAGNETISM_SIMULATION_TECHNIQUES_MOTOR_PAGE);
     }
 
     // Hides all the pages
     void Electromagnetism_Simulation::hide_all() {
+        if(a_equations_context_page.get() != 0) {a_equations_context_page.get()->set_visible(false);}
         if(a_equations_faraday_page_1.get() != 0) {a_equations_faraday_page_1.get()->set_visible(false);}
         if(a_equations_faraday_page_2.get() != 0) {a_equations_faraday_page_2.get()->set_visible(false);}
         if(a_equations_faraday_page_3.get() != 0) {a_equations_faraday_page_3.get()->set_visible(false);}
@@ -744,8 +932,13 @@ namespace pleos {
         if(a_equations_thomson_page_1.get() != 0){a_equations_thomson_page_1.get()->set_visible(false);}
         if(a_field_page.get() != 0) a_field_page.get()->set_visible(false);
         if(a_home_page.get() != 0) a_home_page.get()->set_visible(false);
+        if(a_social_page.get() != 0){a_social_page.get()->set_visible(false);}
         if(a_techniques_page.get() != 0) {a_techniques_page.get()->set_visible(false);}
         if(a_techniques_current_page_1.get() != 0) {a_techniques_current_page_1.get()->set_visible(false);}
+        if(a_techniques_current_page_2.get() != 0) {a_techniques_current_page_2.get()->set_visible(false);}
+        if(a_techniques_current_page_3.get() != 0) {a_techniques_current_page_3.get()->set_visible(false);}
+        if(a_techniques_motor_page_1.get() != 0){a_techniques_motor_page_1.get()->set_visible(false);}
+        if(a_techniques_motor_page_2.get() != 0){a_techniques_motor_page_2.get()->set_visible(false);}
 
         if(current_mode() == PLEOS_ELECTROMAGNETISM_SIMULATION_NAVIGATION) {a_navigation.get()->set_visible(true);a_presentation.get()->set_visible(false);}
         if(current_mode() == PLEOS_ELECTROMAGNETISM_SIMULATION_PRESENTATION) {a_navigation.get()->set_visible(false);a_presentation.get()->set_visible(true);}

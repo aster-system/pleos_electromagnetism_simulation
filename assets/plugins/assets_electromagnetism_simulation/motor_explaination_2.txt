@@ -1,0 +1,12 @@
+Avant tout cela, le meilleur moyen de générer de l'électricité était l'utilisation de l'électrochimie.
+Cependant, cette technique n'est pas très rentable.
+Le mieux serait d'utiliser le mouvement mécanique, en utilisant le principe du moteur réciproque.
+La première idée est d'utilisé un moteur inversé : une dynamo.
+Ce concept fût inventé en 1861 par le physicien hongrois Anyos Jedlik (1800 - 1895), et amélioré dans les temps à venir, comme par le physicien italien Antonio Pacinotti (1841 - 1912) et le physicien belge Zénobe Gramme (1826 - 1901).
+</br></br>
+<img src="assets/plugins/assets_electromagnetism_simulation/images/pacinotti_gramme_ring.png" height=300>
+</br></br>
+Cependant, d'autre type de générateur fûrent crée, comme le moteur synchrone de Nikola Tesla, qui peut être utilisé comme une machine générant un courant alternatif.
+Les moteurs de ce genre servant à produire du courant alternatif sont appelés alternateurs.
+Ils sont aussi à l'origine de la célèbre guerre des courants entre Nikola Tesla (et l'entrepreneur George Westinghouse (1846 - 1914)) et Thomas Edison entre 1890 et 1905.
+C'est grâce à ce genre de machines que l'électricité a pû être produite en masse dans le monde.

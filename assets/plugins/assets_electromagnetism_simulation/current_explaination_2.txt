@@ -1,0 +1,20 @@
+Bien que, dans le vide, les calculs sont plus simples, dans la réalité d'un circuit électrique, il y a d'autres choses à prendre compte.
+En effet, le mouvement des charges électriques peut être freiné par les atomes dans le circuit.
+Ce concept simple permet d'établir deux lois différentes.
+La première est une loi très connue : la loi d'Ohm, découverte par le scientifique allemand Georg Simon Ohm (1789 - 1854) en 1822, mais comprise bien plus tard.
+Cette loi stipule que la mise sous tension d'un circuit électrique génère un courant d'une intensité tout à fait prévisible, propotionelle à la tension de facteur une valeur nommé la résistance du circuit.
+</br></br>
+<math><mi>U</mi><mo>=</mo><mi>R</mi><mo>*</mo><mi>I</mi></math>
+</br></br>
+Ici, U est en volts, R en ohms et I en ampères.
+Grâce à cela, seule la tension est nécessaire pour étudier un courant électrique.
+La résistance d'un circuit est en réalité très complexe à prédire (sans utiliser la formu d'au dessus), puisqu'elle dépend de pleins de propriétés quantiques du circuit : arrangement des atomes, force d'attraction des atomes...
+De plus, la résistance a la propriété de diminuer la puissance électrique du courant.
+En effet, en 1840, le scientifique britannique James Prescott Joule (1818 - 1889) a découvert que cette résistance provoque une perte d'énergie, en réchauffant le circuit : c'est l'effet Joule.
+Les interactions entre charges et atomes en sont les responsables.
+Dans le cas d'un courant continue, la formule de la puissance dissipée en chaleur à cause de l'effet Joule est :
+</br></br>
+<math><mi>P</mi><mo>=</mo><mi>R</mi><mo>*</mo><mi>I</mi><msup>2</msup></math>
+</br></br>
+Ici, P est en watts, R en ohms et I en ampères.
+Bien que ces lois fûrent découvertes avant les lois de Maxwell, leur compréhension et utilisation précises ont nécessité l'apport des lois de Maxwell.

@@ -1,0 +1,17 @@
+Il est difficile de citer toutes les inventions qui ont suivi ces lois.
+</br></br>
+Parmi toutes les inventions, une des plus importantes est la résistance électrique.
+Elle permet deux choses : limiter un courant électrique ou produire de la chaleur avec l'électricité.
+À l'inverse, des solutions sont trouvées pour limiter cette effet pour du transport sur longue distance.
+Pour cela, de nombreux scientifiques, tel que l'irlandais Nicholas Joseph Callan (1799 - 1864) découvrent qu'une façon de limiter les pertes est de limiter l'intensité et la résistance du circuit est d'augmenter la tension.
+Pour augmenter la tension, le plus simple est de faire alterner le sens du courant, grâce à pleins d'outils différents, dont le plus célèbre concepteur est le serbe Nikola Tesla (1856 - 1943) : c'est le célèbre courant alternatif. 
+</br></br>
+En utilisant un fil de matériaux spéciaux (comme du tungstène), noyé dans un gaz spécial (en général noble, comme l'argon), vous obtenez une lampe à incandescance.
+Une des premières fonctionnelles est la lampe de l'électricien anglais Joseph Swan (1828 - 1914), parue en 1879.
+Bien que ce genre de lampes étaient très consommatrices, elles avaient le privilèges de l'être (au moins, légèrement moins) que les autres dispositifs disponibles à cette époque.
+En réalité, l'effet Joule n'était pas suffisant pour ce genre de lampe, et un autre effet avez lieu (permettant de rendre le fil lumineux) : la loi Planck, découverte par le scientifique Max Planck (1858-1947) en 1900.
+</br></br>
+Une dernière découverte extrêmement importante suivant ces lois est le comportement des semis-conducteurs.
+Leur compréhension a pris plus de 100 ans entre les premières observations de Faraday en 1833 et la théorie moderne des semis-conducteurs du scientifique britannique Alan Herries Wilson (1906 - 1995) en 1931.
+La cause de leur existence est la façon dont agit la résistance d'un matériaux à certaines conditions spécifiques, comme prévue par les lois de Maxwell, de Newton et même de Rutherford.
+Ce phénomène et sa compréhension sont la graine d'une quantité aberrantes de découverte : effet photovoltaïque, effet transistor...

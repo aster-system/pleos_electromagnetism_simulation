@@ -1,7 +1,8 @@
 Grâce à ces formules, nous pouvons avoir un nouveau point de vue sur ce qu'est un courant électrique, beaucoup plus proche de la réalité.
 Un courant électrique représente donc un mouvement de charges électriques.
-Nous pouvons calculer le nombre de charges passant par un certain endroit du circuit, plus communément appelée l'intensité du circuit, exprimée en ampères (un ampère représente un coulomb de charges électriques par secondes).
-Ce mouvement est induit par une force, qui, à un instant t, est plus communément appelée la tension électrique, exprimée en volts (un volt représente une force de 1 newtons par coulombs).
+Nous pouvons calculer le nombre de charges passant par un certain endroit du circuit, plus communément appelée l'intensité du circuit I, exprimée en ampères (un ampère représente un coulomb de charges électriques par secondes).
+Ce mouvement est induit par une force, qui, à un instant t, est plus communément appelée la tension électrique U, exprimée en volts (un volt représente une force de 1 newtons par coulombs).
+En toute logique, la puissance totale P est la multiplication de la tension U et de l'intensité U.
 Dans le plus simple des modèles, seule les équations de Maxwell et un peu de mécanique newtonienne suffisent à décrire un courant électrique.
 Grâce à ces modèles, nous pouvons établir des lois très connues (surtout au collèges et au lycées) : les lois de Kirchhoff, établies par le physicien allemand Gustav Kirchhoff (1824 - 1887) en 1845.
 Il y en a 2 :
